@@ -1,0 +1,137 @@
+﻿<Window x:Class="Adastra.RichEditorLibrary.ImagePropertiesDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Microsoft.WPFControlsLibrary;assembly=WPFControlsLibrary"         
+    Title="Зображення" Height="450" Width="450">
+    <!-- -->
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="..\Resources\Styles\MainViewStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- NumricEditorStyle -->
+            <Style x:Key="NumricEditorStyle" TargetType="{x:Type controls:ValueEditor}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type controls:ValueEditor}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.5*"/>
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <controls:NumberTextBox x:Name="PART_EDITOR" Style="{DynamicResource NumricTextBoxStyle}" Text="{Binding Path=Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Grid.ColumnSpan="2"/>
+                                <Rectangle x:Name="PART_DRAGGER"  Stroke="Transparent" Fill="Transparent" />
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True" SourceName="PART_DRAGGER">
+                                    <Setter Property="Cursor" Value="SizeAll"/>
+                                </Trigger>
+                                <Trigger Property="IsDragging" Value="True">
+                                    <Setter Property="Cursor" Value="SizeAll"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="276*" />
+            <RowDefinition Height="35" />
+        </Grid.RowDefinitions>
+        <TabControl Grid.Row="0" x:Name="m_tabbedWorkspace" Margin="1,1,1,1" >
+            <TabItem x:Name="m_tabProperties" Header="Основне" >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="160" />
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <GroupBox Header="Особливості вихідного зображення" Grid.Row="0" BorderThickness="0.1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="40"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" Content="Шлях:"  Foreground="Black"  Margin="10,0,0,0" ToolTip="Оригінальний шлях розташування зображення"/>
+                            <Grid Grid.Row="0" Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="70"  />
+                                </Grid.ColumnDefinitions>
+                               
+                                <TextBox  Grid.Row="0" Grid.Column="0" Name="m_txbxPath" GotFocus="OnPathGotFocus" LostFocus="OnNavigateUriLostFocus" Width="auto" 
+                                     ToolTip="Zadejte zdrojovou cestu k umístění obrázku" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                     Text="{Binding Path=ImagePath, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="10,0,0,0" Height="21"/>
+                                
+                                <Button  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="OnBrowseClick"  Style="{DynamicResource BlackButtonStyle}" 
+                                Content="Шукати..." Margin="5,5,5,5" Width="60" />
+                            </Grid>
+                            <Label Grid.Row="1" Grid.Column="1" Margin="10,0,0,0"  Name="m_lblPictureInfoName"  Foreground="Black" BorderThickness="0.1" BorderBrush="Black"/>
+                            <Label Grid.Row="2" Grid.Column="1" Margin="10,0,0,0"  Name="m_lblPictureInfoSize"  Foreground="Black" BorderThickness="0.1" BorderBrush="Black"/>
+                            <Button Grid.Row="3" Grid.Column="1" IsEnabled="False" Visibility="Hidden" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="OnSetDefaultsClick" Style="{DynamicResource BlackButtonStyle}" 
+                                Content="Nastavit původní" Margin="5,5,5,5" ToolTip="Nastaví původní hodnoty originálního obrázku (velikost...)" />
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Поточні властивості" Grid.Row="1" BorderThickness="0.1">
+                        <Grid Width="404">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0"/>
+                                <RowDefinition Height="0"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0" Grid.Row="0" Content="Šířka:" Margin="10,0,0,0" Foreground="Black" Visibility="Hidden" />
+                            <controls:ValueEditor Grid.Column="1" Grid.Row="0"  Name="m_txBxWidth" Height="21" Visibility="Hidden" Width="70" Margin="10,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                                                            Style="{DynamicResource NumricEditorStyle}"
+                                                            Value="{Binding Path=ImageWidth, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                            LargeChange="0.5"
+                                                            MaxPrecision="2"
+                                                            Minimum="0"
+                                                            SmallChange="0.1"
+                                                            DefaultChange="0.1"/>
+                            <!--TextBox Name="m_txBxWidth" Text="{Binding Path=Width, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  Height="21" Width="70" Margin="10,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/-->
+
+                            <Label Grid.Column="0" Grid.Row="1" Content="Výška:" Visibility="Hidden" Margin="10,0,0,0" Foreground="Black"/>
+                            <controls:ValueEditor Grid.Column="1" Grid.Row="1"  Visibility="Hidden" Name="m_txBxHeight" Height="21" Width="70" Margin="10,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                                                            Style="{DynamicResource NumricEditorStyle}"
+                                                            Value="{Binding Path=ImageHeight, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                                            LargeChange="0.5"
+                                                            MaxPrecision="2"
+                                                            Minimum="0"
+                                                            SmallChange="0.1"
+                                                            DefaultChange="0.1"/>
+                            <!--TextBox Grid.Column="1" Grid.Row="1" Name="m_txBxHeight" Text="{Binding Path=Height, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="21" Width="70" Margin="10,5,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/-->
+
+                            <Label Grid.Row="2" Content="Посилання:" ToolTip="Посилання на веб-адресу" Foreground="Black" Grid.ColumnSpan="2" Margin="0,0,326,0" />
+                            <TextBox Grid.Column="1" Grid.Row="2" Name="m_txBxHyperlink"  ToolTip="Zadejte odkaz na webovou adresu, kam se po kliknutí na obrázek uživatel proklikne"
+                                     Text="{Binding Path=ImageHyperlink, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Height="21" Width="auto" Margin="10,5,0,0" 
+                                     HorizontalAlignment="Stretch" VerticalAlignment="Top"  GotFocus="OnPathGotFocus"/>
+                            <ScrollViewer Grid.Column="1" Grid.Row="3" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
+                                <Image Name="m_webBrowser" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                            </ScrollViewer>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+
+            </TabItem>
+        </TabControl>
+        <Button Grid.Row="1" IsCancel="True" Margin="0,5,108,5" HorizontalAlignment="Right" Width="75" Click="OnCancelClick" >Відмінити</Button>
+        <Button Grid.Row="1" IsDefault="True" HorizontalAlignment="Right" Margin="0,5,6,5" Width="75" Click="OnOkClick">OK</Button>
+
+    </Grid>
+</Window>

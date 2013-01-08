@@ -1,0 +1,21 @@
+﻿<Window x:Class="iSpreadsheets.PieChart"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:charts="clr-namespace:Visiblox.Charts;assembly=Visiblox.Charts"
+        Title="PieChart" Height="450" Width="700">
+    <Window.Resources>
+        <Style x:Key="NoBorder" TargetType="Border">
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="LayoutRoot" Background="White">
+        <StackPanel Orientation="Vertical">
+            <!-- Ultimate Trial users should add 'ValidationKey="ENTER TRIAL LICENSE KEY HERE"' to each Chart declaration. -->
+            <charts:PieChart x:Name="MainChart" Width="600" Height="350" Title="Pie chart of selected cells sum value"
+                         HorizontalContentAlignment="Center"  IsExploding="True" AnimationEnabled="True"
+                         LegendPosition="InsideTopRight" SelectionMode="Multiple" ShowLabels="True"
+                             PlotAreaBorderStyle="{StaticResource NoBorder}" HighlightingEnabled="True" ValidationKey="jea492iTvteDK/DMjAxMzAxMTJpbmZvQHZpc2libG94LmNvbQ==ikKTzyZ5S22gZIq0V28tixR5AgOofLZABim6FUZUCI68A6yqG00tR0jCauAHr3mTUgkLBgF/kh1ywihaUvB/eoDVVgHllQsBmYgX6mIrmcm46Aj/QfUmAb+9KaJpWLiFdQLTLmuiu9hcSpmZ3xCS0Ximu69A=BQxSUisl3BaWf/7myRmmlIjRnMU2cA7q+/03ZX9wdj30RzapYANf51ee3Pi8m2rVW6aD7t6Hi4Qy5vv9xpaQYXF5T7XzsafhzS3hbBokp36BoJZg8IrceBj742nQajYyV7trx5GIw9jy/V6r0bvctKYwTim7Kzq+YPWGMtqtQoU=PFJTQUtleVZhbHVlPjxNb2R1bHVzPnh6YlRrc2dYWWJvQUh5VGR6dkNzQXUrUVAxQnM5b2VrZUxxZVdacnRFbUx3OHZlWStBK3pteXg4NGpJbFkzT2hGdlNYbHZDSjlKVGZQTTF4S2ZweWZBVXBGeXgxRnVBMThOcDNETUxXR1JJbTJ6WXA3a1YyMEdYZGU3RnJyTHZjdGhIbW1BZ21PTTdwMFBsNWlSKzNVMDg5M1N4b2hCZlJ5RHdEeE9vdDNlMD08L01vZHVsdXM+PEV4cG9uZW50PkFRQUI8L0V4cG9uZW50PjwvUlNBS2V5VmFsdWU+">
+            </charts:PieChart>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,23 @@
+// Grammar of my mini-language
+
+<statement> := var <id> = <expr>
+<statement> := print <expr>
+<statement> := <id> = <expr>
+<statement> := for <id> = <expr> to <expr> do <statement> end
+<statement> := read_integer <id>
+<statement> := <statement> ;
+<statement> := <statement> ; <statement>
+
+<expr> := <string>	| <int>	| <bin_expr> | <id>
+
+<bin_expr> := <expr> <bin_op> <expr>
+<bin_op> := + | - | * | /
+
+<id> := <character> <id_tail>*
+<id_tail> := <character> | <digit>
+
+<int> := <digit>+
+<digit> := 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+
+<string> := "<string_literal>"
+<string_literal> := [^"]*

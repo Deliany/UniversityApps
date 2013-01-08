@@ -1,0 +1,164 @@
+﻿<Window x:Class="iDraw.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:iDraw"
+    mc:Ignorable="d"
+        Icon="/mainicon.ico"
+    Style="{StaticResource VS2012WindowStyle}"
+        Title="iDraw" MinHeight="600" MinWidth="800" Height="600" Width="800">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <LinearGradientBrush x:Key="GrayBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Gray" Offset="0.624"/>
+                <GradientStop Color="LightGray" Offset="0.948"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="BlueBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF4444A1" Offset="0.78"/>
+                <GradientStop Color="#FF487381" Offset="0.168"/>
+            </LinearGradientBrush>
+
+            <DataTemplate x:Key="ConversationTemplate">
+                <StackPanel Margin="2" Background="LightYellow">
+                    <Border Margin="3" BorderBrush="{StaticResource GrayBrush}" BorderThickness="1" CornerRadius="4" Padding="3">
+                        <StackPanel Background="White">
+                            <TextBlock TextWrapping="Wrap"  Margin="2" Padding="2" Text="{Binding Path=Text}"></TextBlock>
+                        </StackPanel>
+                    </Border>
+                    <StackPanel Orientation="Horizontal" Margin="3">
+                        <TextBlock Text="From "></TextBlock>
+                        <TextBlock Text="{Binding Path=From}"></TextBlock>
+                        <TextBlock Text=" On "></TextBlock>
+                        <TextBlock Text="{Binding Path=Time}"></TextBlock>
+                    </StackPanel>
+
+                </StackPanel>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Background="LightGray">
+
+
+        <Grid Background="LightGray" x:Name="LayoutRoot" Visibility="Visible">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <Border Grid.Row="2"  Background="{StaticResource GrayBrush}" Margin="10,10,10,0" CornerRadius="5">
+                
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+
+
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <ScrollViewer x:Name="canvasZoomer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <Canvas Grid.Column="0" x:Name="DrawingCanvas" Margin="4"  Background="White" 
+                        MouseLeftButtonDown="DrawingCanvas_MouseLeftButtonDown"
+                        MouseLeftButtonUp="DrawingCanvas_MouseLeftButtonUp"
+                        MouseMove="DrawingCanvas_MouseMove" Width="800" Height="600">
+                            <Canvas.LayoutTransform>
+                                <ScaleTransform x:Name="scaleTransform" ScaleX="{Binding ElementName=SliderCanvasZoomX, Path=Value}" 
+                                        ScaleY="{Binding ElementName=SliderCanvasZoomY, Path=Value}"/>
+                            </Canvas.LayoutTransform>
+                        </Canvas>
+                    </ScrollViewer>
+
+                    <GridSplitter VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" Width="5"></GridSplitter>
+
+                    <GridSplitter  HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Height="5"></GridSplitter>
+
+                </Grid>
+            </Border>
+
+
+            <Border Grid.Row="3" Grid.Column="0" Height="40" Background="{StaticResource GrayBrush}" Margin="10,0,10,0" CornerRadius="5">
+                <StackPanel Orientation="Horizontal">
+                    <Button Tag="Pencil" Margin="4" Click="ButtonTool_Click" Height="30" Width="30">
+                        <Image Source="Resources/pencil.jpg"/>
+                    </Button>
+                    <Button Tag="Brush" Margin="4" Height="30" Click="ButtonTool_Click" Width="30">
+                        <Image Source="Resources/brush.jpg"/>
+                    </Button>
+                    <Button Tag="EraseBrush" Margin="4" Height="30" Click="ButtonTool_Click" Width="30">
+                        <Image Source="Resources/eraser.jpg"/>
+                    </Button>
+                    <Button Tag="Line" Margin="4" Height="30" Click="ButtonTool_Click" Width="30">
+                        <Image Source="Resources/line.jpg"/>
+                    </Button>
+                    <Button Tag="Rectangle" Margin="4" Height="30" Click="ButtonTool_Click" Width="30">
+                        <Image Source="Resources/square.jpg"/>
+                    </Button>
+                    <Button Tag="Ellipse" Margin="4" Height="30" Click="ButtonTool_Click" Width="30">
+                        <Image Source="Resources/circle.jpg"/>
+                    </Button>
+                    <Button Tag="Triangle" Margin="4" Height="30" Click="ButtonTool_Click" Width="30">
+                        <Image Source="Resources/triangle.jpg"/>
+                    </Button>
+                    <Button Tag="CustomStar" Margin="4" Height="30" Click="ButtonTool_Click" Width="30">
+                        <Image Source="Resources/custom_star.jpg"/>
+                    </Button>
+                    <Button x:Name="undoStrokeButton" Tag="UndoStock" Margin="0,0,0,0" Click="UndoButton_Click" ToolTipService.ToolTip="Undo stroke" >
+                        <Image Height="32" Source="Resources/undo.jpg" Stretch="Fill" Width="32"/>
+                    </Button>
+                    <Button x:Name="clearStrokesButton" ToolTipService.ToolTip="Clear strokes" Click="RedoButton_Click" Margin="0,0,0,0" >
+                        <Image Height="32" Source="Resources/redo.jpg" Stretch="Fill" Width="32"/>
+                    </Button>
+                    <Button x:Name="CopyButton" ToolTipService.ToolTip="Copy all working area to clipboard" Click="CopyButton_Click" Margin="0,0,0,0" >
+                        <Image Height="32" Source="Resources/copy.jpg" Stretch="Fill" Width="32"/>
+                    </Button>
+                    <Button x:Name="PasteButton" ToolTipService.ToolTip="Paste from clipboard" Click="PasteButton_Click" Margin="0,0,0,0" >
+                        <Image Height="32" Source="Resources/paste.jpg" Stretch="Fill" Width="32"/>
+                    </Button>
+                    <Button x:Name="SaveButton" ToolTipService.ToolTip="Save" Click="SaveButton_Click" Margin="0,0,0,0" >
+                        <Image Height="32" Source="Resources/save.jpg" Stretch="Fill" Width="32"/>
+                    </Button>
+                    <Button x:Name="OpenButton" ToolTipService.ToolTip="Open" Click="OpenButton_Click" Margin="0,0,0,0" >
+                        <Image Height="32" Source="Resources/open.jpg" Stretch="Fill" Width="32"/>
+                    </Button>
+                    <Button x:Name="NewButton" ToolTipService.ToolTip="New image" Click="NewButton_Click" Margin="0,0,0,0" >
+                        <Image Height="32" Source="Resources/new.jpg" Stretch="Fill" Width="32"/>
+                    </Button>
+                </StackPanel>
+            </Border>
+            <StackPanel  Grid.Row="0" >
+                <StackPanel Orientation="Horizontal" Margin="10,5,10,0" Background="LightGray" Height="22" >
+                    <Button Width="20" Height="20">
+                        <Canvas x:Name="cnLine"  Background="{Binding Path=StrokeColor, Mode=TwoWay}" MouseLeftButtonDown="ButtonColor_Click" Width="15"  Height="15"/>
+                    </Button>
+                    <TextBlock Text="Line Color" Width="60" Margin="3,3,5,0"/>
+                    <Button Width="20" Height="20">
+                        <Canvas x:Name="cnBack"  Background="{Binding Path=FillColor, Mode=TwoWay}" MouseLeftButtonDown="ButtonColor_Click" Width="15" Height="15"/>
+                    </Button>
+                    <TextBlock Text="Brush Color" Width="70" Margin="3,3,30,0"/>
+                    <TextBlock Text="Line Size" Width="60" Margin="3,3,2,0"/>
+                    <Slider Minimum="0" Maximum="100" Width="100" Value="{Binding Path=StrokeWidth, Mode=TwoWay}" Name="StorkeSlider"/>
+                    <TextBlock Text="Zoom X" Width="50" Margin="20,3,0,0"/>
+                    <Slider Name="SliderCanvasZoomX" Minimum="0.1" Maximum="10" Value="1" Width="100" />
+                    <TextBlock Text="Zoom Y" Width="50" Margin="20,3,0,0"/>
+                    <Slider Name="SliderCanvasZoomY" Minimum="0.1" Maximum="10" Value="1" Width="100" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Row="1" x:Name="ColorPanel" Visibility="Collapsed" Height="240" Margin="10,5,10,20" >
+                <Button Content="[^] Choose the color below" VerticalAlignment="top" x:Name="ButtonSelect" Click="ButtonSelect_Click" Height="30"/>
+                <local:ColorPicker Margin="3" x:Name="ColorPicker" Height="200" />
+            </StackPanel>
+        </Grid>
+
+        <local:ModalDialog x:Name="ModalDialog"/>
+    </Grid>
+</Window>

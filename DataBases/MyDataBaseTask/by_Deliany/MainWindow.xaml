@@ -1,0 +1,106 @@
+﻿<Window x:Class="by_Deliany.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Background="#FF494959" Height="700" Width="1200" ResizeMode="NoResize" Icon="/by_Deliany;component/Images/248.jpg">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Theme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <TabControl HorizontalAlignment="Stretch" Name="tabControl" VerticalAlignment="Stretch" Background="#FF494959" SelectionChanged="tabControl_SelectionChanged">
+            <TabItem Header="Головна" Name="tabItemMain">
+                <Grid Name="gridMain">
+                    <DataGrid AutoGenerateColumns="True" Height="200" HorizontalAlignment="Left" Name="dataGridOlympiads" VerticalAlignment="Top" Width="510" AreRowDetailsFrozen="False" SelectionUnit="CellOrRowHeader" RowDetailsVisibilityMode="Collapsed" SelectedCellsChanged="dataGridOlympiads_SelectedCellsChanged" Margin="0,32,0,0" AutoGeneratingColumn="dataGridOlympiads_AutoGeneratingColumn" />
+                    <DataGrid AutoGenerateColumns="True" Name="dataGridWinners" Margin="542,32,6,0" VerticalAlignment="Top" Height="200" SelectionUnit="CellOrRowHeader" RowDetailsVisibilityMode="Collapsed" Width="620" />
+                    <DataGrid AutoGenerateColumns="True" Height="331" HorizontalAlignment="Left" Margin="123,278,0,0" Name="dataGridOlympiadSummary" VerticalAlignment="Top" Width="949" RowDetailsVisibilityMode="Collapsed" />
+                    <Label Content="Олімпіади:" HorizontalAlignment="Left" Margin="20,0,0,0" Name="labelOlympiads" VerticalAlignment="Top" Foreground="White" FontSize="14" />
+                    <Label Content="Переможці вибраної олімпіади:" Foreground="White" HorizontalAlignment="Left" Margin="573,0,0,0" Name="label2" VerticalAlignment="Top" FontSize="14" />
+                    <Label Content="Учасники вибраної олімпіади:" Foreground="White" HorizontalAlignment="Left" Margin="147,243,0,0" Name="label3" VerticalAlignment="Top" FontSize="14" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Ввід даних 1" Name="tabItemOlympiads">
+                <Grid Name="gridOlympiads">
+                    <DataGrid AreRowDetailsFrozen="False" AutoGenerateColumns="True" Height="100" HorizontalAlignment="Left" Margin="752,36,0,0" Name="dataGridAuditories" RowDetailsVisibilityMode="Collapsed" SelectionUnit="CellOrRowHeader" VerticalAlignment="Top" Width="400" />
+                    <DataGrid AreRowDetailsFrozen="False" AutoGenerateColumns="True" Height="75" HorizontalAlignment="Left" Margin="752,165,0,0" Name="dataGridAddAuditory" RowDetailsVisibilityMode="Collapsed" SelectionUnit="CellOrRowHeader" VerticalAlignment="Top" Width="400" IsReadOnly="False" />
+                    <Button Content="Додати аудиторію" Height="33" HorizontalAlignment="Left" Margin="748,244,0,0" Name="buttonAddAuditory" VerticalAlignment="Top" Width="131" Click="buttonAddAuditory_Click" />
+                    <Label Content="Аудиторії в школі:" FontSize="14" Foreground="White" HorizontalAlignment="Left" Margin="769,6,0,0" Name="label1" VerticalAlignment="Top" />
+                    <DataGrid AreRowDetailsFrozen="False" AutoGenerateColumns="True" Height="75" HorizontalAlignment="Left" IsReadOnly="False" Margin="531,36,0,0" Name="dataGridAddOlympiad" RowDetailsVisibilityMode="Collapsed" SelectionUnit="CellOrRowHeader" VerticalAlignment="Top" Width="204" />
+                    <Button Content="Додати олімпіаду" Height="33" HorizontalAlignment="Left" Margin="570,126,0,0" Name="buttonAddOlympiad" VerticalAlignment="Top" Width="124" Click="buttonAddOlympiad_Click" />
+                    <DataGrid AreRowDetailsFrozen="False" AutoGenerateColumns="True" Height="190" HorizontalAlignment="Left" Margin="629,283,0,0" Name="dataGridTasks" RowDetailsVisibilityMode="Collapsed" SelectionUnit="CellOrRowHeader" VerticalAlignment="Top" Width="500" />
+                    <DataGrid AreRowDetailsFrozen="False" AutoGenerateColumns="True" Height="75" HorizontalAlignment="Left" IsReadOnly="False" Margin="629,511,0,0" Name="dataGridAddTask" RowDetailsVisibilityMode="Collapsed" SelectionUnit="CellOrRowHeader" VerticalAlignment="Top" Width="500" />
+                    <Button Content="Додати завдання" Height="31" HorizontalAlignment="Left" Margin="661,592,0,0" Name="buttonAddTask" VerticalAlignment="Top" Width="106" Click="buttonAddTask_Click" />
+                    <Label Content="Завдання:" FontSize="14" Foreground="White" HorizontalAlignment="Left" Margin="649,253,0,0" Name="label4" VerticalAlignment="Top" />
+                    <Label Content="Екзаменатори:" FontSize="14" Foreground="White" HorizontalAlignment="Left" Margin="41,253,0,0" Name="label5" VerticalAlignment="Top" />
+                    <DataGrid AreRowDetailsFrozen="False" AutoGenerateColumns="True" Height="190" HorizontalAlignment="Left" Margin="19,283,0,0" Name="dataGridExaminers" RowDetailsVisibilityMode="Collapsed" SelectionUnit="CellOrRowHeader" VerticalAlignment="Top" Width="500" AutoGeneratingColumn="dataGridExaminers_AutoGeneratingColumn" />
+                    <DataGrid AreRowDetailsFrozen="False" AutoGenerateColumns="True" Height="75" HorizontalAlignment="Left" IsReadOnly="False" Margin="19,511,0,0" Name="dataGridAddExaminer" RowDetailsVisibilityMode="Collapsed" SelectionUnit="CellOrRowHeader" VerticalAlignment="Top" Width="500" />
+                    <Button Content="Додати екзаменатора" Height="31" HorizontalAlignment="Left" Margin="41,592,0,0" Name="buttonAddExaminer" VerticalAlignment="Top" Width="133" Click="buttonAddExaminer_Click" />
+                    <Label Content="Нова олімпіада:" FontSize="14" Foreground="White" HorizontalAlignment="Left" Margin="548,6,0,0" Name="label9" VerticalAlignment="Top" />
+                    <Label Content="Нова аудиторія:" FontSize="14" Foreground="White" HorizontalAlignment="Left" Margin="769,136,0,0" Name="label10" VerticalAlignment="Top" />
+                    <Label Content="Новий екзаменатор:" FontSize="14" Foreground="White" HorizontalAlignment="Left" Margin="33,479,0,0" Name="label11" VerticalAlignment="Top" />
+                    <Label Content="Нове завдання:" FontSize="14" Foreground="White" HorizontalAlignment="Left" Margin="649,479,0,0" Name="label12" VerticalAlignment="Top" />
+                    <Button Content="Видалити олімпіаду" Height="33" HorizontalAlignment="Left" Margin="570,207,0,0" Name="buttonDeleteOlympiad" VerticalAlignment="Top" Width="124" Click="buttonDeleteOlympiad_Click" />
+                    <Button Content="Редагувати олімпіаду" Height="33" HorizontalAlignment="Left" Margin="570,165,0,0" Name="buttonUpdateOlympiad" VerticalAlignment="Top" Width="124" Click="buttonUpdateOlympiad_Click" />
+                    <Button Content="Видалити аудиторію" Height="33" HorizontalAlignment="Left" Margin="1021,244,0,0" Name="buttonDeleteAuditory" VerticalAlignment="Top" Width="131" Click="buttonDeleteAuditory_Click" />
+                    <Button Content="Редагувати аудиторію" Height="33" HorizontalAlignment="Left" Margin="885,244,0,0" Name="buttonUpdateAuditory" VerticalAlignment="Top" Width="131" Click="buttonUpdateAuditory_Click" />
+                    <Button Content="Редагувати екзаменатора" Height="31" HorizontalAlignment="Left" Margin="190,592,0,0" Name="buttonUpdateExaminer" VerticalAlignment="Top" Width="148" Click="buttonUpdateExaminer_Click" />
+                    <Button Content="Видалити екзаменатора" Height="31" HorizontalAlignment="Left" Margin="355,592,0,0" Name="buttonDeleteExaminer" VerticalAlignment="Top" Width="143" Click="buttonDeleteExaminer_Click" />
+                    <Button Content="Редагувати завдання" Height="31" HorizontalAlignment="Left" Margin="789,592,0,0" Name="buttonUpdateTask" VerticalAlignment="Top" Width="120" Click="buttonUpdateTask_Click" />
+                    <Button Content="Видалити завдання" Height="31" HorizontalAlignment="Left" Margin="933,592,0,0" Name="buttonDeleteTask" VerticalAlignment="Top" Width="114" Click="buttonDeleteTask_Click" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Ввід даних 2" Name="tabItemOlympiads2">
+                <Grid Name="gridOlympiads2">
+                    <DataGrid AreRowDetailsFrozen="False" AutoGenerateColumns="True" Height="160" HorizontalAlignment="Left" Margin="530,30,0,0" Name="dataGridOlympiadDetails" RowDetailsVisibilityMode="Collapsed" SelectionUnit="CellOrRowHeader" VerticalAlignment="Top" Width="610" />
+                    <Label Content="Деталі олімпіади:" FontSize="14" Foreground="White" HorizontalAlignment="Left" Margin="546,0,0,0" Name="label6" VerticalAlignment="Top" />
+                    <DataGrid AreRowDetailsFrozen="False" AutoGenerateColumns="True" Height="200" HorizontalAlignment="Left" Margin="6,322,0,0" Name="dataGridSchools" RowDetailsVisibilityMode="Collapsed" SelectionUnit="CellOrRowHeader" VerticalAlignment="Top" Width="250" />
+                    <Label Content="Школи учасників:" FontSize="14" Foreground="White" HorizontalAlignment="Left" Margin="28,287,0,0" Name="label7" VerticalAlignment="Top" />
+                    <DataGrid AreRowDetailsFrozen="False" AutoGenerateColumns="True" Height="200" HorizontalAlignment="Left" Margin="318,322,0,0" Name="dataGridParticipants2" RowDetailsVisibilityMode="Collapsed" SelectionUnit="CellOrRowHeader" VerticalAlignment="Top" Width="375" SelectedCellsChanged="dataGridParticipants2_SelectedCellsChanged" AutoGeneratingColumn="dataGridParticipants2_AutoGeneratingColumn" />
+                    <Label Content="Учасники олімпіади:" FontSize="14" Foreground="White" HorizontalAlignment="Left" Margin="349,287,0,0" Name="label8" VerticalAlignment="Top" />
+                    <DataGrid AreRowDetailsFrozen="False" AutoGenerateColumns="True" Height="200" HorizontalAlignment="Left" Margin="751,322,0,0" Name="dataGridExaminers2" RowDetailsVisibilityMode="Collapsed" SelectionUnit="CellOrRowHeader" VerticalAlignment="Top" Width="374" SelectionChanged="dataGridExaminers2_SelectionChanged" AutoGeneratingColumn="dataGridExaminers2_AutoGeneratingColumn" />
+                    <Label Content="Екзаменатори" FontSize="14" Foreground="White" HorizontalAlignment="Left" Margin="988,287,0,0" Name="label13" VerticalAlignment="Top" />
+                    <DataGrid AreRowDetailsFrozen="False" AutoGenerateColumns="True" Height="69" HorizontalAlignment="Left" IsReadOnly="False" Margin="6,528,0,0" Name="dataGridAddSchool" RowDetailsVisibilityMode="Collapsed" SelectionUnit="CellOrRowHeader" VerticalAlignment="Top" Width="250" />
+                    <Button Content="Додати школу" Height="31" HorizontalAlignment="Left" Margin="6,601,0,0" Name="buttonAddSchool" VerticalAlignment="Top" Width="102" Click="buttonAddSchool_Click" />
+                    <DataGrid AreRowDetailsFrozen="False" AutoGenerateColumns="True" Height="69" HorizontalAlignment="Left" IsReadOnly="False" Margin="318,528,0,0" Name="dataGridAddParticipant" RowDetailsVisibilityMode="Collapsed" SelectionUnit="CellOrRowHeader" VerticalAlignment="Top" Width="375" />
+                    <Button Content="Додати учасника" Height="31" HorizontalAlignment="Left" Margin="321,603,0,0" Name="buttonAddParticipant" VerticalAlignment="Top" Width="110" Click="buttonAddParticipant_Click" />
+                    <DataGrid AreRowDetailsFrozen="False" AutoGenerateColumns="True" Height="69" HorizontalAlignment="Left" IsReadOnly="False" Margin="751,528,0,0" Name="dataGridAddExaminer2" RowDetailsVisibilityMode="Collapsed" SelectionUnit="CellOrRowHeader" VerticalAlignment="Top" Width="375" />
+                    <Button Content="Додати екзаменатора" Height="31" HorizontalAlignment="Left" Margin="719,601,0,0" Name="buttonAddExaminer2" VerticalAlignment="Top" Width="130" Click="buttonAddExaminer2_Click" />
+                    <DataGrid AreRowDetailsFrozen="False" AutoGenerateColumns="True" Height="67" HorizontalAlignment="Left" IsReadOnly="False" Margin="530,196,0,0" Name="dataGridAddOlympiadDetail" RowDetailsVisibilityMode="Collapsed" SelectionUnit="CellOrRowHeader" VerticalAlignment="Top" Width="610" />
+                    <Button Content="Додати результат" Height="31" HorizontalAlignment="Left" Margin="536,269,0,0" Name="buttonAddOlympiadDetail" VerticalAlignment="Top" Width="110" Click="buttonAddOlympiadDetail_Click" />
+                    <Button Content="Редагувати екзаменатора" Height="31" HorizontalAlignment="Left" Margin="855,601,0,0" Name="buttonUpdateExaminer2" VerticalAlignment="Top" Width="156" Click="buttonUpdateExaminer2_Click" />
+                    <Button Content="Видалити екзаменатора" Height="31" HorizontalAlignment="Left" Margin="1017,601,0,0" Name="buttonDeleteExaminer2" VerticalAlignment="Top" Width="141" Click="buttonDeleteExaminer2_Click" />
+                    <Button Content="Редагувати учасника" Height="31" HorizontalAlignment="Left" Margin="437,603,0,0" Name="buttonUpdateParticipant" VerticalAlignment="Top" Width="123" Click="buttonUpdateParticipant_Click" />
+                    <Button Content="Видалити учасника" Height="31" HorizontalAlignment="Left" Margin="566,603,0,0" Name="buttonDeleteParticipant" VerticalAlignment="Top" Width="118" Click="buttonDeleteParticipant_Click" />
+                    <Button Content="Редагувати" Height="31" HorizontalAlignment="Left" Margin="114,601,0,0" Name="buttonUpdateSchool" VerticalAlignment="Top" Width="73" Click="buttonUpdateSchool_Click" />
+                    <Button Content="Видалити школу" Height="31" HorizontalAlignment="Left" Margin="193,601,0,0" Name="buttonDeleteSchool" VerticalAlignment="Top" Width="102" Click="buttonDeleteSchool_Click" />
+                    <Button Content="Редагувати результат" Height="31" HorizontalAlignment="Left" Margin="652,269,0,0" Name="buttonUpdateOlympiadDetail" VerticalAlignment="Top" Width="126" Click="buttonUpdateOlympiadDetail_Click" />
+                    <Button Content="Видалити результат" Height="31" HorizontalAlignment="Left" Margin="784,269,0,0" Name="buttonDeleteOlympiadDetail" VerticalAlignment="Top" Width="120" Click="buttonDeleteOlympiadDetail_Click" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Запити" Name="tabItemQuery">
+                <Grid Name="gridQuery">
+                    <DataGrid AreRowDetailsFrozen="False" AutoGenerateColumns="True" Height="250" HorizontalAlignment="Left" Margin="545,33,0,0" Name="dataGridQuery1" RowDetailsVisibilityMode="Collapsed" SelectionUnit="CellOrRowHeader" VerticalAlignment="Top" Width="617" />
+                    <DataGrid AreRowDetailsFrozen="False" AutoGenerateColumns="True" Height="250" HorizontalAlignment="Left" Margin="545,337,0,0" Name="dataGridQuery2" RowDetailsVisibilityMode="Collapsed" SelectionUnit="CellOrRowHeader" VerticalAlignment="Top" Width="617" />
+                    <DataGrid AreRowDetailsFrozen="False" AutoGenerateColumns="True" Height="121" HorizontalAlignment="Left" Margin="22,313,0,0" Name="dataGridQuery3" RowDetailsVisibilityMode="Collapsed" SelectionUnit="CellOrRowHeader" VerticalAlignment="Top" Width="478" />
+                    <DataGrid AreRowDetailsFrozen="False" AutoGenerateColumns="True" Height="121" HorizontalAlignment="Left" Margin="22,466,0,0" Name="dataGridQuery4" RowDetailsVisibilityMode="Collapsed" SelectionUnit="CellOrRowHeader" VerticalAlignment="Top" Width="478" AutoGeneratingColumn="dataGridQuery4_AutoGeneratingColumn" />
+                    <Label Content="Кращі учні кожного району:" FontSize="14" Foreground="White" HorizontalAlignment="Left" Margin="569,6,0,0" Name="label14" VerticalAlignment="Top" />
+                    <Label Content="Вчителі, чиї учні набрали максимальне число балів:" FontSize="14" Foreground="White" HorizontalAlignment="Left" Margin="569,302,0,0" Name="label15" VerticalAlignment="Top" />
+                    <Label Content="Список задач, які були розв'язані найменшою кількістю учасників:" FontSize="14" Foreground="White" HorizontalAlignment="Left" Margin="42,278,0,0" Name="label16" VerticalAlignment="Top" />
+                    <Label Content="Рейтинговий список учнів одної школи:" FontSize="14" Foreground="White" HorizontalAlignment="Left" Margin="42,431,0,0" Name="label17" VerticalAlignment="Top" />
+                    <Button Content="Відобразити" Height="23" HorizontalAlignment="Left" Margin="204,600,0,0" Name="buttonApplySchool" VerticalAlignment="Top" Width="90" Click="buttonApplySchool_Click" />
+                    <TextBox Height="23" HorizontalAlignment="Left" Margin="121,600,0,0" Name="textBoxSchool" VerticalAlignment="Top" Width="60" Text="18" />
+                    <Label Content="Школа:" FontSize="14" Foreground="White" HorizontalAlignment="Left" Margin="59,596,0,0" Name="label18" VerticalAlignment="Top" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Логи" Name="tabItemLog">
+                <Grid>
+                    <Grid HorizontalAlignment="Stretch" Margin="6,6,0,0" Name="grid1" VerticalAlignment="Stretch" Height="623" Width="1162">
+                        <DataGrid AreRowDetailsFrozen="False" AutoGenerateColumns="True" Height="500" HorizontalAlignment="Left" Margin="240,56,0,0" Name="dataGridLog" RowDetailsVisibilityMode="Collapsed" SelectionUnit="CellOrRowHeader" VerticalAlignment="Top" Width="700" />
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

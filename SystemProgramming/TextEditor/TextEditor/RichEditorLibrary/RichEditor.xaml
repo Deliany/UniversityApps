@@ -1,0 +1,556 @@
+<UserControl x:Class="RichEditorLibrary.RichTextEditor"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:custom="clr-namespace:RichEditorLibrary"
+    xmlns:controls="clr-namespace:Microsoft.WPFControlsLibrary;assembly=WPFControlsLibrary"
+    xmlns:r="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"                   
+    xmlns:local="clr-namespace:RichEditorLibrary"
+    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Royale"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib" >
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--ResourceDictionary Source="..\..\..\Resources\Styles\MainViewStyles.xaml"/-->
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style TargetType="{x:Type	Menu}">
+                <Setter Property="Menu.Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <LinearGradientBrush.GradientStops>
+                                <GradientStop Color="#FFFFFF"
+											  Offset="0.15"/>
+                                <GradientStop Color="#D6E7EF"
+											  Offset=".4"/>
+                                <GradientStop Color="#BDD7EF"
+											  Offset=".65"/>
+                                <GradientStop Color="#A5CBE7"
+											  Offset=".65"/>
+                                <GradientStop Color="#A5CBE7"
+											  Offset=".75"/>
+                                <GradientStop Color="#ADD3EF"
+											  Offset=".75"/>
+                                <GradientStop Color="#ADD7EF"
+											  Offset="1"/>
+                            </LinearGradientBrush.GradientStops>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!-- Context menu -->
+            <ContextMenu x:Key="RTEditorContextMenu" Language="cs-CZ">
+                <MenuItem Header="Vystřihnout" Command="{x:Static ApplicationCommands.Cut}">
+                    <MenuItem.Icon>
+                        <Image Source="..\Resources\Cut.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Kopie" Command="{x:Static ApplicationCommands.Copy}">
+                    <MenuItem.Icon>
+                        <Image Source="..\Resources\Copy.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Vložit" Command="{x:Static ApplicationCommands.Paste}">
+                    <MenuItem.Icon>
+                        <Image Source="..\Resources\Paste.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <!--MenuItem Header="Tisk" Command="{x:Static custom:RichTextEditor.PrintCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="..\Resources\Print.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Vlastnosti" Command="PropertiesCommand">
+                    <MenuItem.Icon>
+                        <Image Source="..\Resources\properties.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem-->
+            </ContextMenu>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <UserControl.CommandBindings>
+        <!-- bindings for context menu commands -->
+        <CommandBinding Command="local:MiscCommands.PropertiesCommand"
+                        />
+
+    </UserControl.CommandBindings>
+    
+    <Grid >
+        <DockPanel>
+            <!-- RICH EDITOR 
+        <Style TargetType="{x:Type custom:RichTextEditor}">
+            <Style.Resources>
+
+            </Style.Resources>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type custom:RichTextEditor}">
+                        <DockPanel LastChildFill="True">
+                            <Menu DockPanel.Dock="Top" FontWeight="Bold"  FontSize="11" Name="FirstMenu" >
+                                <MenuItem Header="_File">
+                                    <MenuItem Header="_Print" Command="custom:RichTextEditor.PrintCommand" />
+                                    
+                                </MenuItem>
+                                <MenuItem Header="_Edit">
+                                    <MenuItem Header="Cu_t" Command="ApplicationCommands.Cut" />
+                                    <MenuItem Header="_Copy" Command="ApplicationCommands.Copy" />
+                                    <MenuItem Header="_Paste" Command="ApplicationCommands.Paste" />
+                                    <MenuItem Header="Delete" Command="ApplicationCommands.Delete" />
+                                    
+                                    <Separator />
+                                    <MenuItem Header="Clear Formatting"  Visibility="{Binding ElementName=TableMenu, Path=Visibility}" Command="custom:RichTextEditor.ClearFormattingCommand"/>
+                                    <MenuItem Header="Select All" Command="ApplicationCommands.SelectAll"/>
+                                </MenuItem>
+                                <MenuItem Header="_Table" Visibility="{Binding ElementName=FirstToolBar, Path=Visibility}" Name="TableMenu">
+                                    <MenuItem Header="Insert">
+                                        <MenuItem Header="Table" Command="custom:RichTextEditor.InsertTableCommand" />
+                                        <Separator/>
+                                        <MenuItem Header="Rows Above" Command="custom:RichTextEditor.InsertRowsAboveCommand" />
+                                        <MenuItem Header="Rows Below" Command="custom:RichTextEditor.InsertRowsBelowCommand"/>
+                                        <Separator/>
+                                        <MenuItem Header="Columns to the Right" Command="custom:RichTextEditor.InsertColumnsToRightCommand"/>
+                                        <MenuItem Header="Columns to the Left" Command="custom:RichTextEditor.InsertColumnsToLeftCommand"/>
+                                    </MenuItem>
+                                    <MenuItem Header="Delete">
+                                        <MenuItem Header="Table" Command="custom:RichTextEditor.DeleteTableCommand"/>
+                                        <MenuItem Header="Rows" Command="custom:RichTextEditor.DeleteRowsCommand"/>
+                                        <MenuItem Header="Columns" Command="custom:RichTextEditor.DeleteColumnsCommand"/>
+                                    </MenuItem>
+                                </MenuItem>
+                                
+                <MenuItem Header="_Insert">
+                  <MenuItem Header="Hyperlink"  Command="custom:RichTextEditor.InsertHyperlinkCommand"/>
+                  <MenuItem Header="Picture" Command="custom:RichTextEditor.InsertPictureCommand" />
+                </MenuItem>
+                <MenuItem Header="Tools">
+                  <MenuItem Header="Options"/>
+                </MenuItem>
+                
+						</Menu-->
+
+            <!-- ################ RIBON START ################ -->
+            <r:Ribbon Title="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}},Path=Title}">
+                <r:Ribbon.Resources>
+
+                    <!-- Quick Access Toolbar Command -->
+                    <r:RibbonCommand x:Key="ProfileQuickAccessCommand"  
+                                                     Executed="RibbonCommand_Executed_7"
+                                                     SmallImageSource="..\Resources\profile-quick-access.png"                                     
+                                                     LargeImageSource="..\Resources\profile-quick-access.png"                                 
+                                                     ToolTipTitle="Profile"
+                                                     ToolTipDescription="View Your Twitter Profile" />
+                    <r:RibbonCommand x:Key="FavoritesQuickAccessCommand"
+                                                     SmallImageSource="..\Resources\favorite-quick-access.png"                                     
+                                                     LargeImageSource="..\Resources\favorite-quick-access.png"
+                                                     ToolTipTitle="Favorites"
+                                                     ToolTipDescription="View Your Favorites" />
+                    <r:RibbonCommand x:Key="RefreshQuickAccessCommand"
+                                                     
+                                                     SmallImageSource="..\Resources\refresh-quick-access.png"                                     
+                                                     LargeImageSource="..\Resources\refresh-quick-access.png"
+                                                     LabelTitle="Refresh"
+                                                     ToolTipTitle="Refresh"
+                                                     ToolTipDescription="Refresh Your Tweets" />
+                    <r:RibbonCommand x:Key="FeedQuickAccessCommand"
+                                                 
+                                                 SmallImageSource="..\Resources\feed-quick-access.png"                                     
+                                                 LargeImageSource="..\Resources\feed-quick-access.png"
+                                                 LabelTitle="Feed"
+                                                 ToolTipTitle="Feed"
+                                                 ToolTipDescription="View Your Feed" />
+                    <!-- Quick Access Toolbar Command -->
+
+                    <!-- Personal Tab -->
+                    <!-- Replies Group -->
+                    <r:RibbonCommand x:Key="RepliesCommand"
+                                                     
+                                                     SmallImageSource="..\Resources\replies-small.png"                                     
+                                                     LargeImageSource="..\Resources\replies-large.png"
+                                                     LabelTitle="Replies"
+                                                     ToolTipTitle="Replies"
+                                                     ToolTipImageSource="..\Resources\replies-small.png"
+                                                     ToolTipDescription="View Your Replies" />
+                    <!-- Replies Group -->
+                    <!-- Direct Messages Group -->
+                    <r:RibbonCommand x:Key="DirectMessagesSentCommand"
+                                                     
+                                                     SmallImageSource="..\Resources\dm-sent-small.png"
+                                                     LargeImageSource="..\Resources\dm-sent-large.png"
+                                                     LabelTitle="Sent"
+                                                     ToolTipTitle="Direct Messages Sent"
+                                                     ToolTipImageSource="..\Resources\dm-sent-small.png"
+                                                     ToolTipDescription="Direct Messages Sent Only to You" />
+                    <r:RibbonCommand x:Key="DirectMessagesReceivedCommand"
+                                                     
+                                                     SmallImageSource="..\Resources\dm-received-small.png"
+                                                     LargeImageSource="..\Resources\dm-received-large.png"
+                                                     LabelTitle="Received"
+                                                     ToolTipTitle="Direct Messages Received"
+                                                     ToolTipImageSource="..\Resources\dm-received-small.png"
+                                                     ToolTipDescription="Direct Messages Received By You" />
+                    <!-- Direct Messages Group -->
+                    <!--Favorites Group -->
+                    <r:RibbonCommand x:Key="FavoritesCommand"
+                                                     
+                                                     SmallImageSource="..\Resources\favorites-small.png"
+                                                     LargeImageSource="..\Resources\favorites-large.png"
+                                                     ToolTipImageSource="..\Resources\favorites-small.png"
+                                                     LabelTitle="Favorites"
+                                                     ToolTipTitle="Favorites"
+                                                     ToolTipDescription="View Your Favorites" />
+                    <!--Favorites Group -->
+                    <!-- Personal Tab -->
+
+                    <!-- Public Tab -->
+                    <!-- Public Group -->
+                    <r:RibbonCommand x:Key="EveryoneCommand"
+                                                     
+                                                     SmallImageSource="..\Resources\everyone-small.png"
+                                                     LargeImageSource="..\Resources\everyone-large.png"
+                                                     ToolTipImageSource="..\Resources\everyone-small.png"
+                                                     LabelTitle="Everyone"
+                                                     ToolTipTitle="Everyone"
+                                                     ToolTipDescription="View Public Timeline" />
+                    <!-- Public Group -->
+                    <!-- Public Tab -->
+
+                    <!-- People Tab -->
+                    <!-- People Group -->
+                    <r:RibbonCommand x:Key="FollowersCommand"
+                                                     
+                                                     SmallImageSource="..\Resources\followers-small.png"
+                                                     LargeImageSource="..\Resources\followers-large.png"
+                                                     LabelTitle="Followers"
+                                                     ToolTipImageSource="..\Resources\followers-small.png"
+                                                     ToolTipTitle="Followers"
+                                                     ToolTipDescription="View Your Followers" />
+                    <r:RibbonCommand x:Key="FollowingCommand"
+                                                     
+                                                     SmallImageSource="..\Resources\following-small.png"                                     
+                                                     LargeImageSource="..\Resources\following-large.png"
+                                                     LabelTitle="Following"
+                                                     ToolTipImageSource="..\Resources\following-small.png"
+                                                     ToolTipTitle="Following"                                     
+                                                     ToolTipDescription="Who you are Following" />
+                    <r:RibbonCommand x:Key="FriendsCommand"
+                                                     
+                                                     SmallImageSource="..\Resources\friends-small.png"
+                                                     LargeImageSource="..\Resources\friends-large.png"
+                                                     LabelTitle="Friends"
+                                                     ToolTipImageSource="..\Resources\friends-small.png"
+                                                     ToolTipTitle="Friends"
+                                                     ToolTipDescription="View Your Friends" />
+                    <!-- People Group -->
+                    <!-- People Tab -->
+
+                    <!-- Application Menu -->
+                    <r:RibbonCommand x:Key="TweetyApplicationMenu"                                     
+                                                     SmallImageSource="..\Resources\twitter-application-menu.png"
+                                                     LargeImageSource="..\Resources\twitter-application-menu.png"
+                                                     LabelTitle="Tweety"
+                                                     ToolTipImageSource="..\Resources\twitter-application-menu.png"
+                                                     ToolTipTitle="Tweety"
+                                                     ToolTipDescription="Yet another twitter client" />
+                    <!-- Application Menu -->
+
+                    <!-- Layout Definitions -->
+                    <r:RibbonGroupSizeDefinitionCollection x:Key="RibbonLayout">
+                        <r:RibbonGroupSizeDefinition>
+                            <r:RibbonControlSizeDefinition ImageSize="Large" IsLabelVisible="True"/>
+                            <r:RibbonControlSizeDefinition ImageSize="Large" IsLabelVisible="True"/>
+                            <r:RibbonControlSizeDefinition ImageSize="Large" IsLabelVisible="True"/>
+                        </r:RibbonGroupSizeDefinition>
+                        <r:RibbonGroupSizeDefinition>
+                            <r:RibbonControlSizeDefinition ImageSize="Large" IsLabelVisible="True"/>
+                            <r:RibbonControlSizeDefinition ImageSize="Small" IsLabelVisible="True"/>
+                            <r:RibbonControlSizeDefinition ImageSize="Small" IsLabelVisible="True"/>
+                        </r:RibbonGroupSizeDefinition>
+                        <r:RibbonGroupSizeDefinition>
+                            <r:RibbonControlSizeDefinition ImageSize="Large" IsLabelVisible="True"/>
+                            <r:RibbonControlSizeDefinition ImageSize="Small" IsLabelVisible="False"/>
+                            <r:RibbonControlSizeDefinition ImageSize="Small" IsLabelVisible="False"/>
+                        </r:RibbonGroupSizeDefinition>
+                        <r:RibbonGroupSizeDefinition IsCollapsed="True" />
+                    </r:RibbonGroupSizeDefinitionCollection>
+                    <!-- Layout Definitions -->
+
+                </r:Ribbon.Resources>
+
+                <!-- Building Ribbon starts here with the Application Menu -->
+                <r:Ribbon.ApplicationMenu>
+                    <r:RibbonApplicationMenu>
+                        <!-- The round button -->
+                        <r:RibbonApplicationMenu.Command>
+                            <r:RibbonCommand                        
+                                                LabelTitle="Application Button"
+                                                LabelDescription="Close the application."
+                                                SmallImageSource="..\Resources\twitter-application-menu.png"
+                                                LargeImageSource="..\Resources\twitter-application-menu.png"
+                                                ToolTipTitle="Tweety"
+                                                ToolTipDescription="Yet Another Twitter Client" />
+                        </r:RibbonApplicationMenu.Command>
+                        <!-- The round button -->
+
+                        <!-- Menu Items -->
+                        <r:RibbonApplicationMenuItem>
+                            <!-- Ribbon Theme Menu Item -->
+                            <r:RibbonApplicationMenuItem.Command>
+                                <r:RibbonCommand 
+                                                    LabelTitle="Ribbon Theme" 
+                                                    LabelDescription="Change the theme of your Ribbon"
+                                                    
+                                                    LargeImageSource="..\Resources\windows.png"/>
+                            </r:RibbonApplicationMenuItem.Command>
+                            <!-- Ribbon Theme Menu SubItems -->
+                            <r:RibbonApplicationSplitMenuItem>
+                                <r:RibbonApplicationSplitMenuItem.Command>
+                                    <r:RibbonCommand
+                                                        LabelTitle="Office 2007 Black" 
+                                                        LabelDescription="Change the Ribbon theme"
+                                                        
+                                                        LargeImageSource="..\Resources\black.png"
+                                                        ToolTipTitle="Office 2007 Black"
+                                                        ToolTipDescription="Change the Ribbon theme to Office 2007 Black"/>
+                                </r:RibbonApplicationSplitMenuItem.Command>
+                            </r:RibbonApplicationSplitMenuItem>
+                            <r:RibbonApplicationSplitMenuItem>
+                                <r:RibbonApplicationSplitMenuItem.Command>
+                                    <r:RibbonCommand
+                                                                    LabelTitle="Office 2007 Blue" 
+                                                                    LabelDescription="Change the Ribbon theme"
+                                                                    
+                                                                    LargeImageSource="..\Resources\blue.png"
+                                                                    ToolTipTitle="Office 2007 Blue"
+                                                                    ToolTipDescription="Change the Ribbon theme to Office 2007 Blue"/>
+                                </r:RibbonApplicationSplitMenuItem.Command>
+                            </r:RibbonApplicationSplitMenuItem>
+                            <r:RibbonApplicationSplitMenuItem>
+                                <r:RibbonApplicationSplitMenuItem.Command>
+                                    <r:RibbonCommand
+                                                                    LabelTitle="Office 2007 Silver" 
+                                                                    LabelDescription="Change the Ribbon theme"
+                                                                    
+                                                                    LargeImageSource="..\Resources\white.png"
+                                                                    ToolTipTitle="Office 2007 Silver"
+                                                                    ToolTipDescription="Change the Ribbon theme to Office 2007 Silver"/>
+                                </r:RibbonApplicationSplitMenuItem.Command>
+                            </r:RibbonApplicationSplitMenuItem>
+                            <!-- Ribbon Theme Menu SubItems -->
+                        </r:RibbonApplicationMenuItem>
+                        <!-- Ribbon Theme Menu Item -->
+
+                        <!-- Close Menu Item -->
+                        <r:RibbonApplicationMenuItem>
+                            <r:RibbonApplicationMenuItem.Command>
+                                <r:RibbonCommand 
+                                                                LabelTitle="Close" 
+                                                                LabelDescription="Close the Application"
+                                                                
+                                                                LargeImageSource="..\Resources\power.png"/>
+                            </r:RibbonApplicationMenuItem.Command>
+                        </r:RibbonApplicationMenuItem>
+                        <!-- Close Menu Item -->
+                    </r:RibbonApplicationMenu>
+                </r:Ribbon.ApplicationMenu>
+                <!-- Building Ribbon ends here with the Application Menu -->
+
+                <!-- Building the Quick Access ToolBar starts here -->
+                <r:Ribbon.QuickAccessToolBar>
+                    <r:RibbonQuickAccessToolBar CanUserCustomize="False">
+                        <r:RibbonButton Command="{StaticResource ProfileQuickAccessCommand}" r:RibbonQuickAccessToolBar.Placement="InToolBar"/>
+                        <r:RibbonButton Command="{StaticResource FavoritesQuickAccessCommand}" r:RibbonQuickAccessToolBar.Placement="InToolBar"/>
+                        <r:RibbonButton Command="{StaticResource RefreshQuickAccessCommand}" r:RibbonQuickAccessToolBar.Placement="InCustomizeMenuAndToolBar"/>
+                        <r:RibbonButton Command="{StaticResource FeedQuickAccessCommand}" r:RibbonQuickAccessToolBar.Placement="InCustomizeMenuAndToolBar"/>
+                    </r:RibbonQuickAccessToolBar>
+                </r:Ribbon.QuickAccessToolBar>
+                <!-- Building the Quick Access ToolBar ends here -->
+
+                <!-- Building Tabs starts here -->
+
+                <!-- Personal Tab -->
+                <r:RibbonTab Name="Personal" Label="Personal">
+                    <r:RibbonTab.Groups>
+                        <!-- Replies Group -->
+                        <r:RibbonGroup GroupSizeDefinitions="{StaticResource RibbonLayout}">
+                            <r:RibbonGroup.Command>
+                                <r:RibbonCommand LabelTitle="Replies"/>
+                            </r:RibbonGroup.Command>
+                            <r:RibbonButton Command="{StaticResource RepliesCommand}" Height="Auto"/>
+                        </r:RibbonGroup>
+                        <!-- Replies Group -->
+
+                        <!-- Direct Messages Group -->
+                        <r:RibbonGroup GroupSizeDefinitions="{StaticResource RibbonLayout}">
+                            <r:RibbonGroup.Command>
+                                <r:RibbonCommand LabelTitle="Direct Messages"/>
+                            </r:RibbonGroup.Command>
+                            <r:RibbonButton Command="{StaticResource DirectMessagesReceivedCommand}" Height="Auto"/>
+                            <r:RibbonButton Command="{StaticResource DirectMessagesSentCommand}" Height="Auto"/>
+                        </r:RibbonGroup>
+                        <!-- Direct Messages Group -->
+
+                        <!-- Favorites Group -->
+                        <r:RibbonGroup GroupSizeDefinitions="{StaticResource RibbonLayout}">
+                            <r:RibbonGroup.Command>
+                                <r:RibbonCommand LabelTitle="Favorites"/>
+                            </r:RibbonGroup.Command>
+                            <r:RibbonButton Command="{StaticResource FavoritesCommand}" Height="Auto"/>
+                        </r:RibbonGroup>
+                        <!-- Favorites Group -->
+                    </r:RibbonTab.Groups>
+                </r:RibbonTab>
+                <!-- Personal Tab -->
+
+                <!-- People Tab -->
+                <r:RibbonTab Name="People" Label="People" >
+                    <r:RibbonTab.Groups>
+                        <!-- People Group -->
+                        <r:RibbonGroup GroupSizeDefinitions="{StaticResource RibbonLayout}">
+                            <r:RibbonGroup.Command>
+                                <r:RibbonCommand LabelTitle="People"/>
+                            </r:RibbonGroup.Command>
+                            <r:RibbonButton Command="{StaticResource FollowersCommand}"/>
+                            <r:RibbonButton Command="{StaticResource FollowingCommand}"/>
+                            <r:RibbonButton Command="{StaticResource FriendsCommand}"/>
+                        </r:RibbonGroup>
+                        <!-- People Group -->
+                    </r:RibbonTab.Groups>
+                </r:RibbonTab>
+                <!-- People Tab -->
+
+                <!-- Public Tab -->
+                <r:RibbonTab Name="Public" Label="Public" >
+                    <!-- Public Group -->
+                    <r:RibbonGroup GroupSizeDefinitions="{StaticResource RibbonLayout}">
+                        <r:RibbonGroup.Command>
+                            <r:RibbonCommand LabelTitle="Public"/>
+                        </r:RibbonGroup.Command>
+                        <r:RibbonButton Command="{StaticResource EveryoneCommand}" Height="Auto"/>
+                    </r:RibbonGroup>
+                    <!-- Public Group -->
+                </r:RibbonTab>
+                <!-- Public Tab -->
+
+                <!-- Building Tabs starts here -->
+            </r:Ribbon>
+
+            <!-- ################ RIBON END ################ -->
+
+            <!--ToolBarTray DockPanel.Dock="Top" Background="{Binding ElementName=FirstMenu, Path=Background}" Visibility="Visible" Name="FirstToolBar" >
+                                    
+                                        <ToggleButton Content="SpellCheck" ToolTip="Toggle SpellCheck" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSpellCheckEnabled}"/>
+                                        <Button Command="ApplicationCommands.Cut" CommandTarget="{Binding ElementName=RTB}" Content= "Cut" ToolTip="Cut"/>
+                                        <Button Command="ApplicationCommands.Copy" CommandTarget="{Binding ElementName=RTB}" Content="Copy" ToolTip="Copy"/>
+                                        <Button Command="ApplicationCommands.Paste" CommandTarget="{Binding ElementName=RTB}" Content="Paste" ToolTip="Paste"/>
+                                    </ToolBar>
+                                    <ToolBar Background="{Binding ElementName=FirstMenu, Path=Background}">
+                                        <Button Command="ApplicationCommands.Undo" CommandTarget="{Binding ElementName=RTB}" Content="Undo" ToolTip="Undo"/>
+                                        <Button Command="ApplicationCommands.Redo" CommandTarget="{Binding ElementName=RTB}" Content="Redo" ToolTip="Redo"/>
+                                    </ToolBar>
+                                    <ToolBar Background="{Binding ElementName=FirstMenu, Path=Background}">
+                                        <ComboBox x:Name="FindComboBox" IsEditable="True" Width="100" Text="Text to search..."/>
+                                        <Button Content="Find" Command="custom:RichTextEditor.FindCommand" CommandTarget="{Binding ElementName=RTB}"/>
+
+                                    </ToolBar>
+                                </ToolBarTray>
+                                <ToolBarTray DockPanel.Dock="Top" Background="{Binding ElementName=FirstMenu, Path=Background}"  >
+                                    <ToolBar Background="{Binding ElementName=FirstMenu, Path=Background}"  Visibility="{Binding ElementName=TableMenu, Path=Visibility}">
+                                        FontFamily
+                                        <ComboBox ToolTip="Font Family" Width="80" SelectedValue="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionFontFamily}">
+                                            <sys:String>Tahoma</sys:String>
+                                            <sys:String>Verdana</sys:String>
+                                            <sys:String>Arial</sys:String>
+                                            <sys:String>Times New Roman</sys:String>
+                                            <sys:String>Courier New</sys:String>
+                                        </ComboBox>
+                                        <ComboBox ToolTip="Font Size" Width="40" SelectedValue="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionFontSize}">
+                                            <sys:String>8</sys:String>
+                                            <sys:String>9</sys:String>
+                                            <sys:String>10</sys:String>
+                                            <sys:String>11</sys:String>
+                                            <sys:String>12</sys:String>
+                                            <sys:String>14</sys:String>
+                                            <sys:String>16</sys:String>
+                                            <sys:String>18</sys:String>
+                                            <sys:String>20</sys:String>
+                                            <sys:String>22</sys:String>
+                                            <sys:String>24</sys:String>
+                                            <sys:String>26</sys:String>
+                                            <sys:String>28</sys:String>
+                                            <sys:String>36</sys:String>
+                                            <sys:String>48</sys:String>
+                                            <sys:String>72</sys:String>
+                                        </ComboBox>
+                                    </ToolBar>
+                                    <ToolBar Background="{Binding ElementName=FirstMenu, Path=Background}"  Visibility="{Binding ElementName=TableMenu, Path=Visibility}">
+                                        <ToggleButton Width="20" ToolTip="Bold" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionIsBold}">
+                                            <ToggleButton.Content>
+                                                <TextBlock FontWeight="Bold">B</TextBlock>
+                                            </ToggleButton.Content>
+                                        </ToggleButton>
+                                        <ToggleButton Width="20" ToolTip="Italic" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionIsItalic}">
+                                            <ToggleButton.Content>
+                                                <TextBlock FontStyle="Italic">I</TextBlock>
+                                            </ToggleButton.Content>
+                                        </ToggleButton>
+                                        <ToggleButton Width="20" ToolTip="Underline" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionIsUnderline}">
+                                            <ToggleButton.Content>
+                                                <TextBlock TextDecorations="Underline">U</TextBlock>
+                                            </ToggleButton.Content>
+                                        </ToggleButton>
+                                    </ToolBar>
+                                    <ToolBar Background="{Binding ElementName=FirstMenu, Path=Background}" Visibility="{Binding ElementName=FirstToolBar, Path=Visibility}">
+                                        <ToggleButton Content="Left" ToolTip="Align Left" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionIsAlignLeft}"/>
+                                        <ToggleButton Content="Center" ToolTip="Align Center" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionIsAlignCenter}" />
+                                        <ToggleButton Content="Right" ToolTip="Align Right" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionIsAlignRight}"/>
+                                        <ToggleButton Content="Justify" ToolTip="Align Justify" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionIsAlignJustify}"/>
+                                    </ToolBar>
+                                    <ToolBar Background="{Binding ElementName=FirstMenu, Path=Background}" Visibility="{Binding ElementName=FirstToolBar, Path=Visibility}">
+                                        <ToggleButton Content="LTR" ToolTip="Left To Right" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionParagraphIsLeftToRight}"/>
+                                        <ToggleButton Content="RTL" ToolTip="RightToLeft" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionParagraphIsRightToLeft}"/>
+                                    </ToolBar>
+                                    <ToolBar Background="{Binding ElementName=FirstMenu, Path=Background}" Visibility="{Binding ElementName=FirstToolBar, Path=Visibility}">
+                                        <Button Width="20" Content="≡ " ToolTip="Decrease Indent" Command="EditingCommands.DecreaseIndentation" CommandTarget="{Binding ElementName=RTB}" />
+                                        <Button Width="20" Content="  ≡" ToolTip="Increase Indent" Command="EditingCommands.IncreaseIndentation" CommandTarget="{Binding ElementName=RTB}" />
+                                        <Button Width="20" Content="↑" ToolTip="Grow Font" Command="EditingCommands.IncreaseFontSize" CommandTarget="{Binding ElementName=RTB}" />
+                                        <Button x:Name="Button1" Width="20" Content="↓" ToolTip="Shrink Font" Command="EditingCommands.DecreaseFontSize" CommandTarget="{Binding ElementName=RTB}" />
+
+                                    </ToolBar>
+                                    <ToolBar Background="{Binding ElementName=FirstMenu, Path=Background}">
+
+                                   
+                                        <ToggleButton Width="20"  Visibility="{Binding ElementName=TableMenu, Path=Visibility}" Content="•" ToolTip="Toggle Bullets" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionIsBullets}" />
+                                        <ToggleButton Width="20"  Visibility="{Binding ElementName=TableMenu, Path=Visibility}" ToolTip="Toggle Numbering" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionIsNumbering}" Content="1.">
+                                        </ToggleButton>
+                                    </ToolBar>
+                                </ToolBarTray-->
+            <StatusBar DockPanel.Dock="Top" Visibility="{Binding ElementName=TableMenu, Path=Visibility}" >
+                <StatusBarItem>
+                    <TextBlock x:Name="StatusBarLineInfo"/>
+                </StatusBarItem>
+                <StatusBarItem>
+                    <Separator/>
+                </StatusBarItem>
+                <StatusBarItem>
+                    <TextBlock x:Name="StatusBarMessage"/>
+                </StatusBarItem>
+            </StatusBar>
+            <RichTextBox x:Name="m_RTB" ContextMenu="{StaticResource RTEditorContextMenu}"
+									 AcceptsTab="True" AcceptsReturn="True"
+									 HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible"
+									 SpellCheck.IsEnabled="True"
+									  Visibility="{Binding ElementName=TableMenu, Path=Visibility}"/>
+            <!--TextBox x:Name="TB"
+			                     AcceptsTab="True" AcceptsReturn="True"
+			                     HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible"
+			                     SpellCheck.IsEnabled="True"
+								 Visibility="Collapsed"/-->
+
+
+        </DockPanel>
+    </Grid>
+</UserControl>

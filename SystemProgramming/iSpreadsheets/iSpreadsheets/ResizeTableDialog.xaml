@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="iSpreadsheets.ResizeTableDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" >
+    <Grid DataContext="{Binding ElementName=root}">
+        <Border Background="#90000000" Visibility="{Binding Visibility}">
+            <Border BorderBrush="Black" BorderThickness="1" Background="AliceBlue" 
+					CornerRadius="10,0,10,0" VerticalAlignment="Center"
+					HorizontalAlignment="Center">
+                <Border.BitmapEffect>
+                    <DropShadowBitmapEffect Color="Black" Opacity="0.5" Direction="270" ShadowDepth="0.7" />
+                </Border.BitmapEffect>
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label Content="Rows:"/>
+                    <TextBox x:Name="RowsTextBox" TextWrapping="Wrap" Margin="60,0,0,30" TextChanged="RowsTextBox_TextChanged"/>
+                    <Label Content="Columns:" Margin="0,30,0,0"/>
+                    <TextBox x:Name="ColsTextBox" TextWrapping="Wrap" Margin="60,30,0,0" TextChanged="ColsTextBox_TextChanged" />
+                    <UniformGrid Grid.Row="2" Margin="5" Columns="2" HorizontalAlignment="Center"
+								 VerticalAlignment="Bottom">
+                        <Button x:Name="OkButton" Click="OkButton_Click" Content="Ok" Margin="2"  />
+                        <Button x:Name="CancelButton" Click="CancelButton_Click" Content="Cancel" Margin="2" />
+                    </UniformGrid>
+                </Grid>
+            </Border>
+        </Border>
+    </Grid>
+</UserControl>

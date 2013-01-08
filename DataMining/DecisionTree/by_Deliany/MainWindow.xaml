@@ -1,0 +1,35 @@
+﻿<Window x:Class="by_Deliany.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:by_Deliany" 
+        Title="MainWindow" 
+        xmlns:TreeContainer="clr-namespace:TreeContainer" Height="600" Width="800" Background="#FF494959" WindowStartupLocation="CenterScreen" Icon="/by_Deliany;component/Images/248.jpg">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Helpers/Theme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            
+            <Style TargetType="ListBoxItem">
+                <Setter Property="Foreground" Value="White" />
+            </Style>
+            
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid Name="mainGrid">
+        <GroupBox Header="Дерево рішень" Height="400" Name="groupBoxDecisionTree" VerticalAlignment="Top" IsEnabled="True">
+            <Grid>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="6,0,0,0" BorderBrush="White">
+                    <TreeContainer:TreeContainer Width="Auto" Height="Auto" x:Name="tcMain" Margin="8,8,8,8" VerticalBuffer="20"/>
+                </ScrollViewer>
+            </Grid>
+        </GroupBox>
+        <TextBox Margin="0,406,27,66" Name="textBoxOutput" TextWrapping="WrapWithOverflow" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Right" Width="213" />
+        <ListBox Margin="28,406,250,106" Name="listBoxZoo" />
+        <CheckBox Content="Режим бази даних" Margin="0,0,27,12" Name="checkBoxDataBase" Click="checkBoxDataBase_Click" HorizontalAlignment="Right" Width="122" Height="16" VerticalAlignment="Bottom" />
+        <Button Content="simple example" HorizontalAlignment="Right" Margin="0,0,137,35" Name="buttonSimpleExample" Width="95" Height="25" VerticalAlignment="Bottom" Click="buttonSimpleExample_Click" />
+        <Button Content="zoo example" HorizontalAlignment="Right" Margin="0,0,36,35" Name="buttonZooExample" Width="95" Height="25" VerticalAlignment="Bottom" Click="buttonZooExample_Click" />
+        <DataGrid AutoGenerateColumns="True" Margin="28,0,250,10" Name="dataGridClassify" Height="90" VerticalAlignment="Bottom" CanUserAddRows="False" FontFamily="Verdana" FontSize="12" PreviewKeyDown="dataGridClassify_PreviewKeyDown" />
+    </Grid>
+
+</Window>

@@ -1,0 +1,676 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:custom="clr-namespace:RichEditorLibrary"
+    xmlns:controls="clr-namespace:Microsoft.WPFControlsLibrary;assembly=WPFControlsLibrary"
+    xmlns:core="clr-namespace:Microsoft.WPFControlsLibrary.Core;assembly=WPFControlsLibraryInterface"                    
+    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Royale"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib" >
+
+
+
+    <!-- RICH EDITOR -->
+    <Style TargetType="{x:Type custom:RichEditor}">
+        <Style.Resources>
+
+            <!-- Ribon toolbar styles -->
+            <ControlTemplate x:Key="ButtonTemplate" TargetType="{x:Type controls:ImageButton}">
+                <ControlTemplate.Resources>
+                    <Storyboard x:Key="hover">
+                        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.Opacity)">
+                            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.7"/>
+                            <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+                        </DoubleAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="backgroundButton" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                            <SplineColorKeyFrame KeyTime="00:00:00" Value="#FFDEE8FB"/>
+                            <SplineColorKeyFrame KeyTime="00:00:00.2000000" Value="#FF92B2EC"/>
+                        </ColorAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="backgroundButton" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
+                            <SplineColorKeyFrame KeyTime="00:00:00" Value="#FF92B2EC"/>
+                            <SplineColorKeyFrame KeyTime="00:00:00.2000000" Value="#FFDEE8FB"/>
+                        </ColorAnimationUsingKeyFrames>
+                        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="backgroundButton" Storyboard.TargetProperty="(UIElement.Opacity)">
+                            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                            <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                    <Storyboard x:Key="release">
+                        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.Opacity)">
+                            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                            <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="0.7"/>
+                        </DoubleAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="backgroundButton" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                            <SplineColorKeyFrame KeyTime="00:00:00" Value="#FF92B2EC"/>
+                            <SplineColorKeyFrame KeyTime="00:00:00.2000000" Value="#FFDEE8FB"/>
+                        </ColorAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="backgroundButton" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
+                            <SplineColorKeyFrame KeyTime="00:00:00" Value="#FFDEE8FB"/>
+                            <SplineColorKeyFrame KeyTime="00:00:00.2000000" Value="#FF92B2EC"/>
+                        </ColorAnimationUsingKeyFrames>
+                        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="backgroundButton" Storyboard.TargetProperty="(UIElement.Opacity)">
+                            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                            <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="0"/>
+                        </DoubleAnimationUsingKeyFrames>
+                    </Storyboard>
+                    <Storyboard x:Key="enter">
+                        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="image" Storyboard.TargetProperty="(UIElement.Opacity)">
+                            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0.7"/>
+                            <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+                        </DoubleAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="backgroundButton" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                            <SplineColorKeyFrame KeyTime="00:00:00" Value="#FFDEE8FB"/>
+                            <SplineColorKeyFrame KeyTime="00:00:00.2000000" Value="#FFFBF385"/>
+                        </ColorAnimationUsingKeyFrames>
+                        <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="backgroundButton" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
+                            <SplineColorKeyFrame KeyTime="00:00:00" Value="#FF92B2EC"/>
+                            <SplineColorKeyFrame KeyTime="00:00:00.2000000" Value="#FFFDFCE9"/>
+                        </ColorAnimationUsingKeyFrames>
+                    </Storyboard>
+                </ControlTemplate.Resources>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.36*"/>
+                        <ColumnDefinition Width="0.64*"/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle x:Name="backgroundButton" Height="Auto" Canvas.Left="0" Canvas.Top="0" Width="Auto" StrokeThickness="2" RadiusX="5" RadiusY="5" Grid.ColumnSpan="2" Stroke="{x:Null}" Opacity="0">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                                <GradientStop Color="#FF92B2EC" Offset="0"/>
+                                <GradientStop Color="#FFDEE8FB" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
+                                      Canvas.Left="43.958" Canvas.Top="8.362" Content="{TemplateBinding Content}" x:Name="textButton" Grid.Column="1" Margin="0,0,3,0"/>
+                    <Image HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="{TemplateBinding MaxHeight}" Height="{TemplateBinding MaxHeight}" Canvas.Left="0" Canvas.Top="0" 
+                           Opacity="0.7" x:Name="image" Grid.Column="0" Source="{TemplateBinding Source}" Margin="5,5,5,5"/>
+                </Grid>
+                <ControlTemplate.Triggers>
+                    <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                        <BeginStoryboard x:Name="release_BeginStoryboard" Storyboard="{StaticResource release}"/>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="ButtonBase.Click">
+                        <BeginStoryboard x:Name="enter_BeginStoryboard" Storyboard="{StaticResource enter}"/>
+                    </EventTrigger>
+                    <Trigger Property="IsKeyboardFocused" Value="True"/>
+                    <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                        <BeginStoryboard Storyboard="{StaticResource hover}"/>
+                    </EventTrigger>
+                    <Trigger Property="ToggleButton.IsChecked" Value="True"/>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+            <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
+            <Style x:Key="GroupBoxStyleRibbon" TargetType="{x:Type GroupBox}">
+                <Setter Property="BorderBrush" Value="#D5DFE5"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type GroupBox}">
+                            <Grid SnapsToDevicePixels="true">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="6"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="18"/>
+                                </Grid.RowDefinitions>
+                                <Border Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="4" Grid.RowSpan="3" BorderBrush="#FF86A6B9"/>
+                                <Border x:Name="Header" Grid.Column="1" Grid.Row="3" Grid.RowSpan="2" Padding="{TemplateBinding Padding}" BorderBrush="#FF87A6B9" CornerRadius="0,0,5,5">
+                                    <Border.Background>
+                                        <LinearGradientBrush EndPoint="0.525,0.948" StartPoint="0.526,0.018">
+                                            <GradientStop Color="#FF7A9DB2" Offset="0"/>
+                                            <GradientStop Color="#FFD5DFE5" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" ContentSource="Header" RecognizesAccessKey="True" HorizontalAlignment="Center"/>
+                                </Border>
+                                <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="{TemplateBinding Padding}" Grid.Column="1" Grid.Row="2"/>
+                                <Border Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="2" BorderBrush="#FF87A6B9" CornerRadius="4" Grid.Column="1">
+                                    <Border.OpacityMask>
+                                        <MultiBinding Converter="{StaticResource BorderGapMaskConverter}" ConverterParameter="7">
+                                            <Binding Path="ActualWidth" ElementName="Header"/>
+                                            <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}"/>
+                                            <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}"/>
+                                        </MultiBinding>
+                                    </Border.OpacityMask>
+                                    <Border BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="3">
+                                        <Border BorderBrush="#FF7A9DB2" CornerRadius="2" BorderThickness="{TemplateBinding BorderThickness}"/>
+                                    </Border>
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <SolidColorBrush x:Key="TabControlNormalBorderBrush" Color="#8C8E94"/>
+            <Style x:Key="TabControlStyle" TargetType="{x:Type TabControl}">
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                <Setter Property="Padding" Value="4,4,4,4"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="BorderBrush" Value="{StaticResource TabControlNormalBorderBrush}"/>
+                <Setter Property="Background" Value="#F9F9F9"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TabControl}">
+                            <Grid ClipToBounds="true" SnapsToDevicePixels="true" KeyboardNavigation.TabNavigation="Local">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition x:Name="ColumnDefinition0"/>
+                                    <ColumnDefinition x:Name="ColumnDefinition1" Width="0"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition x:Name="RowDefinition0" Height="Auto"/>
+                                    <RowDefinition x:Name="RowDefinition1" Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TabPanel Margin="2,2,2,0" x:Name="HeaderPanel" Grid.Column="0" Grid.Row="0" IsItemsHost="true" Panel.ZIndex="1" KeyboardNavigation.TabIndex="1"/>
+                                <Border x:Name="ContentPanel" Grid.Column="0" Grid.Row="1" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" KeyboardNavigation.DirectionalNavigation="Contained" KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local">
+                                    <Border.Background>
+                                        <LinearGradientBrush EndPoint="0.528,1.731" StartPoint="0.527,-0.629">
+                                            <GradientStop Color="#FFBCC9E8" Offset="0"/>
+                                            <GradientStop Color="#FFFFFFFF" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="{TemplateBinding Padding}" x:Name="PART_SelectedContentHost" ContentSource="SelectedContent"/>
+                                </Border>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="TabStripPlacement" Value="Bottom">
+                                    <Setter Property="Grid.Row" TargetName="HeaderPanel" Value="1"/>
+                                    <Setter Property="Grid.Row" TargetName="ContentPanel" Value="0"/>
+                                    <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
+                                    <Setter Property="Height" TargetName="RowDefinition1" Value="Auto"/>
+                                    <Setter Property="Margin" TargetName="HeaderPanel" Value="2,0,2,2"/>
+                                </Trigger>
+                                <Trigger Property="TabStripPlacement" Value="Left">
+                                    <Setter Property="Grid.Row" TargetName="HeaderPanel" Value="0"/>
+                                    <Setter Property="Grid.Row" TargetName="ContentPanel" Value="0"/>
+                                    <Setter Property="Grid.Column" TargetName="HeaderPanel" Value="0"/>
+                                    <Setter Property="Grid.Column" TargetName="ContentPanel" Value="1"/>
+                                    <Setter Property="Width" TargetName="ColumnDefinition0" Value="Auto"/>
+                                    <Setter Property="Width" TargetName="ColumnDefinition1" Value="*"/>
+                                    <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
+                                    <Setter Property="Height" TargetName="RowDefinition1" Value="0"/>
+                                    <Setter Property="Margin" TargetName="HeaderPanel" Value="2,2,0,2"/>
+                                </Trigger>
+                                <Trigger Property="TabStripPlacement" Value="Right">
+                                    <Setter Property="Grid.Row" TargetName="HeaderPanel" Value="0"/>
+                                    <Setter Property="Grid.Row" TargetName="ContentPanel" Value="0"/>
+                                    <Setter Property="Grid.Column" TargetName="HeaderPanel" Value="1"/>
+                                    <Setter Property="Grid.Column" TargetName="ContentPanel" Value="0"/>
+                                    <Setter Property="Width" TargetName="ColumnDefinition0" Value="*"/>
+                                    <Setter Property="Width" TargetName="ColumnDefinition1" Value="Auto"/>
+                                    <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
+                                    <Setter Property="Height" TargetName="RowDefinition1" Value="0"/>
+                                    <Setter Property="Margin" TargetName="HeaderPanel" Value="0,2,2,2"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="TabItemFocusVisual">
+                <Setter Property="Control.Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Rectangle SnapsToDevicePixels="true" Stroke="Black" StrokeDashArray="1 2" StrokeThickness="1" Margin="3,3,3,1"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <LinearGradientBrush x:Key="ButtonNormalBackground" EndPoint="0,1" StartPoint="0,0">
+                <GradientStop Color="#F3F3F3" Offset="0"/>
+                <GradientStop Color="#EBEBEB" Offset="0.5"/>
+                <GradientStop Color="#DDDDDD" Offset="0.5"/>
+                <GradientStop Color="#CDCDCD" Offset="1"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="TabItemHotBackground" EndPoint="0,1" StartPoint="0,0">
+                <GradientStop Color="#EAF6FD" Offset="0.15"/>
+                <GradientStop Color="#D9F0FC" Offset=".5"/>
+                <GradientStop Color="#BEE6FD" Offset=".5"/>
+                <GradientStop Color="#A7D9F5" Offset="1"/>
+            </LinearGradientBrush>
+            <SolidColorBrush x:Key="TabItemSelectedBackground" Color="#F9F9F9"/>
+            <SolidColorBrush x:Key="TabItemHotBorderBrush" Color="#3C7FB1"/>
+            <SolidColorBrush x:Key="TabItemDisabledBackground" Color="#F4F4F4"/>
+            <SolidColorBrush x:Key="TabItemDisabledBorderBrush" Color="#FFC9C7BA"/>
+            <Style x:Key="TabItemStyle" TargetType="{x:Type TabItem}">
+                <Setter Property="FocusVisualStyle" Value="{StaticResource TabItemFocusVisual}"/>
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="Padding" Value="6,1,6,1"/>
+                <Setter Property="BorderBrush" Value="{StaticResource TabControlNormalBorderBrush}"/>
+                <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TabItem}">
+                            <Grid SnapsToDevicePixels="true">
+                                <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1,1,1,0" CornerRadius="6,6,0,0" Padding="{TemplateBinding Padding}">
+                                    <Border.Background>
+                                        <LinearGradientBrush EndPoint="0.942,0.976" StartPoint="0,0">
+                                            <GradientStop Color="#FFFFFFFF" Offset="0"/>
+                                            <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                                            <GradientStop Color="#FFB0BCC3" Offset="0.236"/>
+                                            <GradientStop Color="#FFC6D8E2" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" HorizontalAlignment="{Binding Path=HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" x:Name="Content" VerticalAlignment="{Binding Path=VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" ContentSource="Header" RecognizesAccessKey="True"/>
+                                </Border>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Background" TargetName="Bd" Value="{StaticResource TabItemHotBackground}"/>
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="true">
+                                    <Setter Property="Panel.ZIndex" Value="1"/>
+                                    <Setter Property="Background" TargetName="Bd" Value="{StaticResource TabItemSelectedBackground}"/>
+                                </Trigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="false"/>
+                                        <Condition Property="IsMouseOver" Value="true"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource TabItemHotBorderBrush}"/>
+                                </MultiTrigger>
+                                <Trigger Property="TabStripPlacement" Value="Bottom">
+                                    <Setter Property="BorderThickness" TargetName="Bd" Value="1,0,1,1"/>
+                                </Trigger>
+                                <Trigger Property="TabStripPlacement" Value="Left">
+                                    <Setter Property="BorderThickness" TargetName="Bd" Value="1,1,0,1"/>
+                                </Trigger>
+                                <Trigger Property="TabStripPlacement" Value="Right">
+                                    <Setter Property="BorderThickness" TargetName="Bd" Value="0,1,1,1"/>
+                                </Trigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="true"/>
+                                        <Condition Property="TabStripPlacement" Value="Top"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Margin" Value="-2,-2,-2,-1"/>
+                                    <Setter Property="Margin" TargetName="Content" Value="0,0,0,1"/>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="true"/>
+                                        <Condition Property="TabStripPlacement" Value="Bottom"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Margin" Value="-2,-1,-2,-2"/>
+                                    <Setter Property="Margin" TargetName="Content" Value="0,1,0,0"/>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="true"/>
+                                        <Condition Property="TabStripPlacement" Value="Left"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Margin" Value="-2,-2,-1,-2"/>
+                                    <Setter Property="Margin" TargetName="Content" Value="0,0,1,0"/>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsSelected" Value="true"/>
+                                        <Condition Property="TabStripPlacement" Value="Right"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Margin" Value="-1,-2,-2,-2"/>
+                                    <Setter Property="Margin" TargetName="Content" Value="1,0,0,0"/>
+                                </MultiTrigger>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Background" TargetName="Bd" Value="{StaticResource TabItemDisabledBackground}"/>
+                                    <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource TabItemDisabledBorderBrush}"/>
+                                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <ControlTemplate x:Key="GlassButton" TargetType="{x:Type Button}">
+                <Grid x:Name="Grid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.27843484567369*"/>
+                        <ColumnDefinition Width="0.72156515432631*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Rectangle RadiusX="9.5" RadiusY="9.5" StrokeThickness="1"  Margin="0,0,0,0" Width="Auto" Height="Auto" x:Name="Rectangle" Grid.ColumnSpan="2">
+                        <Rectangle.Stroke>
+                            <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform X="-0.5" Y="-0.5"/>
+                                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                        <SkewTransform AngleX="0" AngleY="0"/>
+                                        <RotateTransform Angle="-134.21615637340656"/>
+                                        <TranslateTransform X="0.5" Y="0.5"/>
+                                        <TranslateTransform X="0" Y="1.1102230246251565E-16"/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="sc#1, 0, 0.105029024, 0.341755062" Offset="0"/>
+                                <GradientStop Color="sc#1, 0.236293077, 0.58113, 1" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Stroke>
+                        <Rectangle.Fill>
+                            <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform X="-0.5" Y="-0.5"/>
+                                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                        <SkewTransform AngleX="0" AngleY="0"/>
+                                        <RotateTransform Angle="-134.21615637340656"/>
+                                        <TranslateTransform X="0.5" Y="0.5"/>
+                                        <TranslateTransform X="0" Y="1.1102230246251565E-16"/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="sc#1, 0.19747445, 0.5656454, 0.8154832" Offset="0"/>
+                                <GradientStop Color="sc#1, 0.0365921259, 0.134746253, 0.638337433" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <TextBlock  HorizontalAlignment="Left" TextAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Width="{Binding ElementName=Rectangle, Path=ActualWidth}" x:Name="tbCloseX"  Grid.ColumnSpan="2" Foreground="#FFFFFFFF" Text="Submit" TextWrapping="Wrap">
+                    </TextBlock>
+                    <Path  Stroke="{x:Null}" StrokeThickness="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5.50301444227762,5.28670889641099,5.45587888360024,10.5438191677396" Width="Auto" Height="Auto" x:Name="Path" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5" Stretch="Fill" Data="M8.1022701,17.799688 C7.3544157,11.583093 9.8522114,8.0085448 16.349833,7.6899629 L250.16826,7.8843801 C256.14965,8.0045337 259.63309,10.688788 259.03439,16.633179 L258.8282,31.797765 C164.51944,24.560953 80.727082,36.104513 8.3084562,67.959472 z">
+                        <Path.RenderTransform>
+                            <TransformGroup>
+                                <TranslateTransform X="0" Y="0"/>
+                                <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                <SkewTransform AngleX="0" AngleY="0"/>
+                                <RotateTransform Angle="0"/>
+                                <TranslateTransform X="0" Y="0"/>
+                                <TranslateTransform X="0" Y="0"/>
+                            </TransformGroup>
+                        </Path.RenderTransform>
+                        <Path.Fill>
+                            <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform X="-0.5" Y="-0.5"/>
+                                        <ScaleTransform ScaleX="0.42070697804067081" ScaleY="0.42070697804067081"/>
+                                        <SkewTransform AngleX="0" AngleY="0"/>
+                                        <RotateTransform Angle="-278.63046519289236"/>
+                                        <TranslateTransform X="0.5" Y="0.5"/>
+                                        <TranslateTransform X="-0.02811997223844305" Y="-0.28845321875685026"/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="sc#0.7, 1, 1, 1" Offset="0"/>
+                                <GradientStop Color="sc#0.2, 1, 1, 1" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Path.Fill>
+                    </Path>
+
+                </Grid>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="true">
+                        <Setter TargetName="tbCloseX" Property="Foreground" Value="Black"/>
+                        <Setter TargetName="Rectangle" Property="Fill">
+                            <Setter.Value>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                    <LinearGradientBrush.GradientStops>
+                                        <GradientStop Color="#FFFFFF"
+													  Offset="1"/>
+                                        <GradientStop Color="#D6E7EF"
+													  Offset=".75"/>
+                                        <GradientStop Color="#BDD7EF"
+													  Offset=".75"/>
+                                        <GradientStop Color="#A5CBE7"
+													  Offset=".65"/>
+                                        <GradientStop Color="#A5CBE7"
+													  Offset=".65"/>
+                                        <GradientStop Color="#ADD3EF"
+													  Offset=".4"/>
+                                        <GradientStop Color="#ADD7EF"
+													  Offset="0.15"/>
+                                    </LinearGradientBrush.GradientStops>
+                                </LinearGradientBrush>
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+
+                    <Trigger Property="IsPressed" Value="true">
+                        <Setter TargetName="Rectangle" Property="Fill" Value="SteelBlue"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+
+            </ControlTemplate>
+
+            <Style TargetType="{x:Type	Menu}">
+                <Setter Property="Menu.Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <LinearGradientBrush.GradientStops>
+                                <GradientStop Color="#FFFFFF"
+											  Offset="0.15"/>
+                                <GradientStop Color="#D6E7EF"
+											  Offset=".4"/>
+                                <GradientStop Color="#BDD7EF"
+											  Offset=".65"/>
+                                <GradientStop Color="#A5CBE7"
+											  Offset=".65"/>
+                                <GradientStop Color="#A5CBE7"
+											  Offset=".75"/>
+                                <GradientStop Color="#ADD3EF"
+											  Offset=".75"/>
+                                <GradientStop Color="#ADD7EF"
+											  Offset="1"/>
+                            </LinearGradientBrush.GradientStops>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!-- Context menu -->
+            <ContextMenu x:Key="RTEditorContextMenu" Language="cs-CZ">
+                <MenuItem Header="Vystřihnout" Command="{x:Static ApplicationCommands.Cut}">
+                    <MenuItem.Icon>
+                        <Image Source="..\Resources\Cut.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Kopie" Command="{x:Static ApplicationCommands.Copy}">
+                    <MenuItem.Icon>
+                        <Image Source="..\Resources\Copy.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Vložit" Command="{x:Static ApplicationCommands.Paste}">
+                    <MenuItem.Icon>
+                        <Image Source="..\Resources\Paste.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Tisk" Command="{x:Static custom:RichEditor.PrintCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="..\Resources\Print.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Vlastnosti" Command="{x:Static custom:RichEditor.PropertiesCommand}">
+                    <MenuItem.Icon>
+                        <Image Source="..\Resources\properties.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </ContextMenu>
+
+        </Style.Resources>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type custom:RichEditor}">
+                    <DockPanel LastChildFill="True">
+                        <Menu DockPanel.Dock="Top" FontWeight="Bold"  FontSize="11" Name="FirstMenu" >
+                            <MenuItem Header="_File">
+                                <MenuItem Header="_Print" Command="custom:RichEditor.PrintCommand" />
+                                <!--<Separator />
+								<MenuItem Header="E_xit" />-->
+                            </MenuItem>
+                            <MenuItem Header="_Edit">
+                                <MenuItem Header="Cu_t" Command="ApplicationCommands.Cut" />
+                                <MenuItem Header="_Copy" Command="ApplicationCommands.Copy" />
+                                <MenuItem Header="_Paste" Command="ApplicationCommands.Paste" />
+                                <MenuItem Header="Delete" Command="ApplicationCommands.Delete" />
+                                <!--
+                  <Separator />
+                  <MenuItem Header="_Find"/>
+                  <MenuItem Header="Re_place"/>
+                  -->
+                                <Separator />
+                                <MenuItem Header="Clear Formatting"  Visibility="{Binding ElementName=TableMenu, Path=Visibility}" Command="custom:RichEditor.ClearFormattingCommand"/>
+                                <MenuItem Header="Select All" Command="ApplicationCommands.SelectAll"/>
+                            </MenuItem>
+                            <MenuItem Header="_Table" Visibility="{Binding ElementName=FirstToolBar, Path=Visibility}" Name="TableMenu">
+                                <MenuItem Header="Insert">
+                                    <MenuItem Header="Table" Command="custom:RichEditor.InsertTableCommand" />
+                                    <Separator/>
+                                    <MenuItem Header="Rows Above" Command="custom:RichEditor.InsertRowsAboveCommand" />
+                                    <MenuItem Header="Rows Below" Command="custom:RichEditor.InsertRowsBelowCommand"/>
+                                    <Separator/>
+                                    <MenuItem Header="Columns to the Right" Command="custom:RichEditor.InsertColumnsToRightCommand"/>
+                                    <MenuItem Header="Columns to the Left" Command="custom:RichEditor.InsertColumnsToLeftCommand"/>
+                                </MenuItem>
+                                <MenuItem Header="Delete">
+                                    <MenuItem Header="Table" Command="custom:RichEditor.DeleteTableCommand"/>
+                                    <MenuItem Header="Rows" Command="custom:RichEditor.DeleteRowsCommand"/>
+                                    <MenuItem Header="Columns" Command="custom:RichEditor.DeleteColumnsCommand"/>
+                                </MenuItem>
+                            </MenuItem>
+                            <!---->
+                <MenuItem Header="_Insert">
+                  <MenuItem Header="Hyperlink"  Command="custom:RichEditor.InsertHyperlinkCommand"/>
+                  <MenuItem Header="Picture" Command="custom:RichEditor.InsertPictureCommand" />
+                </MenuItem>
+                <MenuItem Header="Tools">
+                  <MenuItem Header="Options"/>
+                </MenuItem>
+                
+						</Menu>
+                                              
+                            <ToolBarTray DockPanel.Dock="Top" Background="{Binding ElementName=FirstMenu, Path=Background}" Visibility="Visible" Name="FirstToolBar" >
+
+
+                                <ToolBar Background="{Binding ElementName=FirstMenu, Path=Background}">
+                                    <!--<Button ToolTip="Print File" Command="custom:RichEditor.PrintCommand">Print</Button>-->
+                                    <ToggleButton Content="SpellCheck" ToolTip="Toggle SpellCheck" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSpellCheckEnabled}"/>
+                                    <Button Command="ApplicationCommands.Cut" CommandTarget="{Binding ElementName=RTB}" Content= "Cut" ToolTip="Cut"/>
+                                    <Button Command="ApplicationCommands.Copy" CommandTarget="{Binding ElementName=RTB}" Content="Copy" ToolTip="Copy"/>
+                                    <Button Command="ApplicationCommands.Paste" CommandTarget="{Binding ElementName=RTB}" Content="Paste" ToolTip="Paste"/>
+                                </ToolBar>
+                                <ToolBar Background="{Binding ElementName=FirstMenu, Path=Background}">
+                                    <Button Command="ApplicationCommands.Undo" CommandTarget="{Binding ElementName=RTB}" Content="Undo" ToolTip="Undo"/>
+                                    <Button Command="ApplicationCommands.Redo" CommandTarget="{Binding ElementName=RTB}" Content="Redo" ToolTip="Redo"/>
+                                </ToolBar>
+                                <ToolBar Background="{Binding ElementName=FirstMenu, Path=Background}">
+                                    <ComboBox x:Name="FindComboBox" IsEditable="True" Width="100" Text="Text to search..."/>
+                                    <Button Content="Find" Command="custom:RichEditor.FindCommand" CommandTarget="{Binding ElementName=RTB}"/>
+                                    <!--<Button Content="Find Previous" Command="custom:RichEditor.FindCommand" CommandTarget="{Binding ElementName=RTB}"/>-->
+                                    <!--<Button Content="Find Options"/>-->
+                                </ToolBar>
+                            </ToolBarTray>
+                            <ToolBarTray DockPanel.Dock="Top" Background="{Binding ElementName=FirstMenu, Path=Background}"  >
+                                <ToolBar Background="{Binding ElementName=FirstMenu, Path=Background}"  Visibility="{Binding ElementName=TableMenu, Path=Visibility}">
+                                    FontFamily
+                                    <ComboBox ToolTip="Font Family" Width="80" SelectedValue="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionFontFamily}">
+                                        <sys:String>Tahoma</sys:String>
+                                        <sys:String>Verdana</sys:String>
+                                        <sys:String>Arial</sys:String>
+                                        <sys:String>Times New Roman</sys:String>
+                                        <sys:String>Courier New</sys:String>
+                                    </ComboBox>
+                                    <ComboBox ToolTip="Font Size" Width="40" SelectedValue="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionFontSize}">
+                                        <sys:String>8</sys:String>
+                                        <sys:String>9</sys:String>
+                                        <sys:String>10</sys:String>
+                                        <sys:String>11</sys:String>
+                                        <sys:String>12</sys:String>
+                                        <sys:String>14</sys:String>
+                                        <sys:String>16</sys:String>
+                                        <sys:String>18</sys:String>
+                                        <sys:String>20</sys:String>
+                                        <sys:String>22</sys:String>
+                                        <sys:String>24</sys:String>
+                                        <sys:String>26</sys:String>
+                                        <sys:String>28</sys:String>
+                                        <sys:String>36</sys:String>
+                                        <sys:String>48</sys:String>
+                                        <sys:String>72</sys:String>
+                                    </ComboBox>
+                                </ToolBar>
+                                <ToolBar Background="{Binding ElementName=FirstMenu, Path=Background}"  Visibility="{Binding ElementName=TableMenu, Path=Visibility}">
+                                    <ToggleButton Width="20" ToolTip="Bold" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionIsBold}">
+                                        <ToggleButton.Content>
+                                            <TextBlock FontWeight="Bold">B</TextBlock>
+                                        </ToggleButton.Content>
+                                    </ToggleButton>
+                                    <ToggleButton Width="20" ToolTip="Italic" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionIsItalic}">
+                                        <ToggleButton.Content>
+                                            <TextBlock FontStyle="Italic">I</TextBlock>
+                                        </ToggleButton.Content>
+                                    </ToggleButton>
+                                    <ToggleButton Width="20" ToolTip="Underline" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionIsUnderline}">
+                                        <ToggleButton.Content>
+                                            <TextBlock TextDecorations="Underline">U</TextBlock>
+                                        </ToggleButton.Content>
+                                    </ToggleButton>
+                                </ToolBar>
+                                <ToolBar Background="{Binding ElementName=FirstMenu, Path=Background}" Visibility="{Binding ElementName=FirstToolBar, Path=Visibility}">
+                                    <ToggleButton Content="Left" ToolTip="Align Left" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionIsAlignLeft}"/>
+                                    <ToggleButton Content="Center" ToolTip="Align Center" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionIsAlignCenter}" />
+                                    <ToggleButton Content="Right" ToolTip="Align Right" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionIsAlignRight}"/>
+                                    <ToggleButton Content="Justify" ToolTip="Align Justify" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionIsAlignJustify}"/>
+                                </ToolBar>
+                                <ToolBar Background="{Binding ElementName=FirstMenu, Path=Background}" Visibility="{Binding ElementName=FirstToolBar, Path=Visibility}">
+                                    <ToggleButton Content="LTR" ToolTip="Left To Right" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionParagraphIsLeftToRight}"/>
+                                    <ToggleButton Content="RTL" ToolTip="RightToLeft" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionParagraphIsRightToLeft}"/>
+                                </ToolBar>
+                                <ToolBar Background="{Binding ElementName=FirstMenu, Path=Background}" Visibility="{Binding ElementName=FirstToolBar, Path=Visibility}">
+                                    <Button Width="20" Content="≡ " ToolTip="Decrease Indent" Command="EditingCommands.DecreaseIndentation" CommandTarget="{Binding ElementName=RTB}" />
+                                    <Button Width="20" Content="  ≡" ToolTip="Increase Indent" Command="EditingCommands.IncreaseIndentation" CommandTarget="{Binding ElementName=RTB}" />
+                                    <Button Width="20" Content="↑" ToolTip="Grow Font" Command="EditingCommands.IncreaseFontSize" CommandTarget="{Binding ElementName=RTB}" />
+                                    <Button x:Name="Button1" Width="20" Content="↓" ToolTip="Shrink Font" Command="EditingCommands.DecreaseFontSize" CommandTarget="{Binding ElementName=RTB}" />
+
+                                </ToolBar>
+                                <ToolBar Background="{Binding ElementName=FirstMenu, Path=Background}">
+
+                                    <!--<Button IsEnabled="False">Backcolor</Button>
+                  <Button IsEnabled="False">Forecolor</Button>-->
+                                    <ToggleButton Width="20"  Visibility="{Binding ElementName=TableMenu, Path=Visibility}" 
+                                                  Content="•" ToolTip="Toggle Bullets" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionIsBullets}" />
+                                    <ToggleButton Width="20"  Visibility="{Binding ElementName=TableMenu, Path=Visibility}" 
+                                                  ToolTip="Toggle Numbering" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectionIsNumbering}" Content="1.">
+                                    </ToggleButton>
+                                </ToolBar>
+                            </ToolBarTray>
+                            <StatusBar DockPanel.Dock="Top" Visibility="{Binding ElementName=TableMenu, Path=Visibility}" >
+                                <StatusBarItem>
+                                    <TextBlock x:Name="StatusBarLineInfo"/>
+                                </StatusBarItem>
+                                <StatusBarItem>
+                                    <Separator/>
+                                </StatusBarItem>
+                                <StatusBarItem>
+                                    <TextBlock x:Name="StatusBarMessage"/>
+                                </StatusBarItem>
+                            </StatusBar>
+                            <RichTextBox x:Name="RTB" ContextMenu="{StaticResource RTEditorContextMenu}"
+									 AcceptsTab="True" AcceptsReturn="True"
+									 HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible"
+									 SpellCheck.IsEnabled="True"
+									  Visibility="{Binding ElementName=TableMenu, Path=Visibility}"/>
+                            <TextBox x:Name="TB"
+			                     AcceptsTab="True" AcceptsReturn="True"
+			                     HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible"
+			                     SpellCheck.IsEnabled="True"
+								 Visibility="Collapsed"/>
+
+
+                    </DockPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

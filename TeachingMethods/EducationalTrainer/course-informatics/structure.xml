@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Course xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Tests>
+    <Test CorrectAnswer="2">
+      <Title>Тест 1</Title>
+      <Url>tests/Тест 1.html</Url>
+      <Points>2</Points>
+      <Choice>5</Choice>
+      <Choice>2</Choice>
+      <Choice>3</Choice>
+      <Choice>помилка під час виконання</Choice>
+      <Choice>нічого не відбудеться</Choice>
+    </Test>
+    <Test CorrectAnswer="1">
+      <Title>Тест 2</Title>
+      <Url>tests/Тест 2.html</Url>
+      <Points>3</Points>
+      <Choice>unknown</Choice>
+      <Choice>one</Choice>
+      <Choice>zero</Choice>
+      <Choice>two</Choice>
+      <Choice>помилка під час виконання</Choice>
+      <Choice>нічого не відбудеться</Choice>
+    </Test>
+    <Test CorrectAnswer="2">
+      <Title>Тест 3</Title>
+      <Url>tests/Тест 3.html</Url>
+      <Points>1</Points>
+      <Choice>Це англійська буква</Choice>
+      <Choice>Це кирилична буква</Choice>
+      <Choice>Це число</Choice>
+      <Choice>помилка під час виконання</Choice>
+      <Choice>нічого не відбудеться</Choice>
+    </Test>
+	<Test CorrectAnswer="1">
+      <Title>Тест 4</Title>
+      <Url>tests/Тест 4.htm</Url>
+      <Points>2</Points>
+      <Choice>True,False</Choice>
+      <Choice>-1,0,1</Choice>
+      <Choice>Числових цілочисельних значень</Choice>
+      <Choice>Значень перелічуваного типу</Choice>
+    </Test>
+	<Test CorrectAnswer="2">
+      <Title>Тест 5</Title>
+      <Url>tests/Тест 5.htm</Url>
+      <Points>1</Points>
+      <Choice>Ні</Choice>
+      <Choice>Так</Choice>
+    </Test>
+	<Test CorrectAnswer="3">
+      <Title>Тест 6</Title>
+      <Url>tests/Тест 6.htm</Url>
+      <Points>4</Points>
+      <Choice>Умова</Choice>
+      <Choice>Числовий вираз</Choice>
+      <Choice>Селектор</Choice>
+      <Choice>Логічний вираз</Choice>
+    </Test>
+	<Test CorrectAnswer="2">
+      <Title>Тест 7</Title>
+      <Url>tests/Тест 7.htm</Url>
+      <Points>1</Points>
+      <Choice>Так</Choice>
+      <Choice>Ні</Choice>
+    </Test>
+	<Test CorrectAnswer="4">
+      <Title>Тест 8</Title>
+      <Url>tests/Тест 8.htm</Url>
+      <Points>2</Points>
+      <Choice>go to label</Choice>
+      <Choice>go label</Choice>
+      <Choice>label goto</Choice>
+      <Choice>goto label</Choice>
+      <Choice>label go to</Choice>
+    </Test>
+  </Tests>
+  <Theories>
+    <Theory>
+      <Title>Оператор умовного переходу</Title>
+      <Url>conditional/Оператор умовного переходу.html</Url>
+    </Theory>
+    <Theory>
+      <Title>Приклад 1_1</Title>
+      <Url>conditional/Приклад 1.html</Url>
+    </Theory>
+    <Theory>
+      <Title>Приклад 1_2</Title>
+      <Url>conditional/Приклад 2.html</Url>
+    </Theory>
+    <Theory>
+      <Title>Приклад 1_3</Title>
+      <Url>conditional/Приклад 3.html</Url>
+    </Theory>
+    <Theory>
+      <Title>Оператор вибору</Title>
+      <Url>selection/Оператор вибору.html</Url>
+    </Theory>
+    <Theory>
+      <Title>Приклад 2_1</Title>
+      <Url>selection/Приклад 1.html</Url>
+    </Theory>
+    <Theory>
+      <Title>Оператор безумовного переходу</Title>
+      <Url>unconditional/Оператор безумовного переходу.html</Url>
+    </Theory>
+    <Theory>
+      <Title>Приклад 3_1</Title>
+      <Url>unconditional/Приклад 1.html</Url>
+    </Theory>
+    <Theory>
+      <Title>Додатково</Title>
+      <Url>unconditional/Додатково.html</Url>
+    </Theory>
+  </Theories>
+</Course>

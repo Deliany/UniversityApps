@@ -1,0 +1,13 @@
+﻿<Window x:Class="TextEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:re="clr-namespace:Adastra.RichEditorLibrary;assembly=Adastra.RichEditorLibrary"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <TabControl Name="m_tabControl" Margin="5">
+            <TabItem Header="FlowDocument" Name="editor">
+                <re:RichTextEditor Name="m_richTextEditor" DocTitle="Test dokument" />
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

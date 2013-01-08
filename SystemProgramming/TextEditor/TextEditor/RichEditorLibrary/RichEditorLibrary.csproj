@@ -1,0 +1,366 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B535F14B-4943-48E7-A1C2-9C82B1A33DAB}</ProjectGuid>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <RootNamespace>Adastra.RichEditorLibrary</RootNamespace>
+    <AssemblyName>Adastra.RichEditorLibrary</AssemblyName>
+    <WarningLevel>4</WarningLevel>
+    <OutputType>library</OutputType>
+    <!-- Most people will use Publish dialog in Visual Studio to increment this -->
+    <MinFrameworkVersionRequired>3.0</MinFrameworkVersionRequired>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <PublishUrl>http://localhost/RichEditorLibrary/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationFramework.Royale" />
+    <Reference Include="RibbonControlsLibrary, Version=3.5.31016.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\RibbonControlsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationProvider">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="WPFControlsLibrary, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\WPFControlsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="WPFControlsLibraryInterface, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\WPFControlsLibraryInterface.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Controls\ColorPick.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\HyperlinkPropertiesDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TablePropertiesDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ImagePropertiesDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\MainViewStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RichTextEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AcmBitmapImage.cs" />
+    <Compile Include="Controls\ColorPick.xaml.cs">
+      <DependentUpon>ColorPick.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\HyperlinkPropertiesDialog.xaml.cs">
+      <DependentUpon>HyperlinkPropertiesDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TablePropertiesDialog.xaml.cs">
+      <DependentUpon>TablePropertiesDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ImagePropertiesDialog.xaml.cs">
+      <DependentUpon>ImagePropertiesDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="IRichTextEditor.cs" />
+    <Compile Include="PictureCommands.cs" />
+    <Compile Include="DrawingIcon.cs" />
+    <Compile Include="ParagraphCommands.cs" />
+    <Compile Include="ProxyCredentials.cs" />
+    <Compile Include="ResizeThumb.cs" />
+    <Compile Include="ResizingAdorner.cs" />
+    <Compile Include="RibbonStackPanel.cs" />
+    <Compile Include="RichTextEditor.xaml.cs">
+      <DependentUpon>RichTextEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TableCommands.cs" />
+    <Compile Include="Helper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Properties\Res.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Res.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Res.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Res.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="MiscCommands.cs" />
+    <Compile Include="TableDragHandle.cs" />
+    <Compile Include="WordBreaker.cs" />
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ListBullets.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\testLogo.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Copy.png" />
+    <Resource Include="Resources\Cut.png" />
+    <Resource Include="Resources\Delete.png" />
+    <Resource Include="Resources\Paste.png" />
+    <Resource Include="Resources\Print.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\properties.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\html-xaml\convertHTML.csproj">
+      <Project>{DC692379-518F-4241-9BBA-4E3F4A9BCE13}</Project>
+      <Name>convertHTML</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\AllBorders.png" />
+    <Resource Include="Resources\BoxBorder.png" />
+    <Resource Include="Resources\NoBorders.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\direct-messages-large.png" />
+    <Resource Include="Resources\direct-messages-small.png" />
+    <Resource Include="Resources\dm-received-large.png" />
+    <Resource Include="Resources\dm-received-small.png" />
+    <Resource Include="Resources\dm-sent-large.png" />
+    <Resource Include="Resources\dm-sent-small.png" />
+    <Resource Include="Resources\everyone-large.png" />
+    <Resource Include="Resources\everyone-small.png" />
+    <Resource Include="Resources\favorite-quick-access.png" />
+    <Resource Include="Resources\favorites-large.png" />
+    <Resource Include="Resources\favorites-small.png" />
+    <Resource Include="Resources\feed-quick-access.png" />
+    <Resource Include="Resources\followers-large.png" />
+    <Resource Include="Resources\followers-small.png" />
+    <Resource Include="Resources\following-large.png" />
+    <Resource Include="Resources\following-small.png" />
+    <Resource Include="Resources\friends-large.png" />
+    <Resource Include="Resources\friends-small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\black.png" />
+    <Resource Include="Resources\blue.png" />
+    <Resource Include="Resources\power.png" />
+    <Resource Include="Resources\profile-quick-access.png" />
+    <Resource Include="Resources\refresh-quick-access.png" />
+    <Resource Include="Resources\replies-large.png" />
+    <Resource Include="Resources\replies-small.png" />
+    <Resource Include="Resources\white.png" />
+    <Resource Include="Resources\windows.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\OfficeV2_48x48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\editpaste.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\OfficeV2_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Files-Word.png" />
+    <Resource Include="Resources\redo.png" />
+    <Resource Include="Resources\undo.png" />
+    <Resource Include="Resources\Word_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\floppy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\CharacterBold.png" />
+    <Resource Include="Resources\CharacterItalic.png" />
+    <Resource Include="Resources\CharacterUnderline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\text_list_bullets.png" />
+    <Resource Include="Resources\text_list_numbers.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\text_indent.png" />
+    <Resource Include="Resources\text_indent_remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\text_align_center.png" />
+    <Resource Include="Resources\text_align_justify.png" />
+    <Resource Include="Resources\text_align_left.png" />
+    <Resource Include="Resources\text_align_right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\table.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\table_delete.png" />
+    <Resource Include="Resources\table_edit.png" />
+    <Resource Include="Resources\table_row_delete_down.png" />
+    <Resource Include="Resources\table_row_delete_up.png" />
+    <Resource Include="Resources\table_row_insert_down.png" />
+    <Resource Include="Resources\table_row_insert_up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\table_col_insert_left.png" />
+    <Resource Include="Resources\table_col_insert_rigt.png" />
+    <Resource Include="Resources\table_row_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\InsertImage.png" />
+    <Resource Include="Resources\table_col_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\InsertHyperlink.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\spellcheck.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\vcard.png" />
+    <Resource Include="Resources\vcard_big.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\page_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\signatureline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\floppy_multiple.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\printer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\highlight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\fill32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Themes\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
