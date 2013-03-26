@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#/Algorithms/Layout/Simple/Tree/" id="601223" changeset="23835" shadow="4a23a5cbc2b64736ad6160c009b975cc" />
+  <entry name="BalloonTreeLayoutAlgorithm.cs" kind="file" id="593907" changeset="23835" />
+  <entry name="BalloonTreeLayoutParameters.cs" kind="file" id="593908" changeset="23835" />
+  <entry name="SimpleTreeLayoutAlgorithm.cs" kind="file" id="593909" changeset="24102" />
+  <entry name="SimpleTreeLayoutAlgorithm.Data.cs" kind="file" id="602268" changeset="24102" />
+  <entry name="SimpleTreeLayoutAlgorithm.WidthAndHeightOpt.cs" kind="file" id="602269" changeset="24102" />
+  <entry name="SimpleTreeLayoutParameters.cs" kind="file" id="593940" changeset="24102" />
+  <entry name="SpanningTreeGeneration.cs" kind="file" id="602267" changeset="24102" />
+</entries>

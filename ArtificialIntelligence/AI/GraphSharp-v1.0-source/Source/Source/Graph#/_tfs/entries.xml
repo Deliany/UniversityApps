@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#/" id="442036" changeset="16360" shadow="3381e589dac545828b066c35b2f186b3" />
+  <entry name="Algorithms" kind="folder" id="442047" changeset="16360" shadow="b73574aa3b3c4bfe8d694cb9ae22dd0c" />
+  <entry name="ClassDiagrams" kind="folder" id="605486" changeset="24229" shadow="198b4b36a9b347e98ef5fec93f37109f" />
+  <entry name="CompoundGraph.cs" kind="file" id="454694" changeset="23835" />
+  <entry name="Contracts" kind="folder" id="505130" changeset="18533" shadow="9ac5e56435ec431c8ef42e9e7d01ae89" />
+  <entry name="GraphHelper.cs" kind="file" id="441938" changeset="23835" />
+  <entry name="GraphHideHelper.cs" kind="file" id="441939" changeset="16360" />
+  <entry name="GraphSharp.csproj" kind="file" id="441940" changeset="24603" />
+  <entry name="GraphSharp.csproj.vspscc" kind="file" id="442765" changeset="16906" />
+  <entry name="HierarchicalGraph.cs" kind="file" id="441941" changeset="16360" />
+  <entry name="ICompoundGraph.cs" kind="file" id="445268" changeset="20719" />
+  <entry name="IHierarchicalBidirectionalGraph.cs" kind="file" id="441942" changeset="16360" />
+  <entry name="IMutableCompoundGraph.cs" kind="file" id="593911" changeset="23835" />
+  <entry name="ISoftMutableGraph.cs" kind="file" id="441943" changeset="16360" />
+  <entry name="Properties" kind="folder" id="458529" changeset="16944" shadow="2175a0e5a0fd44aaa8edc3f6660f8447" />
+  <entry name="SoftMutableBidirectionalGraph.cs" kind="file" id="441944" changeset="16360" />
+  <entry name="SoftMutableHierarchicalGraph.cs" kind="file" id="441945" changeset="16360" />
+  <entry name="TypedEdge.cs" kind="file" id="441946" changeset="16360" />
+  <entry name="WeightedEdge.cs" kind="file" id="441947" changeset="16360" />
+  <entry name="WrappedVertex.cs" kind="file" id="441948" changeset="16360" />
+</entries>

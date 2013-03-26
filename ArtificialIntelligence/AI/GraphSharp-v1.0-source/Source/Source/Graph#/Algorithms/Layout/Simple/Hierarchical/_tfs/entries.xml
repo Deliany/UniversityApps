@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#/Algorithms/Layout/Simple/Hierarchical/" id="601222" changeset="23835" shadow="263109496b604988b9d3b81f73b75b10" />
+  <entry name="EfficientSugiyamaAlgorithm.BuildSparseNormalizedGraph.cs" kind="file" id="596446" changeset="24102" />
+  <entry name="EfficientSugiyamaAlgorithm.DoCrossingMinimizations.cs" kind="file" id="596447" changeset="24102" />
+  <entry name="EfficientSugiyamaAlgorithm.DoPreparing.cs" kind="file" id="596445" changeset="23835" />
+  <entry name="EfficientSugiyamaLayoutAlgorithm.AlternatingLayer.cs" kind="file" id="595014" changeset="23835" />
+  <entry name="EfficientSugiyamaLayoutAlgorithm.cs" kind="file" id="593901" changeset="24102" />
+  <entry name="EfficientSugiyamaLayoutAlgorithm.Data.cs" kind="file" id="593942" changeset="23901" />
+  <entry name="EfficientSugiyamaLayoutAlgorithm.HorizontalAssignment.cs" kind="file" id="597737" changeset="24229" />
+  <entry name="EfficientSugiyamaLayoutAlgorithm.SegmentContainer.cs" kind="file" id="593941" changeset="23835" />
+  <entry name="EfficientSugiyamaLayoutParameters.cs" kind="file" id="593937" changeset="24102" />
+  <entry name="SugiyamaEdgeRoutings.cs" kind="file" id="603633" changeset="24102" />
+  <entry name="SugiyamaLayoutAlgorithm.cs" kind="file" id="593902" changeset="23835" />
+  <entry name="SugiyamaLayoutAlgorithm.Enums.cs" kind="file" id="593903" changeset="23835" />
+  <entry name="SugiyamaLayoutAlgorithm.SugiEdge.cs" kind="file" id="593904" changeset="23835" />
+  <entry name="SugiyamaLayoutAlgorithm.SugiVertex.cs" kind="file" id="593905" changeset="23835" />
+  <entry name="SugiyamaLayoutAlgorithm.VertexLayer.cs" kind="file" id="593938" changeset="23835" />
+  <entry name="SugiyamaLayoutAlgorithm.VertexLayerCollection.cs" kind="file" id="593906" changeset="23835" />
+  <entry name="SugiyamaLayoutParameters.cs" kind="file" id="593939" changeset="23835" />
+</entries>

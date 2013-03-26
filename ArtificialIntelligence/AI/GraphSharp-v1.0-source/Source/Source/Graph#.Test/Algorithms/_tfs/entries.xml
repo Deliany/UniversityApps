@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#.Test/Algorithms/" id="601216" changeset="23835" shadow="9f1a1ffd4dd04305924b73ceaa24db06" />
+  <entry name="CompoundFDPForceTest.cs" kind="file" id="593874" changeset="23835" />
+</entries>

@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#.Controls/Helpers/" id="505129" changeset="18533" shadow="c1b29fa37b4540cb8d1a4a9d6032fef7" />
+  <entry name="ObjectPool.cs" kind="file" id="503866" changeset="18533" />
+</entries>

@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/GraphSharp.Optimization/Algorithms/" id="601229" changeset="23837" shadow="862db7cd1b9a4e4cae4f1b6d6e15f154" />
+  <entry name="Layout" kind="folder" id="601230" changeset="23837" shadow="6b39aea7e418470b9888d5d8184c89d4" />
+</entries>

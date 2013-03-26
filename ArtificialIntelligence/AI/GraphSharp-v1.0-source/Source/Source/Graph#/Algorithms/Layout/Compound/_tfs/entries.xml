@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#/Algorithms/Layout/Compound/" id="601217" changeset="23835" shadow="08932edd73654446a55ec72718fc5d03" />
+  <entry name="CompoundLayoutContext.cs" kind="file" id="593877" changeset="23835" />
+  <entry name="CompoundLayoutIterationEventArgs.cs" kind="file" id="593878" changeset="23835" />
+  <entry name="CompoundVertexInnerLayoutType.cs" kind="file" id="593926" changeset="23835" />
+  <entry name="FDP" kind="folder" id="601219" changeset="23835" shadow="4486b10aa306494794a88ac31c821239" />
+  <entry name="ICompoundLayoutAlgorithm.cs" kind="file" id="593883" changeset="23835" />
+  <entry name="ICompoundLayoutContext.cs" kind="file" id="593884" changeset="23835" />
+  <entry name="ICompoundLayoutIterationEventArgs.cs" kind="file" id="593885" changeset="23835" />
+  <entry name="TestingCompoundLayoutIterationEventArgs.cs" kind="file" id="593886" changeset="23835" />
+  <entry name="TestingCompoundVertexInfo.cs" kind="file" id="593887" changeset="23835" />
+</entries>

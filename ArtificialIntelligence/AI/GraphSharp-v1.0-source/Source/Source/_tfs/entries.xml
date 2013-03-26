@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/" id="440208" changeset="16360" shadow="ba57efed1e34459097e3270fb0958957" />
+  <entry name="Graph#" kind="folder" id="442036" changeset="16360" shadow="3381e589dac545828b066c35b2f186b3" />
+  <entry name="Graph#.Controls" kind="folder" id="442033" changeset="16360" shadow="fca3566bcfd44cbe9b725020d8a2f3d8" />
+  <entry name="Graph#.Sample" kind="folder" id="442034" changeset="16360" shadow="49b04a0efabd4b46b2126f28f2df0708" />
+  <entry name="Graph#.Test" kind="folder" id="442035" changeset="16360" shadow="5bda57731b484b73801361da3a44221b" />
+  <entry name="GraphSharp.Optimization" kind="folder" id="601225" changeset="23837" shadow="86dfcb4c74944180ba580b3572704a7e" />
+  <entry name="GraphSharp.sln" kind="file" id="441949" changeset="24608" />
+  <entry name="GraphSharp.vssscc" kind="file" id="457381" changeset="16906" />
+  <entry name="Libraries" kind="folder" id="440379" changeset="16360" shadow="28afddaa7f884449ae6eea28bfb66c39" />
+</entries>

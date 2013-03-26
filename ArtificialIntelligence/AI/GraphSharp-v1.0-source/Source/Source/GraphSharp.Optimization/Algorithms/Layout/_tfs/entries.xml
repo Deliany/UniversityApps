@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/GraphSharp.Optimization/Algorithms/Layout/" id="601230" changeset="23837" shadow="6b39aea7e418470b9888d5d8184c89d4" />
+  <entry name="CompoundFDP" kind="folder" id="601228" changeset="23837" shadow="d91c32578e0b48a698ae90abc4d007dc" />
+</entries>

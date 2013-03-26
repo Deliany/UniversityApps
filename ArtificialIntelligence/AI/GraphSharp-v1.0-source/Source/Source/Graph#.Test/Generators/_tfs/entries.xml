@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#.Test/Generators/" id="457443" changeset="16906" shadow="b77f1089204f4f4bb6ec025f884b848d" />
+  <entry name="GraphGenerator.cs" kind="file" id="457435" changeset="16906" />
+</entries>

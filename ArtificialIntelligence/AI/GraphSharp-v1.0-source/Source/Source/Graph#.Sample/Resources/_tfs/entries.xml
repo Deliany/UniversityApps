@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#.Sample/Resources/" id="442044" changeset="16360" shadow="b7ff69d76fad4fe5ac51d39afefaeabb" />
+  <entry name="GraphicResources.xaml" kind="file" id="457424" changeset="16906" />
+  <entry name="LayoutParameterTemplates.xaml" kind="file" id="441855" changeset="24229" />
+  <entry name="PocGraphDataTemplates.xaml" kind="file" id="610896" changeset="24614" />
+</entries>

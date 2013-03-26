@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#/Algorithms/Layout/Compound/FDP/" id="601219" changeset="23835" shadow="4486b10aa306494794a88ac31c821239" />
+  <entry name="CompoundFDPLayoutAlgorithm.cs" kind="file" id="593879" changeset="24102" />
+  <entry name="CompoundFDPLayoutAlgorithm.Data.cs" kind="file" id="593880" changeset="23835" />
+  <entry name="CompoundFDPLayoutAlgorithm.Init.cs" kind="file" id="593881" changeset="23835" />
+  <entry name="CompoundFDPLayoutParameters.cs" kind="file" id="593882" changeset="24102" />
+</entries>

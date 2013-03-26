@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#.Sample/Converters/" id="442041" changeset="16360" shadow="a265948364bb473ca3c984a4c7bec4a0" />
+  <entry name="BoolToVisibilityConverter.cs" kind="file" id="441842" changeset="16360" />
+  <entry name="DoubleToIntegerConverter.cs" kind="file" id="441843" changeset="16360" />
+</entries>

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#/Contracts/" id="505130" changeset="18533" shadow="9ac5e56435ec431c8ef42e9e7d01ae89" />
+  <entry name="ICompoundGraphContract.cs" kind="file" id="458533" changeset="23835" />
+  <entry name="IContextualLayoutAlgorithmFactoryContract.cs" kind="file" id="529176" changeset="23835" />
+  <entry name="ILayoutAlgorithmFactoryContract.cs" kind="file" id="529179" changeset="20719" />
+  <entry name="ILayoutContextContract.cs" kind="file" id="529184" changeset="20719" />
+</entries>

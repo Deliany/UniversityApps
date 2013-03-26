@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#/ClassDiagrams/" id="605486" changeset="24229" shadow="198b4b36a9b347e98ef5fec93f37109f" />
+  <entry name="Algorithm Interfaces.cd" kind="file" id="604009" changeset="24229" />
+  <entry name="Implemented Algorithms.cd" kind="file" id="604011" changeset="24229" />
+</entries>

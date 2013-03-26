@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#/Algorithms/EdgeRouting/" id="442048" changeset="16360" shadow="7bccdff674ef4f5f98ae3527d04508e2" />
+  <entry name="EdgeRoutingAlgorithmBase.cs" kind="file" id="441868" changeset="16360" />
+  <entry name="EdgeRoutingParameters.cs" kind="file" id="441869" changeset="16360" />
+  <entry name="IEdgeRoutingAlgorithm.cs" kind="file" id="441870" changeset="16360" />
+  <entry name="IEdgeRoutingAlgorithmFactory.cs" kind="file" id="441871" changeset="16360" />
+  <entry name="IEdgeRoutingParameters.cs" kind="file" id="441872" changeset="16360" />
+  <entry name="StandardEdgeRoutingAlgorithmFactory.cs" kind="file" id="441873" changeset="16360" />
+</entries>

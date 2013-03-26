@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#.Controls/Controls/Transitions/" id="529194" changeset="20719" shadow="7472321dc76e4286a979449c4bb4dee4" />
+  <entry name="FadeInTransition.cs" kind="file" id="529170" changeset="20719" />
+  <entry name="FadeOutTransition.cs" kind="file" id="529182" changeset="20719" />
+  <entry name="FadeTransition.cs" kind="file" id="529181" changeset="20719" />
+  <entry name="TransitionBase.cs" kind="file" id="529187" changeset="20719" />
+</entries>

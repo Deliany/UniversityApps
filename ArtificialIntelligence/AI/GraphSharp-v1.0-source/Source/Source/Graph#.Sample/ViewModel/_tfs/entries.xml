@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#.Sample/ViewModel/" id="442045" changeset="16360" shadow="be8ab3adaec54a37910eb8832140927a" />
+  <entry name="GraphLayoutViewModel.cs" kind="file" id="441860" changeset="16360" />
+  <entry name="LayoutAnalyzerViewModel.cs" kind="file" id="441861" changeset="16360" />
+  <entry name="LayoutAnalyzerViewModel.SampleGraphs.cs" kind="file" id="441862" changeset="16360" />
+</entries>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/GraphSharp.Optimization/" id="601225" changeset="23837" shadow="86dfcb4c74944180ba580b3572704a7e" />
+  <entry name="Algorithms" kind="folder" id="601229" changeset="23837" shadow="862db7cd1b9a4e4cae4f1b6d6e15f154" />
+  <entry name="App.xaml" kind="file" id="593914" changeset="23837" />
+  <entry name="App.xaml.cs" kind="file" id="593913" changeset="23837" />
+  <entry name="GeneticAlgorithm" kind="folder" id="601226" changeset="23837" shadow="4d5d456fddce4fe787517c8552c9861a" />
+  <entry name="GraphSharp.Optimization.csproj" kind="file" id="593918" changeset="23837" />
+  <entry name="Properties" kind="folder" id="601227" changeset="23837" shadow="13bd9d737b6a489d95ed001cc46f99bd" />
+  <entry name="Window1.xaml" kind="file" id="593925" changeset="23837" />
+  <entry name="Window1.xaml.cs" kind="file" id="593924" changeset="23837" />
+</entries>

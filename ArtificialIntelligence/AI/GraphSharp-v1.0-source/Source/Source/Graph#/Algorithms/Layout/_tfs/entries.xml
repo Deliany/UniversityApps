@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#/Algorithms/Layout/" id="442050" changeset="16360" shadow="f74dac96b3aa4a0489e9143dd316f95b" />
+  <entry name="Compound" kind="folder" id="601217" changeset="23835" shadow="08932edd73654446a55ec72718fc5d03" />
+  <entry name="Contextual" kind="folder" id="601218" changeset="23835" shadow="405167771728477d9faa24c5f62e7ae2" />
+  <entry name="ILayoutAlgorithm.cs" kind="file" id="441898" changeset="23835" />
+  <entry name="ILayoutAlgorithmFactory.cs" kind="file" id="441899" changeset="20719" />
+  <entry name="ILayoutContext.cs" kind="file" id="441900" changeset="20719" />
+  <entry name="ILayoutInfoIterationEventArgs.cs" kind="file" id="593890" changeset="23835" />
+  <entry name="ILayoutIterationEventArgs.cs" kind="file" id="593891" changeset="23835" />
+  <entry name="ILayoutParameters.cs" kind="file" id="441901" changeset="16360" />
+  <entry name="IParameterizedLayoutAlgorithm.cs" kind="file" id="441902" changeset="16360" />
+  <entry name="LayoutAlgorithmBase.cs" kind="file" id="441907" changeset="23835" />
+  <entry name="LayoutContext.cs" kind="file" id="441908" changeset="20719" />
+  <entry name="LayoutDirection.cs" kind="file" id="441909" changeset="16360" />
+  <entry name="LayoutIterationEventArgs.cs" kind="file" id="441910" changeset="23835" />
+  <entry name="LayoutMode.cs" kind="file" id="503947" changeset="18533" />
+  <entry name="LayoutParametersBase.cs" kind="file" id="441911" changeset="16360" />
+  <entry name="LayoutState.cs" kind="file" id="442013" changeset="16360" />
+  <entry name="LayoutUtil.cs" kind="file" id="442014" changeset="23835" />
+  <entry name="ParameterizedLayoutAlgorithmBase.cs" kind="file" id="441895" changeset="23835" />
+  <entry name="Simple" kind="folder" id="601224" changeset="23835" shadow="928c333de38847bab95fb84f402a5612" />
+  <entry name="StandardLayoutAlgorithmFactory.cs" kind="file" id="441917" changeset="24229" />
+</entries>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Libraries/" id="440379" changeset="16360" shadow="28afddaa7f884449ae6eea28bfb66c39" />
+  <entry name="QuickGraph.dll" kind="file" id="441787" changeset="16360" />
+  <entry name="RibbonControlsLibrary.dll" kind="file" id="441788" changeset="16360" />
+  <entry name="WPFExtensions.dll" kind="file" id="441789" changeset="24608" />
+</entries>

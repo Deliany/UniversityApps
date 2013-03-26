@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/" id="438560" changeset="15719" shadow="4c581463ffab440398474b6c1e52076b" />
+  <entry name="Documentation" kind="folder" id="440209" changeset="16360" shadow="c9c2b1d527174e03b82486d20cb21079" />
+  <entry name="Source" kind="folder" id="440208" changeset="16360" shadow="ba57efed1e34459097e3270fb0958957" />
+</entries>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#.Sample/icons/" id="457442" changeset="16906" shadow="e3d0ea77c9584f019903588beed47b10" />
+  <entry name="Add.xaml" kind="file" id="457388" changeset="16906" />
+  <entry name="Back.xaml" kind="file" id="457389" changeset="16906" />
+  <entry name="Block.xaml" kind="file" id="457390" changeset="16906" />
+  <entry name="Check.xaml" kind="file" id="457391" changeset="16906" />
+  <entry name="Configurator.xaml" kind="file" id="457392" changeset="16906" />
+  <entry name="Delete.xaml" kind="file" id="457393" changeset="16906" />
+  <entry name="Desktop.ini" kind="file" id="457394" changeset="16906" />
+  <entry name="Down.xaml" kind="file" id="457395" changeset="16906" />
+  <entry name="Down1.xaml" kind="file" id="457396" changeset="16906" />
+  <entry name="Edit.xaml" kind="file" id="457397" changeset="16906" />
+  <entry name="Error.xaml" kind="file" id="457398" changeset="16906" />
+  <entry name="Exit.xaml" kind="file" id="457399" changeset="16906" />
+  <entry name="File.xaml" kind="file" id="457400" changeset="16906" />
+  <entry name="Find.xaml" kind="file" id="457401" changeset="16906" />
+  <entry name="Find_Next.xaml" kind="file" id="457402" changeset="16906" />
+  <entry name="Forward.xaml" kind="file" id="457403" changeset="16906" />
+  <entry name="Help.xaml" kind="file" id="457404" changeset="16906" />
+  <entry name="Left.xaml" kind="file" id="457405" changeset="16906" />
+  <entry name="Left1.xaml" kind="file" id="457406" changeset="16906" />
+  <entry name="Lock.xaml" kind="file" id="457407" changeset="16906" />
+  <entry name="Open.xaml" kind="file" id="457408" changeset="16906" />
+  <entry name="Padlock.xaml" kind="file" id="457409" changeset="16906" />
+  <entry name="Printer.xaml" kind="file" id="457410" changeset="16906" />
+  <entry name="Redo.xaml" kind="file" id="457411" changeset="16906" />
+  <entry name="Refresh.xaml" kind="file" id="457412" changeset="16906" />
+  <entry name="Right.xaml" kind="file" id="457413" changeset="16906" />
+  <entry name="Right1.xaml" kind="file" id="457414" changeset="16906" />
+  <entry name="Save.xaml" kind="file" id="457415" changeset="16906" />
+  <entry name="Save_As.xaml" kind="file" id="457416" changeset="16906" />
+  <entry name="Search.xaml" kind="file" id="457417" changeset="16906" />
+  <entry name="Undo.xaml" kind="file" id="457418" changeset="16906" />
+  <entry name="Up.xaml" kind="file" id="457419" changeset="16906" />
+  <entry name="Up1.xaml" kind="file" id="457420" changeset="16906" />
+  <entry name="Warning.xaml" kind="file" id="457421" changeset="16906" />
+  <entry name="Zoom_in.xaml" kind="file" id="457422" changeset="16906" />
+  <entry name="Zoom_out.xaml" kind="file" id="457423" changeset="16906" />
+</entries>

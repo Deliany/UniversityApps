@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#.Test/MetricTests/" id="442046" changeset="16360" shadow="bb52ad3a2e1f46a287857605beb76ca0" />
+  <entry name="LayoutAlgorithmTest.cs" kind="file" id="441866" changeset="23835" />
+</entries>

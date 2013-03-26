@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#.Controls/" id="442033" changeset="16360" shadow="fca3566bcfd44cbe9b725020d8a2f3d8" />
+  <entry name="Controls" kind="folder" id="442037" changeset="16360" shadow="5bb5412ad8d342d482085a1dd60ec519" />
+  <entry name="Converters" kind="folder" id="442038" changeset="16360" shadow="9d96578d574b4d31816aff258fd91a6c" />
+  <entry name="GraphSharp.Controls.csproj" kind="file" id="441838" changeset="24608" />
+  <entry name="GraphSharp.Controls.csproj.vspscc" kind="file" id="442769" changeset="16906" />
+  <entry name="Helpers" kind="folder" id="505129" changeset="18533" shadow="c1b29fa37b4540cb8d1a4a9d6032fef7" />
+  <entry name="Properties" kind="folder" id="442039" changeset="16360" shadow="5ad5ac59469d49869e3fd0ac7c5e6156" />
+  <entry name="Themes" kind="folder" id="442040" changeset="16360" shadow="c6f9ff3e0d0b4eacac1c674ffdef289e" />
+</entries>

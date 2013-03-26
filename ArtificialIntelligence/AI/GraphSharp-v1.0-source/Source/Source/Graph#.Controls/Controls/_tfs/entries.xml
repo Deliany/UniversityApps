@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#.Controls/Controls/" id="442037" changeset="16360" shadow="5bb5412ad8d342d482085a1dd60ec519" />
+  <entry name="AlgorithmConstraints.cs" kind="file" id="529205" changeset="23835" />
+  <entry name="AnimationContext.cs" kind="file" id="529180" changeset="20719" />
+  <entry name="Animations" kind="folder" id="529193" changeset="20719" shadow="98bd3e9c9154446ba6f2748ffc72716b" />
+  <entry name="CompoundVertexControl.cs" kind="file" id="455783" changeset="23835" />
+  <entry name="ContextualGraphLayout.cs" kind="file" id="441828" changeset="23835" />
+  <entry name="EdgeControl.cs" kind="file" id="441829" changeset="18533" />
+  <entry name="GraphCanvas.cs" kind="file" id="529172" changeset="23835" />
+  <entry name="GraphElementControl.cs" kind="file" id="441830" changeset="16906" />
+  <entry name="GraphLayout.cs" kind="file" id="441831" changeset="24102" />
+  <entry name="GraphLayout.DependencyProperties.cs" kind="file" id="529195" changeset="23835" />
+  <entry name="GraphLayout.GraphElements.cs" kind="file" id="529203" changeset="24102" />
+  <entry name="GraphLayout.HighlightController.cs" kind="file" id="441832" changeset="20719" />
+  <entry name="IAnimation.cs" kind="file" id="529177" changeset="20719" />
+  <entry name="IAnimationContext.cs" kind="file" id="529178" changeset="20719" />
+  <entry name="ICompoundVertexControl.cs" kind="file" id="503865" changeset="18533" />
+  <entry name="ITransition.cs" kind="file" id="529174" changeset="20719" />
+  <entry name="LayoutMode.cs" kind="file" id="503948" changeset="18533" />
+  <entry name="PositionChangedEventArgs.cs" kind="file" id="593870" changeset="23835" />
+  <entry name="PositionChangedEventHandler.cs" kind="file" id="593871" changeset="23835" />
+  <entry name="Transitions" kind="folder" id="529194" changeset="20719" shadow="7472321dc76e4286a979449c4bb4dee4" />
+  <entry name="VertexControl.cs" kind="file" id="441833" changeset="23835" />
+</entries>

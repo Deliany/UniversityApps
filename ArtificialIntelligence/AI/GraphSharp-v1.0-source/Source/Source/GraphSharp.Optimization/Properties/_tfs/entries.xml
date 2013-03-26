@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/GraphSharp.Optimization/Properties/" id="601227" changeset="23837" shadow="13bd9d737b6a489d95ed001cc46f99bd" />
+  <entry name="AssemblyInfo.cs" kind="file" id="593919" changeset="23837" />
+  <entry name="Resources.Designer.cs" kind="file" id="593920" changeset="23837" />
+  <entry name="Resources.resx" kind="file" id="593921" changeset="23837" />
+  <entry name="Settings.Designer.cs" kind="file" id="593922" changeset="23837" />
+  <entry name="Settings.settings" kind="file" id="593923" changeset="23837" />
+</entries>

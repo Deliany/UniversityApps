@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#/Algorithms/Layout/Contextual/" id="601218" changeset="23835" shadow="405167771728477d9faa24c5f62e7ae2" />
+  <entry name="ContextualLayoutAlgorithmFactory.cs" kind="file" id="593927" changeset="23835" />
+  <entry name="ContextualLayoutContext.cs" kind="file" id="593928" changeset="23835" />
+  <entry name="DoubleTreeLayoutAlgorithm.cs" kind="file" id="593888" changeset="23835" />
+  <entry name="DoubleTreeLayoutParameters.cs" kind="file" id="593929" changeset="23835" />
+  <entry name="IContextualLayoutAlgorithmFactory.cs" kind="file" id="593930" changeset="23835" />
+  <entry name="RadialTreeLayoutAlgorithm.cs" kind="file" id="593889" changeset="23835" />
+  <entry name="RadialTreeLayoutParameters.cs" kind="file" id="593931" changeset="23835" />
+</entries>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#/Algorithms/OverlapRemoval/" id="442051" changeset="16360" shadow="8cbe34c971b74e5f8f3ffacfc55780bf" />
+  <entry name="FSAAlgorithm.cs" kind="file" id="441925" changeset="20719" />
+  <entry name="IOverlapRemovalAlgorithm.cs" kind="file" id="441926" changeset="16360" />
+  <entry name="IOverlapRemovalAlgorithmFactory.cs" kind="file" id="441927" changeset="16360" />
+  <entry name="IOverlapRemovalContext.cs" kind="file" id="441928" changeset="16360" />
+  <entry name="IOverlapRemovalParameters.cs" kind="file" id="441929" changeset="16360" />
+  <entry name="OneWayFSAAlgorithm.cs" kind="file" id="441930" changeset="20719" />
+  <entry name="OneWayFSAParameters.cs" kind="file" id="441931" changeset="16360" />
+  <entry name="OverlapRemovalAlgorithmBase.cs" kind="file" id="441932" changeset="20719" />
+  <entry name="OverlapRemovalContext.cs" kind="file" id="441933" changeset="20719" />
+  <entry name="OverlapRemovalHelper.cs" kind="file" id="441934" changeset="16360" />
+  <entry name="OverlapRemovalParameters.cs" kind="file" id="441935" changeset="16360" />
+  <entry name="RectangleWrapper.cs" kind="file" id="441936" changeset="16360" />
+  <entry name="StandardOverlapRemovalAlgorithmFactory.cs" kind="file" id="441937" changeset="16360" />
+</entries>

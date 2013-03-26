@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#.Sample/" id="442034" changeset="16360" shadow="49b04a0efabd4b46b2126f28f2df0708" />
+  <entry name="app.config" kind="file" id="457425" changeset="20719" />
+  <entry name="App.xaml" kind="file" id="457427" changeset="24229" />
+  <entry name="App.xaml.cs" kind="file" id="457426" changeset="16946" />
+  <entry name="Converters" kind="folder" id="442041" changeset="16360" shadow="a265948364bb473ca3c984a4c7bec4a0" />
+  <entry name="GraphSharp.Sample.csproj" kind="file" id="441844" changeset="24608" />
+  <entry name="GraphSharp.Sample.csproj.vspscc" kind="file" id="442633" changeset="16906" />
+  <entry name="icons" kind="folder" id="457442" changeset="16906" shadow="e3d0ea77c9584f019903588beed47b10" />
+  <entry name="LayoutManager.cs" kind="file" id="441845" changeset="16360" />
+  <entry name="MainWindow.xaml" kind="file" id="441847" changeset="24229" />
+  <entry name="MainWindow.xaml.cs" kind="file" id="441846" changeset="24102" />
+  <entry name="Model" kind="folder" id="442042" changeset="16360" shadow="e6b52fb35f77485aa21ceeb09b88acaf" />
+  <entry name="PlainCompoundLayoutTest.xaml" kind="file" id="593873" changeset="23835" />
+  <entry name="PlainCompoundLayoutTest.xaml.cs" kind="file" id="593872" changeset="23835" />
+  <entry name="PoC_TemporaryKey.pfx" kind="file" id="457431" changeset="16906" />
+  <entry name="PocEdge.cs" kind="file" id="441849" changeset="16906" />
+  <entry name="PocGraph.cs" kind="file" id="441850" changeset="16360" />
+  <entry name="PocGraphEditor.cs" kind="file" id="603674" changeset="24102" />
+  <entry name="PocSerializeHelper.cs" kind="file" id="441851" changeset="16360" />
+  <entry name="PocVertex.cs" kind="file" id="441852" changeset="23835" />
+  <entry name="PocVertexToLayoutModeConverter.cs" kind="file" id="602723" changeset="24102" />
+  <entry name="Properties" kind="folder" id="442043" changeset="16360" shadow="9e26e5b366844b86803688b4222e12b0" />
+  <entry name="Resources" kind="folder" id="442044" changeset="16360" shadow="b7ff69d76fad4fe5ac51d39afefaeabb" />
+  <entry name="RibbonCommands.xaml" kind="file" id="457428" changeset="16906" />
+  <entry name="TestCompoundLayout.xaml" kind="file" id="504016" changeset="24229" />
+  <entry name="TestCompoundLayout.xaml.cs" kind="file" id="504017" changeset="24102" />
+  <entry name="TestContextualLayout.xaml" kind="file" id="441857" changeset="23835" />
+  <entry name="TestContextualLayout.xaml.cs" kind="file" id="441856" changeset="16360" />
+  <entry name="TestWindow.xaml" kind="file" id="441859" changeset="24229" />
+  <entry name="TestWindow.xaml.cs" kind="file" id="441858" changeset="24229" />
+  <entry name="Themes" kind="folder" id="605485" changeset="24229" shadow="1d6a7f9b1298401a889230af8c5e984e" />
+  <entry name="ViewModel" kind="folder" id="442045" changeset="16360" shadow="be8ab3adaec54a37910eb8832140927a" />
+</entries>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#/Algorithms/Highlight/" id="442049" changeset="16360" shadow="253265b5f66f48569f08b313d33f22f7" />
+  <entry name="HighlightAlgorithmBase.cs" kind="file" id="441874" changeset="20719" />
+  <entry name="HighlightContext.cs" kind="file" id="441875" changeset="16360" />
+  <entry name="HighlightParameterBase.cs" kind="file" id="441876" changeset="16360" />
+  <entry name="IHighlightAlgorithm.cs" kind="file" id="441877" changeset="16360" />
+  <entry name="IHighlightAlgorithmFactory.cs" kind="file" id="441878" changeset="16360" />
+  <entry name="IHighlightContext.cs" kind="file" id="441879" changeset="16360" />
+  <entry name="IHighlightController.cs" kind="file" id="441880" changeset="16360" />
+  <entry name="IHighlightParameters.cs" kind="file" id="441881" changeset="16360" />
+  <entry name="SimpleHighlightAlgorithm.cs" kind="file" id="441882" changeset="16360" />
+  <entry name="StandardHighlightAlgorithmFactory.cs" kind="file" id="441883" changeset="16360" />
+</entries>

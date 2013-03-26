@@ -1,0 +1,159 @@
+21. Прочитати file.txt,  переконвертувати всі букви в нижній регістр, замінити пробіли на знаки нового рядка, посортувати результат, порахувати скільки слів мають повтори, і потім посортувати знову у зворотньому порядку(виводячи найбільш уживані слова спочатку), і потім відобразити 10 верніх записів.
+tr 'A-Z ' 'a-z\n' < file.txt | sort | uniq -c | sort -rn | head -n 10
+
+22. Знайдіть і видрукуйте шляхи до файлів у заданому каталозі d і його підкаталогах які були змінені X днів тому, потім видаліть ці файли
+find /tmp -size 0 -atime +10 -exec ls -l {} \; > /tmp/checkold.txt
+find /tmp -size 0 -atime +10 -exec rm -f {} \;
+
+23. Зробіть простий шифр підстановки, використовуючи одну з команд csh. На вхід команда повинна отримувати файл з перестановкою алфавіту якою буде замінюватись кожна буква тексту з файлу для шифрування. Також передбачити можливість дешифрування.
+tr 'a-z' `cat cypher` < file > encodedfile
+tr `cat cypher` 'a-z' < encodedfile > decodedfile
+
+24. Із заданого каталогу t вирізати перші n найменьших файлів і помістити у заданий каталог z.
+
+25. Перейменувати всі файли з розширенням jpg вигляду 2007-09-24-picturename.jpg у вигляд 24-09-2007-picturename.jpg
+for fn in *.jpg
+do mv $fn `echo $fn |\
+sed `s/([0-9]+)-([0-9]+)-([0-9]+)/\3-\2-\1/'`
+done
+
+26. В заданому каталозі d і його підкаталогах видаліть пробіли із всіх назв файлів і замініть їх на підкреслення
+find .  -type f -name "* *" | while read file
+do
+   mv "$file" "${file// /_}"
+done
+
+27. Зробіть пошук файлів з розширенням *.cs які перевищують X кб у заданому каталозі d і його підкаталогах, і видрукуйте знайдену кількість таких файлів і дату їх останньої зміни
+grep '*.cs' filename | awk 'BEGIN {tot=0} {tot=tot+$1} END {print (tot)}'
+
+28. Всі дії виконувати за допомогою оболонки csh.
+ 1. У вашій домашній директорії створіть директорію, назвавши її hw1, і перейдіть до неї.
+ 2. Скачайте файл hw1download.sh що знаходиться за адресою http://bit.ly/XIXklI або http://db.tt/NJAnjnXc. 
+ 3. Перейменуйте файл hw1download.sh у hw1run.sh.
+ 4. Зробіть hw1run.sh виконуваним файлом.
+ 5. Створіть файл з назвою hw1file.
+ 6. Запишіть
+Cwxgulyralyewxk=+twru+qlkkqfulki+ek+"Wfi+Plyf+wh+inbikk+ailjk+yw+yfi+Wwoiu+wh+Xekjwz+CXeaaelz+Balsi"
+у файл hw1file.
+7. Видаліть права на запис файлу hw1file
+8. hw1run.csh є csh скриптом. Запустіть його на виконання командою ./hw1run.csh.
+9. Якщо ви успішно виконали усі завдання вище, на консоль буде виведена кодова фраза яку ви повинні повідомити вчителю. 
+
+29. Видалити всі символи окрім цифр із файлу test1.txt, потім зберегти це у файл test2.txt
+tr -cd '0-9' < test1.txt > test2.txt
+
+30. Присвоїти вказаному каталозі d і його підкаталогам права на запис для поточного користувача. Видаліть файли  у вказаному каталозі d і його підкаталогах показуючи підказку про видалення(Y/N?).
+rm -i file
+
+31. Стисніть та заархівуйте всі вихідні файли мови C (.h/.c) в каталозі d і його підкаталогах. Оновіть цей архів двома файлами foo.c bar.c. Видобудьте вмістиме архіву в окрему папку.
+find . -name "*.[ch]" -print | zip source -@
+zip inarchive.zip foo.c bar.c --out outarchive.zip
+
+32. Заархівуйте(не стискаючи) всі вихідні файли мови C# (.cs) в каталозі d і його підкаталогах і стисніть створений таким чином tarball файл. Тепер видобудьте вмістиме архіву в окрему папку.
+tar -c dir/ | bzip2 > dir.tar.bz2
+bzip2 -dc dir.tar.bz2 | tar -x
+
+33. Знайдіть файл у вказаному каталозі d або його підкаталогах, у якому найбільша кількість рядків та файл у якому найбільша кількість символів. Шляхи до таких файлів видрукувати у окремому файлі.
+tar -cf archive.tar foo bar
+
+34. Проаналізувати файли у своєму домашньому каталозі і його підкаталогах. Вивести список файлів, які змінювалися на протязі останньої години. Посортувати всі файли по даті, вивести 'настаріші' файли. Вивести сумарний об'єм 10 настарших файлів. Посортувати реверсивно. Скопіювати 10 найновіших файлів в каталог backup.
+
+ # http://www.cs.cornell.edu/courses/cs2043/2012sp/assignments/hw3sol.html
+
+35. Знайдіть 100 найбільш уживаних слів у тексті про Франкенштейна що знаходиться за адресою http://www.cs.cornell.edu/courses/cs2043/2012sp/frankenstein.txt
+grep -Eo "[[:alpha:]]+|[[:alpha:]]+'[[:alpha:]]+" frankenstein.txt  | sort -f | uniq -ci | sort -nr | head -n 100
+
+36. Знайдіть 100 найбільш уживаних слів в тексті про Франкенштейна що знаходиться за адресою http://www.cs.cornell.edu/courses/cs2043/2012sp/frankenstein.txt які не є прийменниками, список прийменнників можна знайти за адресою http://www.cs.cornell.edu/courses/cs2043/2012sp/prepositions.txt
+grep -Eo "[[:alpha:]]+|[[:alpha:]]+'[[:alpha:]]+" frankenstein.txt  | sort -f | uniq -ci | sort -nr | grep -ivwf prepositions.txt | head -n 100
+
+37. Проаналізувати HTML текст із замітки газети NY Times (заув. HTML текст - це все що не є тагом), що знаходиться за адресою http://www.cs.cornell.edu/courses/cs2043/2012sp/superbowl.html і вибрати 100 найбільш уживаних слів у тексті
+tr '\n' ' ' < superbowl_print.html | sed 's/<[^<]*>//g' | grep -Eo "[[:alpha:]]+|[[:alpha:]]+'[[:alpha:]]+"  | sort -f | uniq -ci | sort -nr | head -n 100
+
+38. Проаналізувати HTML текст із замітки газети NY Times (заув. HTML текст - це все що не є тагом), що знаходиться за адресою http://www.cs.cornell.edu/courses/cs2043/2012sp/superbowl.html  і дістати 5 слів, які з'являються або до або після будь-яких наступних слів в тексті: "giants", "patriots"
+tr '\n' ' ' < superbowl_print.html | sed 's/<[^<]*>//g' | grep -Eo "[[:alpha:]]+|[[:alpha:]]+'[[:alpha:]]+"  | grep -B 5 -A 5 -Ei "giants|patriots"
+
+39.  Звичайний текст, в якому значення розділені комою(csv-file) містить лог активності деякого користувача, доступний за адресою http://www.cs.cornell.edu/courses/cs2043/2012sp/activity_log.csv . Лог має 3 стовпчики: дату, назву активності та час. Є три типи активності: work, run, farmers market. Порахувати загальну кількість годин, витрачених на кожну активність під час періоду в логу.
+gawk -F ',' '
+/start work/ {work -= $3}
+/end work/ {work += $3}
+/start run/ {run -= $3}
+/end run/ {run += $3}
+/start farmers market/ {market -=$3}
+/end farmers market/ {market += $3}
+END {
+print "Total work hours", work
+print "Total run hours", run
+print "Total farmers market hours", market }
+' activity_log.csv
+
+# http://www.cs.cornell.edu/courses/cs2043/2012sp/assignments/find_by_keyword.sh.html
+
+40. Скачайте наступний архів за допомогою відповідної команди, і розархівуйте його теж використовуючи оболонку http://www.cs.cornell.edu/courses/cs2043/2012sp/hw4.tar.gz . В цьому архіві знаходяться два файли tweets.txt який містить список із 2000 твітів, розділених новим рядком, другий файл впринципі для наших цілей не є потрібним (це є баш-скрипт який кожен твіт розміщає в новому файлі). Завдання полягає у написанні сі-шелл скрипта який приймає список слів і створює каталог для кожного слова, який містить всі твіти, що містять в собі це слово. Вміст каталогу - декілька файлів з одним твітом в кожному файлі. Додатково, якщо перший аргумент скрипта є -all то на виході повинний бути єдиний каталог, який містить твіти, які містять >всі< передані аргументи у скрипт.
+
+В результаті виклику цього скрипта з аргументом restaurant - повинен утворитися каталог restaurant який міститиме всі файли з твітами що містять слово 'restaurant'.
+Якщо викликати скрипт з двома аргументами - restaurant і ithaca повинно утворитися 2 каталоги з файлами, які містять твіти що відповідають відповідним ключовим словам.
+В результаті виклику скрипта з аргументами -all restaurant ithaca повиннен утворитися один каталог restaurant_ithaca який міститиме твіти, які містять обидва ключові слова одночасно.
+
+#!/bin/bash
+
+# If not arguments are specified, exit
+if [ $# -eq 0 ]
+then
+   echo 'No arguments specified'
+   exit 0
+fi
+
+if [ $1 != "-all" ]     # is the first argument -all ?
+then
+   for keyword in $@
+   do
+      # look for:
+      #     files contain matches (-l)
+      #     ignore case (-i)
+      #     look for whole words (-w)
+      # ... isn't grep great!
+      matches=$(grep -ilw "$keyword" tweet_*.txt)
+
+      # copy the matching files to a new directory
+      # -p so that mkdir does not complain if a directory exists already
+      mkdir -p $keyword
+
+      # if there are no matches, skip.
+      if [ "$matches" = "" ] ; then continue ; fi
+      cp $matches $keyword
+   done
+else
+   # -all argument specified
+   # Check to make sure there are arguments after -all
+   if [ $# -eq 1 ]
+   then
+      echo 'No keywords specified with -all'
+      exit 0
+   fi
+
+   # Get all the arguments starting with index 2
+   keywords="${@:2}"
+
+   # Create a directory for the matching tweets
+   new_dir=${keywords// /_}   # this string in $keywords and replaces spaces with _
+   mkdir -p $new_dir
+
+   # This variable will contain the names of the files matching the keywords
+   # being searched for. In the beginning, the file will have the names of all
+   # the tweet files. We will iterate over all the keywords, and in each
+   # iteration we will throw out the files not containing that keyword. By the
+   # end of the last iteration, we will only have the names of files that
+   # contain all keywords.
+   matches=tweet_*.txt
+
+   # Iterate through each of the keywords and narrow down the matches
+   for keyword in $keywords
+   do
+      matches=$(grep -ilw "$keyword" $matches)
+      # if there are no more matches, stop.
+      if [ "$matches" = "" ] ; then exit 0 ; fi
+   done
+
+   # Copy the matches to the new directory
+   cp $matches $new_dir
+fi 

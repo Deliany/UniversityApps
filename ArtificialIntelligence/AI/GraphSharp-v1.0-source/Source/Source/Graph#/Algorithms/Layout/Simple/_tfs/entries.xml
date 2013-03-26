@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#/Algorithms/Layout/Simple/" id="601224" changeset="23835" shadow="928c333de38847bab95fb84f402a5612" />
+  <entry name="Circular" kind="folder" id="601220" changeset="23835" shadow="5830847a59134f65ad0478e0e2e98790" />
+  <entry name="FDP" kind="folder" id="601221" changeset="23835" shadow="ce8d50aa3a814ed99fd940778efa4d98" />
+  <entry name="Hierarchical" kind="folder" id="601222" changeset="23835" shadow="263109496b604988b9d3b81f73b75b10" />
+  <entry name="Tree" kind="folder" id="601223" changeset="23835" shadow="4a23a5cbc2b64736ad6160c009b975cc" />
+</entries>

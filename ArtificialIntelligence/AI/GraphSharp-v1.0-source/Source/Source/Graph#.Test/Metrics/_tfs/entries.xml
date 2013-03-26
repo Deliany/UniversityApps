@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#.Test/Metrics/" id="457444" changeset="16906" shadow="7e6643a3e4a1418abf79abd796bc046a" />
+  <entry name="EdgeMetricCalculator.cs" kind="file" id="457436" changeset="16906" />
+  <entry name="IMetricCalculator.cs" kind="file" id="457437" changeset="16906" />
+  <entry name="LayoutAreaMetricCalculator.cs" kind="file" id="457438" changeset="16906" />
+  <entry name="MetricCalculatorBase.cs" kind="file" id="457439" changeset="16906" />
+  <entry name="OverlapMetricCalculator.cs" kind="file" id="457440" changeset="16906" />
+</entries>

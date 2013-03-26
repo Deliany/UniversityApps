@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#.Sample/Themes/" id="605485" changeset="24229" shadow="1d6a7f9b1298401a889230af8c5e984e" />
+  <entry name="BubbleCreme.xaml" kind="file" id="604915" changeset="24229" />
+  <entry name="BureauBlack.xaml" kind="file" id="604916" changeset="24229" />
+  <entry name="BureauBlue.xaml" kind="file" id="604917" changeset="24229" />
+  <entry name="ExpressionDark.xaml" kind="file" id="604918" changeset="24229" />
+  <entry name="ExpressionLight.xaml" kind="file" id="604919" changeset="24229" />
+  <entry name="GraphSharp.png" kind="file" id="605115" changeset="24229" />
+  <entry name="ShinyBlue.xaml" kind="file" id="604920" changeset="24229" />
+  <entry name="ShinyRed.xaml" kind="file" id="604921" changeset="24229" />
+  <entry name="System.Windows.Controls.Theming.BubbleCreme.dll" kind="file" id="604922" changeset="24229" />
+  <entry name="System.Windows.Controls.Theming.BureauBlack.dll" kind="file" id="604923" changeset="24229" />
+  <entry name="System.Windows.Controls.Theming.BureauBlue.dll" kind="file" id="604924" changeset="24229" />
+  <entry name="System.Windows.Controls.Theming.dll" kind="file" id="604925" changeset="24229" />
+  <entry name="System.Windows.Controls.Theming.ExpressionDark.dll" kind="file" id="604926" changeset="24229" />
+  <entry name="System.Windows.Controls.Theming.ExpressionLight.dll" kind="file" id="604927" changeset="24229" />
+  <entry name="System.Windows.Controls.Theming.ShinyBlue.dll" kind="file" id="604928" changeset="24229" />
+  <entry name="System.Windows.Controls.Theming.ShinyRed.dll" kind="file" id="604929" changeset="24229" />
+  <entry name="System.Windows.Controls.Theming.TwilightBlue.dll" kind="file" id="604930" changeset="24229" />
+  <entry name="System.Windows.Controls.Theming.WhistlerBlue.dll" kind="file" id="604931" changeset="24229" />
+  <entry name="TwilightBlue.xaml" kind="file" id="604932" changeset="24229" />
+  <entry name="WhistlerBlue.xaml" kind="file" id="604933" changeset="24229" />
+  <entry name="WPFToolkit.dll" kind="file" id="604934" changeset="24229" />
+</entries>

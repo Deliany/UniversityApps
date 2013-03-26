@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#.Test/" id="442035" changeset="16360" shadow="5bda57731b484b73801361da3a44221b" />
+  <entry name="Algorithms" kind="folder" id="601216" changeset="23835" shadow="9f1a1ffd4dd04305924b73ceaa24db06" />
+  <entry name="Generators" kind="folder" id="457443" changeset="16906" shadow="b77f1089204f4f4bb6ec025f884b848d" />
+  <entry name="GraphHelperTest.cs" kind="file" id="441863" changeset="16360" />
+  <entry name="GraphSharp.Test.csproj" kind="file" id="441864" changeset="23835" />
+  <entry name="GraphSharp.Test.csproj.vspscc" kind="file" id="442771" changeset="16906" />
+  <entry name="LayeredTopologicalSortAlgorithmTest.cs" kind="file" id="441865" changeset="16360" />
+  <entry name="LayoutHelperTest.cs" kind="file" id="593875" changeset="23835" />
+  <entry name="MetricTests" kind="folder" id="442046" changeset="16360" shadow="bb52ad3a2e1f46a287857605beb76ca0" />
+  <entry name="Metrics" kind="folder" id="457444" changeset="16906" shadow="7e6643a3e4a1418abf79abd796bc046a" />
+  <entry name="Properties" kind="folder" id="458528" changeset="16944" shadow="3a8a3e4862f74d0481de90274a49a697" />
+</entries>

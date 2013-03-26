@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#/Algorithms/" id="442047" changeset="16360" shadow="b73574aa3b3c4bfe8d694cb9ae22dd0c" />
+  <entry name="AlgorithmBase.cs" kind="file" id="441867" changeset="16360" />
+  <entry name="EdgeRouting" kind="folder" id="442048" changeset="16360" shadow="7bccdff674ef4f5f98ae3527d04508e2" />
+  <entry name="FactoryHelper.cs" kind="file" id="593876" changeset="23835" />
+  <entry name="Highlight" kind="folder" id="442049" changeset="16360" shadow="253265b5f66f48569f08b313d33f22f7" />
+  <entry name="IAlgorithm.cs" kind="file" id="441884" changeset="16360" />
+  <entry name="IAlgorithmParameters.cs" kind="file" id="441885" changeset="16360" />
+  <entry name="LayeredTopologicalSortAlgorithm.cs" kind="file" id="441886" changeset="16360" />
+  <entry name="Layout" kind="folder" id="442050" changeset="16360" shadow="f74dac96b3aa4a0489e9143dd316f95b" />
+  <entry name="OverlapRemoval" kind="folder" id="442051" changeset="16360" shadow="8cbe34c971b74e5f8f3ffacfc55780bf" />
+</entries>

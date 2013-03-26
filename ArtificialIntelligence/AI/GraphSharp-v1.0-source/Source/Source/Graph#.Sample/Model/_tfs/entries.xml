@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#.Sample/Model/" id="442042" changeset="16360" shadow="e6b52fb35f77485aa21ceeb09b88acaf" />
+  <entry name="GraphModel.cs" kind="file" id="441848" changeset="16360" />
+</entries>

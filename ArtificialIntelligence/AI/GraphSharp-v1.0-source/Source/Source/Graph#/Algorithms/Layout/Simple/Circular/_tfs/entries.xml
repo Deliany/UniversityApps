@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#/Algorithms/Layout/Simple/Circular/" id="601220" changeset="23835" shadow="5830847a59134f65ad0478e0e2e98790" />
+  <entry name="CircularLayoutAlgorithm.cs" kind="file" id="593892" changeset="23835" />
+  <entry name="CircularLayoutParameters.cs" kind="file" id="593932" changeset="23835" />
+</entries>

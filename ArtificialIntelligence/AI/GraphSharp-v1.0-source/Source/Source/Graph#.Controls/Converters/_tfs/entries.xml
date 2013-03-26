@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#.Controls/Converters/" id="442038" changeset="16360" shadow="9d96578d574b4d31816aff258fd91a6c" />
+  <entry name="CoordinatesToPointConverter.cs" kind="file" id="441834" changeset="16360" />
+  <entry name="EdgeRouteToPathConverter.cs" kind="file" id="441835" changeset="16360" />
+  <entry name="GraphConverterHelper.cs" kind="file" id="441836" changeset="16360" />
+  <entry name="PointArrayToString.cs" kind="file" id="441837" changeset="16360" />
+</entries>

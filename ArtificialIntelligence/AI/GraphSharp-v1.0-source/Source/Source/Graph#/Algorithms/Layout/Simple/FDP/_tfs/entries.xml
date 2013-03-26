@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#/Algorithms/Layout/Simple/FDP/" id="601221" changeset="23835" shadow="ce8d50aa3a814ed99fd940778efa4d98" />
+  <entry name="BoundedFRLayoutParameters.cs" kind="file" id="593893" changeset="23835" />
+  <entry name="FRCoolingFunction.cs" kind="file" id="593894" changeset="23835" />
+  <entry name="FreeFRLayoutParameters.cs" kind="file" id="593895" changeset="23835" />
+  <entry name="FRLayoutAlgorithm.cs" kind="file" id="593896" changeset="23835" />
+  <entry name="FRLayoutParametersBase.cs" kind="file" id="593897" changeset="23835" />
+  <entry name="ISOMLayoutAlgorithm.cs" kind="file" id="593898" changeset="23835" />
+  <entry name="ISOMLayoutParameters.cs" kind="file" id="593933" changeset="23835" />
+  <entry name="KKLayoutAlgorithm.cs" kind="file" id="593899" changeset="23835" />
+  <entry name="KKLayoutParameters.cs" kind="file" id="593934" changeset="23835" />
+  <entry name="LinLogLayoutAlgorithm.cs" kind="file" id="593900" changeset="23835" />
+  <entry name="LinLogLayoutAlgorithm.QuadTree.cs" kind="file" id="593935" changeset="23835" />
+  <entry name="LinLogLayoutParameters.cs" kind="file" id="593936" changeset="23835" />
+</entries>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/GraphSharp.Optimization/GeneticAlgorithm/" id="601226" changeset="23837" shadow="4d5d456fddce4fe787517c8552c9861a" />
+  <entry name="GeneticAlgorithmBase.cs" kind="file" id="593915" changeset="23837" />
+  <entry name="GeneticAlgorithmParameters.cs" kind="file" id="593916" changeset="23837" />
+  <entry name="IMutation.cs" kind="file" id="593917" changeset="23837" />
+</entries>

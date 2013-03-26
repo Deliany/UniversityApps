@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#.Test/Properties/" id="458528" changeset="16944" shadow="3a8a3e4862f74d0481de90274a49a697" />
+  <entry name="AssemblyInfo.cs" kind="file" id="458523" changeset="16944" />
+</entries>

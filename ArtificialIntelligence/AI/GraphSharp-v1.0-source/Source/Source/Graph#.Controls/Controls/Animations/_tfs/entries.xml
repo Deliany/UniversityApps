@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<entries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entry name="" kind="folder" url="https://tfs08.codeplex.com:443/" path="$/graphsharp/Source/Graph#.Controls/Controls/Animations/" id="529193" changeset="20719" shadow="98bd3e9c9154446ba6f2748ffc72716b" />
+  <entry name="SimpleMoveAnimation.cs" kind="file" id="529186" changeset="20719" />
+</entries>
