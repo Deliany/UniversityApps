@@ -7,69 +7,56 @@ namespace BidirectionalSearch.Model
 {
     public class TraveledPathData
     {
-        private List<Edge> exploredEdges = new List<Edge>();
-        private List<Edge> traveledEdges = new List<Edge>();
+        public List<Edge> ExploredEdges { get; private set; }
+        public List<Edge> TraveledEdges { get; private set; }
+        public Double PathCost { get; private set; }
 
-        private SearchEventManager eventManager;
-
-        public SearchEventManager EventManager
-        {
-            get { return eventManager; }
-            set { eventManager = value; }
-        }
-
-        public List<Edge> ExploredEdges
-        {
-            get { return exploredEdges; }
-        }
-
-        public List<Edge> TraveledEdges
-        {
-            get { return traveledEdges; }
-        }
+        public SearchEventManager EventManager { get; set; }
 
         public TraveledPathData(Vertex root, Vertex goal)
         {
-            eventManager = new SearchEventManager(root, goal);
+            this.EventManager = new SearchEventManager(root, goal);
+            this.ExploredEdges = new List<Edge>();
+            this.TraveledEdges = new List<Edge>();
         }
 
         public void AddExploredEdge(Edge edge)
         {
-            exploredEdges.Add(edge);
+            this.ExploredEdges.Add(edge);
 
             SearchEvent ev = new SearchEvent(SearchEventType.AddedEdgeToExplored, edge);
-            eventManager.AddEvent(ev);
+            this.EventManager.AddEvent(ev);
         }
 
         public void AddTraveledEdge(Edge edge)
         {
-            traveledEdges.Add(edge);
+            this.TraveledEdges.Add(edge);
 
             SearchEvent ev = new SearchEvent(SearchEventType.AddedEdgeToTraveled, edge);
-            eventManager.AddEvent(ev);
+            this.EventManager.AddEvent(ev);
         }
 
         public void RemoveExplored(Vertex vert)
         {
-            Edge edgeToRemove = exploredEdges.Single(e => e.VerticeTo == vert);
-            exploredEdges.Remove(edgeToRemove);
+            Edge edgeToRemove = ExploredEdges.Single(e => e.VerticeTo == vert);
+            this.ExploredEdges.Remove(edgeToRemove);
 
             SearchEvent ev = new SearchEvent(SearchEventType.RemovedEdgeFromExplored, edgeToRemove);
-            eventManager.AddEvent(ev);
+            this.EventManager.AddEvent(ev);
         }
 
         public void RemoveExplored(Edge edge)
         {
-            exploredEdges.Remove(edge);
+            this.ExploredEdges.Remove(edge);
 
             SearchEvent ev = new SearchEvent(SearchEventType.RemovedEdgeFromExplored, edge);
-            eventManager.AddEvent(ev);
+            this.EventManager.AddEvent(ev);
         }
 
         public List<Edge> GetShortestPath()
         {
             List<Edge> shortestPath = new List<Edge>();
-            var lastEdge = this.traveledEdges.Last();
+            var lastEdge = this.TraveledEdges.Last();
             shortestPath.Insert(0,lastEdge);
 
 
@@ -80,6 +67,11 @@ namespace BidirectionalSearch.Model
             }
 
             return shortestPath;
+        }
+
+        public void UpdatePathCost(Double pathCost)
+        {
+            this.PathCost = pathCost;
         }
     }
 }

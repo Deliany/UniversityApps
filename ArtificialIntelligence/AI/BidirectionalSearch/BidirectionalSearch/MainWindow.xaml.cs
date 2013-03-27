@@ -26,7 +26,7 @@ namespace BidirectionalSearch
     /// </summary>
     public partial class MainWindow : Window
     {
-        public int[,] Matrix { get; set; }
+        public Double[,] Matrix { get; set; }
         public Graph Graph { get; set; }
         public BidirectionalGraph<object, IEdge<object>> VisioGraph { get; set; }
         public BidirectionalGraph<object, IEdge<object>> VisioTree { get; set; }
@@ -36,10 +36,9 @@ namespace BidirectionalSearch
         public MainWindow()
         {
             InitializeComponent();
-            br.searchDidFinishedWithEvents = SearchDidFinishedWithEvents;
-            br.setPathCost = SetPathCost;
+            br.searchDidFinishedWithData = SearchDidFinishedWithData;
 
-            this.Graph = new Graph("C:\\Users\\Deliany\\Desktop\\AI\\graph_matrix.txt");
+            this.Graph = new Graph("graph_matrix.txt");
             Logger.LogBox = this.logRTF;
 
             this.FillVisioGraphWithGraph(this.Graph);
@@ -47,7 +46,7 @@ namespace BidirectionalSearch
             this.FillDataTableWithMatrix(this.Graph);
         }
 
-        private void SetPathCost(int cost)
+        private void SetPathCostTextBox(Double cost)
         {
             Application.Current.Dispatcher.Invoke(new Action(() =>
                 {
@@ -111,11 +110,14 @@ namespace BidirectionalSearch
                 }
             }
 
-            c_dataGrid2D.ItemsSource = BindingHelper.GetBindable2DArray<int>(this.Matrix);
+            c_dataGrid2D.ItemsSource = BindingHelper.GetBindable2DArray<Double>(this.Matrix);
         }
 
-        private void SearchDidFinishedWithEvents(SearchEventManager sem)
+        private void SearchDidFinishedWithData(TwoWayTraveledPathData data)
         {
+            SearchEventManager sem = data.SEM;
+
+            this.SetPathCostTextBox(data.TotalCost);
             Application.Current.Dispatcher.Invoke(new Action(() => { this.setupVisioTree(); }));
             Application.Current.Dispatcher.Invoke(new Action(() => { this.FillVisioGraphWithGraph(this.Graph); }));
 
@@ -129,12 +131,16 @@ namespace BidirectionalSearch
                 }
             }));
 
-            //Application.Current.Dispatcher.Invoke(new Action(() => { Logger.WriteLogInfo("Shortest path:"); }));
-            //var shortestPath = sem.GetShortestPath();
-            //foreach (var edge in shortestPath)
-            //{
-            //    Application.Current.Dispatcher.Invoke(new Action(() => { Logger.WriteLogInfo(edge.ToString()); }));
-            //}
+            var shortestPath = data.GetShortestPath();
+            Application.Current.Dispatcher.Invoke(new Action(() =>
+                {
+                    Logger.WriteLogInfo("Shortest path:");
+                    foreach (var edge in shortestPath)
+                    {
+                         Logger.WriteLogInfo(edge.ToString());
+                    }
+                }));
+            
             
 
             foreach (var searchEvent in sem.Events)
@@ -189,15 +195,15 @@ namespace BidirectionalSearch
                 }
             }
 
-            //foreach (var edge in shortestPath)
-            //{
-            //    var edgeFromGraph = this.VisioGraph.Edges.Single(e => e.Source == edge.VerticeFrom && e.Target == edge.VerticeTo);
-            //    if (edgeFromGraph is MyEdge)
-            //    {
-            //        var ed = edgeFromGraph as MyEdge;
-            //        ed.EdgeColor = Colors.SpringGreen;
-            //    }
-            //}
+            foreach (var edge in shortestPath)
+            {
+                var edgeFromGraph = this.VisioGraph.Edges.Single(e => e.Source == edge.VerticeFrom && e.Target == edge.VerticeTo);
+                if (edgeFromGraph is MyEdge)
+                {
+                    var ed = edgeFromGraph as MyEdge;
+                    ed.EdgeColor = Colors.OrangeRed;
+                }
+            }
 
         }
 
@@ -205,7 +211,7 @@ namespace BidirectionalSearch
         {
             try
             {
-                br.Search(this.Graph, new Vertex(rootVertexChkbx.Text), new Vertex(goalVertexChkbx.Text));
+                br.AsynchronousSearch(this.Graph, new Vertex(rootVertexChkbx.Text), new Vertex(goalVertexChkbx.Text));
             }
             catch (Exception ex)
             {
@@ -215,7 +221,7 @@ namespace BidirectionalSearch
 
         private void StopButton_Click(object sender, RoutedEventArgs e)
         {
-            br.OutsideThread.Abort();
+            br.ActionThread.Abort();
             this.FillVisioGraphWithGraph(this.Graph);
             this.graphLayout.Relayout();
         }

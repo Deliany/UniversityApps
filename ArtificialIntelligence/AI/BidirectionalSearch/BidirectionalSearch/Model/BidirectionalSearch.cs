@@ -30,157 +30,101 @@ namespace BidirectionalSearch.Model
 
 
     /// <summary>
-    /// Bidirectional search that uses uniform-cost search in two directions
+    /// Bidirectional search that uses uniform-cost search in two directions - one from start and one from goal
     /// </summary>
     public class BidirectionalSearch
     {
-        private PriorityQueue<Vertex> frontier1 = new PriorityQueue<Vertex>();
-        private PriorityQueue<Vertex> frontier2 = new PriorityQueue<Vertex>();
-        private List<Vertex> explored1 = new List<Vertex>();
-        private List<Vertex> explored2 = new List<Vertex>();
-        private Thread search1Thread;
-        private Thread search2Thread;
-        private int cost1;
-        private int cost2;
-        private TraveledPathData path1;
-        private TraveledPathData path2;
+        private TwoWayTraveledPathData pathData;
 
-        private Graph graph { get; set; }
-        private Vertex root { get; set; }
-        private Vertex goal { get; set; }
+        private Graph graph;
+        private Vertex root;
+        private Vertex goal;
 
-        public Action<SearchEventManager> searchDidFinishedWithEvents;
-        public Action<int> setPathCost;
+        public Action<TwoWayTraveledPathData> searchDidFinishedWithData;
 
-        public Thread OutsideThread { get; set; }
+        public Thread ActionThread { get; private set; }
 
 
-        public void Search(Graph graph, Vertex root, Vertex goal)
+        public void AsynchronousSearch(Graph graph, Vertex root, Vertex goal)
         {
             this.graph = graph;
             this.root = root;
             this.goal = goal;
-            new Thread(TrueSearch).Start();
-            //search1Thread = new Thread(Search1);
-            //search2Thread = new Thread(Search2);
-            //search1Thread.Start();
-            //search2Thread.Start();
+            new Thread(AsyncSearch).Start();
         }
+
+        public TwoWayTraveledPathData SynchronousSearch(Graph graph, Vertex root, Vertex goal)
+        {
+            this.graph = graph;
+            this.root = root;
+            this.goal = goal;
+            return this.SyncSearch();
+        }
+
 
         protected void ExecuteInBiggerStackThread<T>(Action<T> action, T parameterObject)
         {
-            OutsideThread = new Thread(() => action(parameterObject), 1024 * 1024);
-            OutsideThread.Start();
-            OutsideThread.Join();
+            this.ActionThread = new Thread(() => action(parameterObject), 1024 * 1024);
+            this.ActionThread.Start();
+            this.ActionThread.Join();
         }
 
-        public void TrueSearch()
+        public void AsyncSearch()
         {
-            frontier1 = new PriorityQueue<Vertex>();
-            explored1 = new List<Vertex>();
-            path1 = new TraveledPathData(root, goal);
-
-            frontier2 = new PriorityQueue<Vertex>();
-            explored2 = new List<Vertex>();
-            path2 = new TraveledPathData(goal, root);
-
-            SearchEventManager man = new SearchEventManager(root, goal);
-            path1.EventManager = man;
-            path2.EventManager = man;
+            pathData = new TwoWayTraveledPathData(root, goal);
 
             // enqueue root node in frontier
-            frontier1.Enqueue(root);
-            frontier2.Enqueue(goal);
+            pathData.Frontier1.Enqueue(root);
+            pathData.Frontier2.Enqueue(goal);
 
             // if frontier is empty - we finished searching
-            while (!frontier1.Empty || !frontier2.Empty)
+            while (!pathData.Frontier1.Empty || !pathData.Frontier2.Empty)
             {
                 // by priority at top I mean the smallest total cost path to vertex in frontier
-                cost1 = frontier1.PriorityAtTop();
-                cost2 = frontier2.PriorityAtTop();
+                pathData.UpdateCost1(pathData.Frontier1.PriorityAtTop());
+                pathData.UpdateCost2(pathData.Frontier2.PriorityAtTop());
 
                 // dequeue vertex with the least total cost
-                Vertex node1 = frontier1.Dequeue();
-                Vertex node2 = frontier2.Dequeue();
+                Vertex node1 = pathData.Frontier1.Dequeue();
+                Vertex node2 = pathData.Frontier2.Dequeue();
 
                 // search in explored for adjacent edge for added node
-                foreach (var edge in path1.ExploredEdges)
+                foreach (var edge in pathData.Path1.ExploredEdges)
                 {
                     if (edge.VerticeTo == node1)
                     {
-                        path1.AddTraveledEdge(new Edge(edge, cost1));
+                        pathData.AddTraveledEdgeToPath1(new Edge(edge, pathData.Cost1));
                     }
                 }
-                foreach (var edge in path2.ExploredEdges)
+                foreach (var edge in pathData.Path2.ExploredEdges)
                 {
                     if (edge.VerticeTo == node2)
                     {
-                        path2.AddTraveledEdge(new Edge(edge, cost2));
+                        pathData.AddTraveledEdgeToPath2(new Edge(edge, pathData.Cost2));
                     }
                 }
 
                 // if our dequeued node is goal node, then we got path with shortest cost to it
                 if (node1 == goal)
                 {
-                    string msg = string.Empty;
-                    foreach (var e in path1.EventManager.Events)
-                    {
-                        msg += e.EventMessage + "\n";
-                    }
-                    msg += "!!!Finished!!!\n";
-                    //MessageBox.Show(msg + "\nTotal cost reached1: " + cost1);
-
-                    this.ExecuteInBiggerStackThread(searchDidFinishedWithEvents, path1.EventManager);
-                    this.ExecuteInBiggerStackThread(searchDidFinishedWithEvents, path2.EventManager);
+                    pathData.UpdateCost2(0);
+                    this.ExecuteInBiggerStackThread(searchDidFinishedWithData, pathData);
                     return;
                 }
                 if (node2 == root)
                 {
-                    string msg = string.Empty;
-                    foreach (var e in path2.EventManager.Events)
-                    {
-                        msg += e.EventMessage + "\n";
-                    }
-                    msg += "!!!Finished!!!\n";
-                    //MessageBox.Show(msg + "\nTotal cost reached2: " + cost2);
-
-                    this.ExecuteInBiggerStackThread(searchDidFinishedWithEvents, path1.EventManager);
-                    this.ExecuteInBiggerStackThread(searchDidFinishedWithEvents, path2.EventManager);
+                    pathData.UpdateCost1(0);
+                    this.ExecuteInBiggerStackThread(searchDidFinishedWithData, pathData);
                     return;
                 }
 
                 // add dequeued node to explored list
-                explored1.Add(node1);
-                explored2.Add(node2);
+                pathData.Explored1.Add(node1);
+                pathData.Explored2.Add(node2);
 
-                if (path2.TraveledEdges.Any(e => e.VerticeTo == node1) || path1.TraveledEdges.Any(e => e.VerticeTo == node2))
+                if (pathData.Path2.TraveledEdges.Any(e => e.VerticeTo == node1) || pathData.Path1.TraveledEdges.Any(e => e.VerticeTo == node2))
                 {
-                    string msg = string.Empty;
-                    foreach (var e in man.Events)
-                    {
-                        msg += e.EventMessage + "\n";
-                    }
-                    msg += "!!!Finished!!!\n";
-
-
-                    //List<Vertex> shortestPath1 = path1.GenerateShortestPath();
-                    //List<Vertex> shortestPath2 = path2.GenerateShortestPath();
-                    //shortestPath2.Reverse();
-                    //List<Vertex> allPath = new List<Vertex>();
-                    //allPath.AddRange(shortestPath1);
-                    //allPath.AddRange(shortestPath2);
-                    //string strin = "";
-                    //foreach (var vertex in allPath)
-                    //{
-                    //    strin += vertex + "->";
-                    //}
-                    //MessageBox.Show(strin);
-
-                    // MessageBox.Show(string.Format("Total cost intersect1: {0}+{1}={2}", cost1, cost2, cost1 + cost2));
-
-                    int totalCost = cost1 + cost2;
-                    this.ExecuteInBiggerStackThread(this.setPathCost, totalCost);
-                    this.ExecuteInBiggerStackThread(searchDidFinishedWithEvents, man);
+                    this.ExecuteInBiggerStackThread(searchDidFinishedWithData, pathData);
                     return;
                 }
 
@@ -189,36 +133,36 @@ namespace BidirectionalSearch.Model
                 foreach (var adjacentVertex in graph.AdjacentVertices(node1))
                 {
                     // if node is not in explored
-                    if (!explored1.Contains(adjacentVertex))
+                    if (!pathData.Explored1.Contains(adjacentVertex))
                     {
                         Edge edge = graph.GetEdge(node1, adjacentVertex);
                         // and if neighbour node is not in frontier
-                        if (!frontier1.Contains(adjacentVertex))
+                        if (!pathData.Frontier1.Contains(adjacentVertex))
                         {
                             // add edge NODE-ADJACENTVERTEX
-                            path1.AddExploredEdge(new Edge(edge, cost1 + edge.Weight));
+                            pathData.AddExploredEdgeToPath1(new Edge(edge, pathData.Cost1 + edge.Weight));
 
-                            frontier1.Enqueue(adjacentVertex, cost1 + edge.Weight);
+                            pathData.Frontier1.Enqueue(adjacentVertex, pathData.Cost1 + edge.Weight);
                         }
                         // else if neighbour node is in frontier and its cost is higher then current
                         // -> replace existing node with node with lower path cost
-                        else if ((cost1 + edge.Weight) < frontier1.GetPriority(adjacentVertex))
+                        else if ((pathData.Cost1 + edge.Weight) < pathData.Frontier1.GetPriority(adjacentVertex))
                         {
                             // remove edge PREVIOUSNODE-ADJACENTVERTEX
                             // add edge NODE-ADJACENTVERTEX
-                            path1.RemoveExplored(adjacentVertex);
-                            path1.AddExploredEdge(new Edge(edge, cost1 + edge.Weight));
+                            pathData.RemoveExploredFromPath1(adjacentVertex);
+                            pathData.AddExploredEdgeToPath1(new Edge(edge, pathData.Cost1 + edge.Weight));
 
                             // update vertex priority in frontier
-                            frontier1.Remove(adjacentVertex);
-                            frontier1.Enqueue(adjacentVertex, cost1 + edge.Weight);
+                            pathData.Frontier1.Remove(adjacentVertex);
+                            pathData.Frontier1.Enqueue(adjacentVertex, pathData.Cost1 + edge.Weight);
                         }
                         else
                         {
                             // add and delete it cause it is failure, longer path
-                            Edge tempEdge = new Edge(edge, cost1 + edge.Weight);
-                            path1.AddExploredEdge(tempEdge);
-                            path1.RemoveExplored(tempEdge);
+                            Edge tempEdge = new Edge(edge, pathData.Cost1 + edge.Weight);
+                            pathData.AddExploredEdgeToPath1(tempEdge);
+                            pathData.RemoveExploredFromPath1(tempEdge);
                         }
                     }
                 }
@@ -226,153 +170,96 @@ namespace BidirectionalSearch.Model
                 foreach (var adjacentVertex in graph.AdjacentVertices(node2))
                 {
                     // if node is not in explored
-                    if (!explored2.Contains(adjacentVertex))
+                    if (!pathData.Explored2.Contains(adjacentVertex))
                     {
                         Edge edge = graph.GetEdge(node2, adjacentVertex);
                         // and if neighbour node is not in frontier
-                        if (!frontier2.Contains(adjacentVertex))
+                        if (!pathData.Frontier2.Contains(adjacentVertex))
                         {
                             // add edge NODE-ADJACENTVERTEX
-                            path2.AddExploredEdge(new Edge(edge, cost2 + edge.Weight));
+                            pathData.AddExploredEdgeToPath2(new Edge(edge, pathData.Cost2 + edge.Weight));
 
-                            frontier2.Enqueue(adjacentVertex, cost2 + edge.Weight);
+                            pathData.Frontier2.Enqueue(adjacentVertex, pathData.Cost2 + edge.Weight);
                         }
                         // else if neighbour node is in frontier and its cost is higher then current
                         // -> replace existing node with node with lower path cost
-                        else if ((cost2 + edge.Weight) < frontier2.GetPriority(adjacentVertex))
+                        else if ((pathData.Cost2 + edge.Weight) < pathData.Frontier2.GetPriority(adjacentVertex))
                         {
                             // remove edge PREVIOUSNODE-ADJACENTVERTEX
                             // add edge NODE-ADJACENTVERTEX
-                            path2.RemoveExplored(adjacentVertex);
-                            path2.AddExploredEdge(new Edge(edge, cost2 + edge.Weight));
+                            pathData.RemoveExploredFromPath2(adjacentVertex);
+                            pathData.AddExploredEdgeToPath2(new Edge(edge, pathData.Cost2 + edge.Weight));
 
                             // update vertex priority in frontier
-                            frontier2.Remove(adjacentVertex);
-                            frontier2.Enqueue(adjacentVertex, cost2 + edge.Weight);
+                            pathData.Frontier2.Remove(adjacentVertex);
+                            pathData.Frontier2.Enqueue(adjacentVertex, pathData.Cost2 + edge.Weight);
                         }
                         else
                         {
                             // add and delete it cause it is failure, longer path
-                            Edge tempEdge = new Edge(edge, cost2 + edge.Weight);
-                            path2.AddExploredEdge(tempEdge);
-                            path2.RemoveExplored(tempEdge);
+                            Edge tempEdge = new Edge(edge, pathData.Cost2 + edge.Weight);
+                            pathData.AddExploredEdgeToPath2(tempEdge);
+                            pathData.RemoveExploredFromPath2(tempEdge);
                         }
                     }
                 }
             }
         }
 
-        public int TrueSearche(Graph graph, Vertex root, Vertex goal)
+        public TwoWayTraveledPathData SyncSearch()
         {
-            this.graph = graph;
-            this.root = root;
-            this.goal = goal;
-            frontier1 = new PriorityQueue<Vertex>();
-            explored1 = new List<Vertex>();
-            path1 = new TraveledPathData(root, goal);
-
-            frontier2 = new PriorityQueue<Vertex>();
-            explored2 = new List<Vertex>();
-            path2 = new TraveledPathData(goal, root);
-
-            SearchEventManager man = new SearchEventManager(root, goal);
-            path1.EventManager = man;
-            path2.EventManager = man;
+            pathData = new TwoWayTraveledPathData(root, goal);
 
             // enqueue root node in frontier
-            frontier1.Enqueue(root);
-            frontier2.Enqueue(goal);
+            pathData.Frontier1.Enqueue(root);
+            pathData.Frontier2.Enqueue(goal);
 
             // if frontier is empty - we finished searching
-            while (!frontier1.Empty || !frontier2.Empty)
+            while (!pathData.Frontier1.Empty || !pathData.Frontier2.Empty)
             {
                 // by priority at top I mean the smallest total cost path to vertex in frontier
-                cost1 = frontier1.PriorityAtTop();
-                cost2 = frontier2.PriorityAtTop();
+                pathData.UpdateCost1(pathData.Frontier1.PriorityAtTop());
+                pathData.UpdateCost2(pathData.Frontier2.PriorityAtTop());
 
                 // dequeue vertex with the least total cost
-                Vertex node1 = frontier1.Dequeue();
-                Vertex node2 = frontier2.Dequeue();
+                Vertex node1 = pathData.Frontier1.Dequeue();
+                Vertex node2 = pathData.Frontier2.Dequeue();
 
                 // search in explored for adjacent edge for added node
-                foreach (var edge in path1.ExploredEdges)
+                foreach (var edge in pathData.Path1.ExploredEdges)
                 {
                     if (edge.VerticeTo == node1)
                     {
-                        path1.AddTraveledEdge(new Edge(edge, cost1));
+                        pathData.AddTraveledEdgeToPath1(new Edge(edge, pathData.Cost1));
                     }
                 }
-                foreach (var edge in path2.ExploredEdges)
+                foreach (var edge in pathData.Path2.ExploredEdges)
                 {
                     if (edge.VerticeTo == node2)
                     {
-                        path2.AddTraveledEdge(new Edge(edge, cost2));
+                        pathData.AddTraveledEdgeToPath2(new Edge(edge, pathData.Cost2));
                     }
                 }
 
                 // if our dequeued node is goal node, then we got path with shortest cost to it
                 if (node1 == goal)
                 {
-                    string msg = string.Empty;
-                    foreach (var e in path1.EventManager.Events)
-                    {
-                        msg += e.EventMessage + "\n";
-                    }
-                    msg += "!!!Finished!!!\n";
-                    //MessageBox.Show(msg + "\nTotal cost reached1: " + cost1);
-
-                    this.ExecuteInBiggerStackThread(searchDidFinishedWithEvents, path1.EventManager);
-                    this.ExecuteInBiggerStackThread(searchDidFinishedWithEvents, path2.EventManager);
-                    return cost1;
+                    pathData.UpdateCost2(0);
+                    return pathData;
                 }
                 if (node2 == root)
                 {
-                    string msg = string.Empty;
-                    foreach (var e in path2.EventManager.Events)
-                    {
-                        msg += e.EventMessage + "\n";
-                    }
-                    msg += "!!!Finished!!!\n";
-                    //MessageBox.Show(msg + "\nTotal cost reached2: " + cost2);
-
-                    this.ExecuteInBiggerStackThread(searchDidFinishedWithEvents, path1.EventManager);
-                    this.ExecuteInBiggerStackThread(searchDidFinishedWithEvents, path2.EventManager);
-                    return cost2;
+                    pathData.UpdateCost1(0);
+                    return pathData;
                 }
 
                 // add dequeued node to explored list
-                explored1.Add(node1);
-                explored2.Add(node2);
+                pathData.Explored1.Add(node1);
+                pathData.Explored2.Add(node2);
 
-                if (path2.TraveledEdges.Any(e => e.VerticeTo == node1) || path1.TraveledEdges.Any(e => e.VerticeTo == node2))
+                if (pathData.Path2.TraveledEdges.Any(e => e.VerticeTo == node1) || pathData.Path1.TraveledEdges.Any(e => e.VerticeTo == node2))
                 {
-                    string msg = string.Empty;
-                    foreach (var e in man.Events)
-                    {
-                        msg += e.EventMessage + "\n";
-                    }
-                    msg += "!!!Finished!!!\n";
-
-
-                    //List<Vertex> shortestPath1 = path1.GenerateShortestPath();
-                    //List<Vertex> shortestPath2 = path2.GenerateShortestPath();
-                    //shortestPath2.Reverse();
-                    //List<Vertex> allPath = new List<Vertex>();
-                    //allPath.AddRange(shortestPath1);
-                    //allPath.AddRange(shortestPath2);
-                    //string strin = "";
-                    //foreach (var vertex in allPath)
-                    //{
-                    //    strin += vertex + "->";
-                    //}
-                    //MessageBox.Show(strin);
-
-                    // MessageBox.Show(string.Format("Total cost intersect1: {0}+{1}={2}", cost1, cost2, cost1 + cost2));
-
-                    int totalCost = cost1 + cost2;
-                    this.ExecuteInBiggerStackThread(this.setPathCost, totalCost);
-                    this.ExecuteInBiggerStackThread(searchDidFinishedWithEvents, man);
-                    return totalCost;
+                    return pathData;
                 }
 
 
@@ -380,36 +267,36 @@ namespace BidirectionalSearch.Model
                 foreach (var adjacentVertex in graph.AdjacentVertices(node1))
                 {
                     // if node is not in explored
-                    if (!explored1.Contains(adjacentVertex))
+                    if (!pathData.Explored1.Contains(adjacentVertex))
                     {
                         Edge edge = graph.GetEdge(node1, adjacentVertex);
                         // and if neighbour node is not in frontier
-                        if (!frontier1.Contains(adjacentVertex))
+                        if (!pathData.Frontier1.Contains(adjacentVertex))
                         {
                             // add edge NODE-ADJACENTVERTEX
-                            path1.AddExploredEdge(new Edge(edge, cost1 + edge.Weight));
+                            pathData.AddExploredEdgeToPath1(new Edge(edge, pathData.Cost1 + edge.Weight));
 
-                            frontier1.Enqueue(adjacentVertex, cost1 + edge.Weight);
+                            pathData.Frontier1.Enqueue(adjacentVertex, pathData.Cost1 + edge.Weight);
                         }
                         // else if neighbour node is in frontier and its cost is higher then current
                         // -> replace existing node with node with lower path cost
-                        else if ((cost1 + edge.Weight) < frontier1.GetPriority(adjacentVertex))
+                        else if ((pathData.Cost1 + edge.Weight) < pathData.Frontier1.GetPriority(adjacentVertex))
                         {
                             // remove edge PREVIOUSNODE-ADJACENTVERTEX
                             // add edge NODE-ADJACENTVERTEX
-                            path1.RemoveExplored(adjacentVertex);
-                            path1.AddExploredEdge(new Edge(edge, cost1 + edge.Weight));
+                            pathData.RemoveExploredFromPath1(adjacentVertex);
+                            pathData.AddExploredEdgeToPath1(new Edge(edge, pathData.Cost1 + edge.Weight));
 
                             // update vertex priority in frontier
-                            frontier1.Remove(adjacentVertex);
-                            frontier1.Enqueue(adjacentVertex, cost1 + edge.Weight);
+                            pathData.Frontier1.Remove(adjacentVertex);
+                            pathData.Frontier1.Enqueue(adjacentVertex, pathData.Cost1 + edge.Weight);
                         }
                         else
                         {
                             // add and delete it cause it is failure, longer path
-                            Edge tempEdge = new Edge(edge, cost1 + edge.Weight);
-                            path1.AddExploredEdge(tempEdge);
-                            path1.RemoveExplored(tempEdge);
+                            Edge tempEdge = new Edge(edge, pathData.Cost1 + edge.Weight);
+                            pathData.AddExploredEdgeToPath1(tempEdge);
+                            pathData.RemoveExploredFromPath1(tempEdge);
                         }
                     }
                 }
@@ -417,232 +304,41 @@ namespace BidirectionalSearch.Model
                 foreach (var adjacentVertex in graph.AdjacentVertices(node2))
                 {
                     // if node is not in explored
-                    if (!explored2.Contains(adjacentVertex))
+                    if (!pathData.Explored2.Contains(adjacentVertex))
                     {
                         Edge edge = graph.GetEdge(node2, adjacentVertex);
                         // and if neighbour node is not in frontier
-                        if (!frontier2.Contains(adjacentVertex))
+                        if (!pathData.Frontier2.Contains(adjacentVertex))
                         {
                             // add edge NODE-ADJACENTVERTEX
-                            path2.AddExploredEdge(new Edge(edge, cost2 + edge.Weight));
+                            pathData.AddExploredEdgeToPath2(new Edge(edge, pathData.Cost2 + edge.Weight));
 
-                            frontier2.Enqueue(adjacentVertex, cost2 + edge.Weight);
+                            pathData.Frontier2.Enqueue(adjacentVertex, pathData.Cost2 + edge.Weight);
                         }
                         // else if neighbour node is in frontier and its cost is higher then current
                         // -> replace existing node with node with lower path cost
-                        else if ((cost2 + edge.Weight) < frontier2.GetPriority(adjacentVertex))
+                        else if ((pathData.Cost2 + edge.Weight) < pathData.Frontier2.GetPriority(adjacentVertex))
                         {
                             // remove edge PREVIOUSNODE-ADJACENTVERTEX
                             // add edge NODE-ADJACENTVERTEX
-                            path2.RemoveExplored(adjacentVertex);
-                            path2.AddExploredEdge(new Edge(edge, cost2 + edge.Weight));
+                            pathData.RemoveExploredFromPath2(adjacentVertex);
+                            pathData.AddExploredEdgeToPath2(new Edge(edge, pathData.Cost2 + edge.Weight));
 
                             // update vertex priority in frontier
-                            frontier2.Remove(adjacentVertex);
-                            frontier2.Enqueue(adjacentVertex, cost2 + edge.Weight);
+                            pathData.Frontier2.Remove(adjacentVertex);
+                            pathData.Frontier2.Enqueue(adjacentVertex, pathData.Cost2 + edge.Weight);
                         }
                         else
                         {
                             // add and delete it cause it is failure, longer path
-                            Edge tempEdge = new Edge(edge, cost2 + edge.Weight);
-                            path2.AddExploredEdge(tempEdge);
-                            path2.RemoveExplored(tempEdge);
+                            Edge tempEdge = new Edge(edge, pathData.Cost2 + edge.Weight);
+                            pathData.AddExploredEdgeToPath2(tempEdge);
+                            pathData.RemoveExploredFromPath2(tempEdge);
                         }
                     }
                 }
             }
-            return 0;
-        }
-
-        public void Search1()
-        {
-            frontier1 = new PriorityQueue<Vertex>();
-            explored1 = new List<Vertex>();
-            path1 = new TraveledPathData(root, goal);
-
-            // enqueue root node in frontier
-            frontier1.Enqueue(root);
-
-            // if frontier is empty - we finished searching
-            while (!frontier1.Empty)
-            {
-                // by priority at top I mean the smallest total cost path to vertex in frontier
-                cost1 = frontier1.PriorityAtTop();
-
-                // dequeue vertex with the least total cost
-                Vertex node = frontier1.Dequeue();
-
-                // search in explored for adjacent edge for added node
-                foreach (var edge in path1.ExploredEdges)
-                {
-                    if (edge.VerticeTo == node)
-                    {
-                        path1.AddTraveledEdge(new Edge(edge, cost1));
-                    }
-                }
-
-                // if our dequeued node is goal node, then we got path with shortest cost to it
-                if (node == goal)
-                {
-                    string msg = string.Empty;
-                    foreach (var e in path1.EventManager.Events)
-                    {
-                        msg += e.EventMessage + "\n";
-                    }
-                    msg += "!!!Finished!!!\n";
-                    MessageBox.Show(msg + "\nTotal cost reached1: " + cost1);
-
-                    this.searchDidFinishedWithEvents(path1.EventManager);
-                    return;
-                }
-
-                // add dequeued node to explored list
-                explored1.Add(node);
-
-                // THREADED SYNC CODE
-                //if (path2.TraveledEdges.Any(e => e.VerticeTo == node))
-                //{
-                //    search2Thread.Abort();
-                //    MessageBox.Show(string.Format("Total cost intersect1: {0}+{1}={2}", cost1, cost2, cost1 + cost2));
-                //    this.searchDidFinishedWithEvents(path1.EventManager);
-                //    this.searchDidFinishedWithEvents(path2.EventManager);
-                //    return;
-                //}
-
-                // foreach neighbour's node
-                foreach (var adjacentVertex in graph.AdjacentVertices(node))
-                {
-                    // if node is not in explored
-                    if (!explored1.Contains(adjacentVertex))
-                    {
-                        Edge edge = graph.GetEdge(node, adjacentVertex);
-                        // and if neighbour node is not in frontier
-                        if (!frontier1.Contains(adjacentVertex))
-                        {
-                            // add edge NODE-ADJACENTVERTEX
-                            path1.AddExploredEdge(new Edge(edge, cost1 + edge.Weight));
-
-                            frontier1.Enqueue(adjacentVertex, cost1 + edge.Weight);
-                        }
-                        // else if neighbour node is in frontier and its cost is higher then current
-                        // -> replace existing node with node with lower path cost
-                        else if ((cost1 + edge.Weight) < frontier1.GetPriority(adjacentVertex))
-                        {
-                            // remove edge PREVIOUSNODE-ADJACENTVERTEX
-                            // add edge NODE-ADJACENTVERTEX
-                            path1.RemoveExplored(adjacentVertex);
-                            path1.AddExploredEdge(new Edge(edge, cost1 + edge.Weight));
-
-                            // update vertex priority in frontier
-                            frontier1.Remove(adjacentVertex);
-                            frontier1.Enqueue(adjacentVertex, cost1 + edge.Weight);
-                        }
-                        else
-                        {
-                            // add and delete it cause it is failure, longer path
-                            Edge tempEdge = new Edge(edge, cost1 + edge.Weight);
-                            path1.AddExploredEdge(tempEdge);
-                            path1.RemoveExplored(tempEdge);
-                        }
-                    }
-                }
-            }
-        }
-
-        public void Search2()
-        {
-            frontier2 = new PriorityQueue<Vertex>();
-            explored2 = new List<Vertex>();
-            path2 = new TraveledPathData(goal, root);
-
-            // enqueue root node in frontier
-            frontier2.Enqueue(goal);
-
-            // if frontier is empty - we finished searching
-            while (!frontier2.Empty)
-            {
-                // by priority at top I mean the smallest total cost path to vertex in frontier
-                cost2 = frontier2.PriorityAtTop();
-
-                // dequeue vertex with the least total cost
-                Vertex node = frontier2.Dequeue();
-
-                // search in explored for adjacent edge for added node
-                foreach (var edge in path2.ExploredEdges)
-                {
-                    if (edge.VerticeTo == node)
-                    {
-                        path2.AddTraveledEdge(new Edge(edge, cost2));
-                    }
-                }
-
-                // if our dequeued node is goal node, then we got path with shortest cost to it
-                if (node == root)
-                {
-                    string msg = string.Empty;
-                    foreach (var e in path2.EventManager.Events)
-                    {
-                        msg += e.EventMessage + "\n";
-                    }
-                    msg += "!!!Finished!!!\n";
-                    MessageBox.Show(msg + "\nTotal cost reached2: " + cost2);
-
-                    this.searchDidFinishedWithEvents(path2.EventManager);
-                    return;
-                }
-
-                // add dequeued node to explored list
-                explored2.Add(node);
-
-                // THREADED SYNC CODE
-                //if (path1.TraveledEdges.Any(e => e.VerticeTo == node))
-                //{
-                //    search1Thread.Abort();
-                //    MessageBox.Show(string.Format("Total cost intersect1: {0}+{1}={2}", cost1, cost2, cost1 + cost2));
-                //    this.searchDidFinishedWithEvents(path1.EventManager);
-                //    this.searchDidFinishedWithEvents(path2.EventManager);
-                //    return;
-                //}
-
-                // foreach neighbour's node
-                foreach (var adjacentVertex in graph.AdjacentVertices(node))
-                {
-                    // if node is not in explored
-                    if (!explored2.Contains(adjacentVertex))
-                    {
-                        Edge edge = graph.GetEdge(node, adjacentVertex);
-                        // and if neighbour node is not in frontier
-                        if (!frontier2.Contains(adjacentVertex))
-                        {
-                            // add edge NODE-ADJACENTVERTEX
-                            path2.AddExploredEdge(new Edge(edge, cost2 + edge.Weight));
-
-                            frontier2.Enqueue(adjacentVertex, cost2 + edge.Weight);
-                        }
-                        // else if neighbour node is in frontier and its cost is higher then current
-                        // -> replace existing node with node with lower path cost
-                        else if ((cost2 + edge.Weight) < frontier2.GetPriority(adjacentVertex))
-                        {
-                            // remove edge PREVIOUSNODE-ADJACENTVERTEX
-                            // add edge NODE-ADJACENTVERTEX
-                            path2.RemoveExplored(adjacentVertex);
-                            path2.AddExploredEdge(new Edge(edge, cost2 + edge.Weight));
-
-                            // update vertex priority in frontier
-                            frontier2.Remove(adjacentVertex);
-                            frontier2.Enqueue(adjacentVertex, cost2 + edge.Weight);
-                        }
-                        else
-                        {
-                            // add and delete it cause it is failure, longer path
-                            Edge tempEdge = new Edge(edge, cost2 + edge.Weight);
-
-                            path2.AddExploredEdge(tempEdge);
-                            path2.RemoveExplored(tempEdge);
-                        }
-                    }
-                }
-            }
+            return null;
         }
     }
 }

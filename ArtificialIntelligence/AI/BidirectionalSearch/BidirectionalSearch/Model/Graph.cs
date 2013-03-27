@@ -47,11 +47,11 @@ namespace BidirectionalSearch.Model
 
                     for (int j = 1; j < data.Length; j++)
                     {
-                        int weight;
-                        if (!int.TryParse(data[j], out weight))
+                        Double weight;
+                        if (!Double.TryParse(data[j], out weight))
                         {
                             throw new Exception(
-                                string.Format("Number at [{0},{1}] position is in bad format, int expected", i, j));
+                                string.Format("Number at [{0},{1}] position is in bad format, number expected", i, j));
                         }
 
                         if (weight != 0)
@@ -67,10 +67,10 @@ namespace BidirectionalSearch.Model
 
         private Graph() { }
 
-        public int[,] AsMatrix()
+        public Double[,] AsMatrix()
         {
             int dimension = vertices.Count;
-            int[,] matrix = new int[dimension,dimension];
+            Double[,] matrix = new Double[dimension,dimension];
             for (int i = 0; i < dimension; i++)
             {
                 for (int j = 0; j < dimension; j++)
@@ -87,7 +87,7 @@ namespace BidirectionalSearch.Model
             return matrix;
         }
 
-        public int GetEdgeWeight(Vertex vertFrom, Vertex vertTo)
+        public Double GetEdgeWeight(Vertex vertFrom, Vertex vertTo)
         {
             return edges.Single(edge => edge.VerticeFrom == vertFrom && edge.VerticeTo == vertTo).Weight;
         }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BidirectionalSearch.Helper
 {
-    public class PriorityQueue<TValue> : PriorityQueue<TValue, int> { }
+    public class PriorityQueue<TValue> : PriorityQueue<TValue, Double> { }
 
     public class PriorityQueue<TValue, TPriority> where TPriority : IComparable
     {
@@ -57,6 +57,12 @@ namespace BidirectionalSearch.Helper
         public bool Contains(TValue val)
         {
             return dict.Any(el => el.Value.Contains(val));
+        }
+
+        public void Clear()
+        {
+            this.dict.Clear();
+            this.Count = 0;
         }
     }
 }

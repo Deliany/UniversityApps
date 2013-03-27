@@ -10,16 +10,16 @@ namespace BidirectionalSearch.Model
         public Vertex VerticeFrom { get; set; }
         public Vertex VerticeTo { get; set; }
 
-        public int Weight { get; set; }
+        public Double Weight { get; set; }
 
-        public Edge(Vertex vertFrom, Vertex vertTo, int weight)
+        public Edge(Vertex vertFrom, Vertex vertTo, Double weight)
         {
             this.VerticeFrom = vertFrom;
             this.VerticeTo = vertTo;
             this.Weight = weight;
         }
 
-        public Edge(Edge edge, int weight)
+        public Edge(Edge edge, Double weight)
         {
             this.VerticeFrom = edge.VerticeFrom;
             this.VerticeTo = edge.VerticeTo;
@@ -68,7 +68,7 @@ namespace BidirectionalSearch.Model
             {
                 int hashCode = (VerticeFrom != null ? VerticeFrom.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (VerticeTo != null ? VerticeTo.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ Weight;
+                hashCode = (hashCode * 397) ^ (int)Weight;
                 return hashCode;
             }
         }

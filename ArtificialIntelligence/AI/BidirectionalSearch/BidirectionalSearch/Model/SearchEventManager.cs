@@ -48,5 +48,10 @@ namespace BidirectionalSearch.Model
         //    }
         //    return shortestPath;
         //}
+
+        public void Clear()
+        {
+            this.Events.Clear();
+        }
     }
 }

@@ -77,7 +77,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Tests.cs" />
+    <Compile Include="Model\TwoWayTraveledPathData.cs" />
+    <Compile Include="Tests\Tests.cs" />
     <Page Include="Design\GraphSharpEdgeLabelTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -116,7 +117,7 @@
     <Compile Include="Model\BidirectionalSearch.cs" />
     <Compile Include="Model\Edge.cs" />
     <Compile Include="Model\Graph.cs" />
-    <Compile Include="Model\Path.cs" />
+    <Compile Include="Model\TraveledPathData.cs" />
     <Compile Include="Model\SearchEvent.cs" />
     <Compile Include="Model\SearchEventManager.cs" />
     <Compile Include="Model\Vertex.cs" />
@@ -148,10 +149,8 @@
     <Resource Include="Design\mainicon.ico" />
     <Content Include="Libs\DataGrid2DLibrary.dll" />
     <Content Include="Libs\GraphSharp.Contracts.dll" />
-    <Content Include="Libs\GraphSharp.Contracts.pdb" />
     <Content Include="Libs\GraphSharp.Controls.dll" />
     <Content Include="Libs\GraphSharp.dll" />
-    <Content Include="Libs\GraphSharp.pdb" />
     <Content Include="Libs\Microsoft.Contracts.dll" />
     <Content Include="Libs\QuickGraph.dll" />
     <Content Include="Libs\WPFExtensions.dll" />
