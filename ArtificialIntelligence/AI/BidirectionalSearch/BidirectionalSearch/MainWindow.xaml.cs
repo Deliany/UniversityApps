@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -30,7 +31,7 @@ namespace BidirectionalSearch
         public Graph Graph { get; set; }
         public BidirectionalGraph<object, IEdge<object>> VisioGraph { get; set; }
         public BidirectionalGraph<object, IEdge<object>> VisioTree { get; set; }
-        Model.BidirectionalSearch br = new Model.BidirectionalSearch();
+        public Model.BidirectionalSearch br = new Model.BidirectionalSearch();
         public ObservableCollection<Vertex> Vertices { get; set; }
 
         public MainWindow()
@@ -42,20 +43,79 @@ namespace BidirectionalSearch
             Logger.LogBox = this.logRTF;
 
             this.FillVisioGraphWithGraph(this.Graph);
-            this.FillComboboxesWithVertices(this.Graph.vertices);
+            this.FillComboboxesWithVertices(this.Graph.Vertices);
             this.FillDataTableWithMatrix(this.Graph);
         }
 
-        private void SetPathCostTextBox(Double cost)
+        
+
+        private void WritePathCostToTextBox(Double cost)
         {
             Application.Current.Dispatcher.Invoke(new Action(() =>
                 {
                     Logger.WriteLogInfo(string.Format("Total path cost: {0}",cost)); 
-                    this.pathCostTextBox.Text = cost.ToString(); 
+                    this.pathCostTextBox.Text = cost.ToString(CultureInfo.InvariantCulture); 
                 }));
         }
 
-        private void setupVisioTree()
+        private void WriteLogWithTraveledData(TwoWayTraveledPathData data)
+        {
+            Application.Current.Dispatcher.Invoke(new Action(() =>
+            {
+                SearchEventManager sem = data.SEM;
+
+                Logger.ClearLog();
+
+                foreach (var searchEvent in sem.Events)
+                {
+                    Logger.WriteLogInfo(
+                        searchEvent.EventMessage);
+                }
+                StringBuilder msg = new StringBuilder();
+
+                Logger.WriteLogInfo(string.Format("Total edges EXPLORED in PATH1: {0}", data.Path1.ExploredEdges.Count));
+                foreach (var edge in data.Path1.ExploredEdges)
+                {
+                    msg.Append(edge + "=>");
+                }
+                Logger.WriteLogInfo(msg.ToString());
+                msg.Clear();
+
+                Logger.WriteLogInfo(string.Format("Total edges EXPLORED in PATH2: {0}", data.Path2.ExploredEdges.Count));
+                foreach (var edge in data.Path2.ExploredEdges)
+                {
+                    msg.Append(edge + "=>");
+                }
+                Logger.WriteLogInfo(msg.ToString());
+                msg.Clear();
+
+                Logger.WriteLogInfo(string.Format("Total edges TRAVELED in PATH1: {0}", data.Path1.TraveledEdges.Count));
+                foreach (var vert in data.Path1.TraveledEdges)
+                {
+                    msg.Append(vert + "=>");
+                }
+                Logger.WriteLogInfo(msg.ToString());
+                msg.Clear();
+
+                Logger.WriteLogInfo(string.Format("Total edges TRAVELED in PATH2: {0}", data.Path2.TraveledEdges.Count));
+                foreach (var vert in data.Path2.TraveledEdges)
+                {
+                    msg.Append(vert + "=>");
+                }
+                Logger.WriteLogInfo(msg.ToString());
+                msg.Clear();
+
+                Logger.WriteLogInfo("SHORTEST PATH:");
+                var shortestPath = data.GetShortestPath();
+                foreach (var edge in shortestPath)
+                {
+                    msg.Append(edge + "=>");
+                }
+                Logger.WriteLogInfo(msg.ToString());
+            }));
+        }
+
+        private void SetupVisioTree()
         {
             this.VisioTree = new BidirectionalGraph<object, IEdge<object>>();
             var overlapRemoval = new GraphSharp.Algorithms.OverlapRemoval.OverlapRemovalParameters();
@@ -69,9 +129,9 @@ namespace BidirectionalSearch
         {
             this.VisioGraph = new BidirectionalGraph<object, IEdge<object>>();
         
-            foreach (var edge in graph.edges)
+            foreach (var edge in graph.Edges)
             {
-                this.VisioGraph.AddVerticesAndEdge(new MyEdge(edge.VerticeFrom, edge.VerticeTo, edge.Weight.ToString(),
+                this.VisioGraph.AddVerticesAndEdge(new MyEdge(edge.VerticeFrom, edge.VerticeTo, edge.Weight.ToString(CultureInfo.InvariantCulture),
                                                               Colors.Silver));
             }
             this.graphLayout.Graph = this.VisioGraph;
@@ -84,7 +144,7 @@ namespace BidirectionalSearch
             this.graphLayout.OverlapRemovalParameters = overlapRemoval;
         }
 
-        private void FillComboboxesWithVertices(List<Vertex> vertices)
+        private void FillComboboxesWithVertices(IEnumerable<Vertex> vertices)
         {
             this.Vertices = new ObservableCollection<Vertex>();
             foreach (var vertex in vertices)
@@ -117,38 +177,17 @@ namespace BidirectionalSearch
         {
             SearchEventManager sem = data.SEM;
 
-            this.SetPathCostTextBox(data.TotalCost);
-            Application.Current.Dispatcher.Invoke(new Action(() => { this.setupVisioTree(); }));
-            Application.Current.Dispatcher.Invoke(new Action(() => { this.FillVisioGraphWithGraph(this.Graph); }));
-
-            Application.Current.Dispatcher.Invoke(new Action(() =>
-            {
-                Logger.ClearLog();
-                foreach (var searchEvent in sem.Events)
-                {
-                    Logger.WriteLogInfo(
-                        searchEvent.EventMessage);
-                }
-            }));
-
-            var shortestPath = data.GetShortestPath();
-            Application.Current.Dispatcher.Invoke(new Action(() =>
-                {
-                    Logger.WriteLogInfo("Shortest path:");
-                    foreach (var edge in shortestPath)
-                    {
-                         Logger.WriteLogInfo(edge.ToString());
-                    }
-                }));
+            this.WritePathCostToTextBox(data.TotalCost);
+            this.WriteLogWithTraveledData(data);
+            Application.Current.Dispatcher.Invoke(new Action(this.SetupVisioTree));
+            Application.Current.Dispatcher.Invoke(new Action(() => this.FillVisioGraphWithGraph(this.Graph)));
             
-            
-
             foreach (var searchEvent in sem.Events)
             {
                 var edges1 = this.VisioGraph.Edges.Where(
                                 e =>
-                                e.Source == searchEvent.ParticipantEdge.VerticeFrom &&
-                                e.Target == searchEvent.ParticipantEdge.VerticeTo);
+                                (Vertex) e.Source == searchEvent.ParticipantEdge.VerticeFrom &&
+                                (Vertex) e.Target == searchEvent.ParticipantEdge.VerticeTo);
 
                 switch (searchEvent.Type)
                 {
@@ -195,9 +234,12 @@ namespace BidirectionalSearch
                 }
             }
 
+            var shortestPath = data.GetShortestPath();
             foreach (var edge in shortestPath)
             {
-                var edgeFromGraph = this.VisioGraph.Edges.Single(e => e.Source == edge.VerticeFrom && e.Target == edge.VerticeTo);
+                var edgeFromGraph = this.VisioGraph.Edges.Single(
+                    e => (Vertex) e.Source == edge.VerticeFrom &&
+                         (Vertex) e.Target == edge.VerticeTo);
                 if (edgeFromGraph is MyEdge)
                 {
                     var ed = edgeFromGraph as MyEdge;
@@ -230,6 +272,49 @@ namespace BidirectionalSearch
         {
             this.graphLayout.Relayout();
             this.treeLayout.Relayout();
+        }
+
+        private void PSA_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.SetupVisioTree();
+            
+
+            string rootName = rootVertexChkbx.Text;
+            new Thread(() =>
+                {
+                    ProblemSolvingAgent psa = new ProblemSolvingAgent(5);
+                    Edge action;
+                    try
+                    {
+                        while (
+                            (action =
+                             psa.execute(new ProblemSolvingAgent.Percept
+                                 {
+                                     Current = new Vertex(rootName),
+                                     Graph = this.Graph
+                                 })) != null)
+                        {
+                            Application.Current.Dispatcher.Invoke(new Action(() =>
+                                {
+                                    this.goalVertexChkbx.Text = action.VerticeTo.Name;
+
+                                    this.VisioTree.AddVerticesAndEdge(new MyEdge(action.VerticeFrom, action.VerticeTo,
+                                                                                 action.Weight.ToString(
+                                                                                     CultureInfo.InvariantCulture),
+                                                                                 Colors.Green));
+                                    this.treeLayout.Graph = this.VisioTree;
+                                }));
+
+                            Thread.Sleep(1000);
+
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+
+                }).Start();
         }
     }
 }

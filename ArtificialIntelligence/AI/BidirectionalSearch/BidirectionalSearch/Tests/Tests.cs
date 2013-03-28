@@ -62,7 +62,7 @@ namespace BidirectionalSearch
         {
             Model.BidirectionalSearch br = new Model.BidirectionalSearch();
             Double totalCost = br.SynchronousSearch(g, new Vertex("a"), new Vertex("z")).TotalCost;
-            Assert.AreEqual(totalCost, 1335);
+            Assert.AreEqual(totalCost, 1163);
         }
 
         [Test]
@@ -87,7 +87,7 @@ namespace BidirectionalSearch
         {
             Model.BidirectionalSearch br = new Model.BidirectionalSearch();
             Double totalCost = br.SynchronousSearch(g, new Vertex("a"), new Vertex("x")).TotalCost;
-            Assert.AreEqual(totalCost, 1546);
+            Assert.AreEqual(totalCost, 1404);
         }
 
         [Test]

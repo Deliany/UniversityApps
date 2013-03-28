@@ -20,7 +20,31 @@ namespace BidirectionalSearch.Model
         public Double Cost1 { get; private set; }
         public Double Cost2 { get; private set; }
 
-        public Double TotalCost { get { return this.Cost1 + this.Cost2; } }
+        public Double TotalCost
+        {
+            get
+            {
+                Edge commonEdge = this.SEM.Events.Last().ParticipantEdge;
+                Edge linkedEdge = null;
+
+                if (this.Path1.TraveledEdges.Contains(commonEdge))
+                {
+                    if (this.Path2.TraveledEdges.Any(e => e.VerticeTo == commonEdge.VerticeTo))
+                    {
+                        linkedEdge = this.Path2.TraveledEdges.Single(e => e.VerticeTo == commonEdge.VerticeTo);
+                    }
+                }
+                else if (this.Path2.TraveledEdges.Contains(commonEdge))
+                {
+                    if (this.Path1.TraveledEdges.Any(e => e.VerticeTo == commonEdge.VerticeTo))
+                    {
+                        linkedEdge = this.Path1.TraveledEdges.Single(e => e.VerticeTo == commonEdge.VerticeTo);
+                    }
+                }
+
+                return commonEdge.Weight + (linkedEdge != null ? linkedEdge.Weight : 0.0);
+            }
+        }
 
         public Vertex Root { get; private set; }
         public Vertex Goal { get; private set; }

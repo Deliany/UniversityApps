@@ -69,7 +69,7 @@ namespace BidirectionalSearch.Model
             this.ActionThread.Join();
         }
 
-        public void AsyncSearch()
+        private void AsyncSearch()
         {
             pathData = new TwoWayTraveledPathData(root, goal);
 
@@ -105,15 +105,8 @@ namespace BidirectionalSearch.Model
                 }
 
                 // if our dequeued node is goal node, then we got path with shortest cost to it
-                if (node1 == goal)
+                if (node1 == goal || node2 == root)
                 {
-                    pathData.UpdateCost2(0);
-                    this.ExecuteInBiggerStackThread(searchDidFinishedWithData, pathData);
-                    return;
-                }
-                if (node2 == root)
-                {
-                    pathData.UpdateCost1(0);
                     this.ExecuteInBiggerStackThread(searchDidFinishedWithData, pathData);
                     return;
                 }
@@ -206,7 +199,7 @@ namespace BidirectionalSearch.Model
             }
         }
 
-        public TwoWayTraveledPathData SyncSearch()
+        private TwoWayTraveledPathData SyncSearch()
         {
             pathData = new TwoWayTraveledPathData(root, goal);
 
@@ -242,14 +235,8 @@ namespace BidirectionalSearch.Model
                 }
 
                 // if our dequeued node is goal node, then we got path with shortest cost to it
-                if (node1 == goal)
+                if (node1 == goal || node2 == root)
                 {
-                    pathData.UpdateCost2(0);
-                    return pathData;
-                }
-                if (node2 == root)
-                {
-                    pathData.UpdateCost1(0);
                     return pathData;
                 }
 

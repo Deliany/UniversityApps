@@ -36,6 +36,7 @@
                 <TextBox x:Name="pathCostTextBox" HorizontalAlignment="Left" Height="23" Margin="885,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="81" IsEnabled="False"/>
                 <Button x:Name="StopButton" Content="Stop" HorizontalAlignment="Left" Margin="519,12,0,0" VerticalAlignment="Top" Width="75" Click="StopButton_Click"/>
                 <Button x:Name="Relayout" Content="Relayout" HorizontalAlignment="Left" Margin="613,12,0,0" VerticalAlignment="Top" Width="75" Click="Relayout_Click"/>
+                <Button x:Name="PSA" Content="PSA" HorizontalAlignment="Left" Margin="713,12,0,0" VerticalAlignment="Top" Width="75" Click="PSA_OnClick"/>
             </Grid>
         </Border>
         <Grid Grid.Row="1">
@@ -67,7 +68,7 @@
             </TabItem>
         </TabControl>
             <RichTextBox x:Name="logRTF" Margin="5,10,10,10" Grid.Column="1" MinWidth="150" FontFamily="Consolas" FontSize="14" IsReadOnly="True" ScrollViewer.VerticalScrollBarVisibility="Auto" />
-            <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Height="100" Margin="0,215,0,0" VerticalAlignment="Top" Width="5"  />
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Left"   Width="5" Background="Silver"  />
         </Grid>
         <!-- Status bar -->
         <StatusBar Grid.Row="2" Height="24">

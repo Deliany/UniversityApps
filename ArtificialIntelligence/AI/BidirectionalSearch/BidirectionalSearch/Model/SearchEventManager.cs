@@ -7,7 +7,7 @@ namespace BidirectionalSearch.Model
 {
     public class SearchEventManager
     {
-        private List<SearchEvent> events = new List<SearchEvent>();
+        private readonly List<SearchEvent> events = new List<SearchEvent>();
 
         public Vertex RootVertex { get; private set; }
         public Vertex GoalVertex { get; private set; }

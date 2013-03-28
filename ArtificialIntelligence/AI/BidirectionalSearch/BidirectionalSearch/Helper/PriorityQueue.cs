@@ -9,7 +9,7 @@ namespace BidirectionalSearch.Helper
 
     public class PriorityQueue<TValue, TPriority> where TPriority : IComparable
     {
-        private SortedDictionary<TPriority, Queue<TValue>> dict = new SortedDictionary<TPriority, Queue<TValue>>();
+        private readonly SortedDictionary<TPriority, Queue<TValue>> dict = new SortedDictionary<TPriority, Queue<TValue>>();
 
         public int Count { get; private set; }
         public bool Empty { get { return Count == 0; } }

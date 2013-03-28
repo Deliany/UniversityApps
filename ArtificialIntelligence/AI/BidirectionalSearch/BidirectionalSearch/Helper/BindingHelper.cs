@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -25,7 +26,7 @@ namespace BidirectionalSearch.Helper
             DataTable dataTable = new DataTable();
             for (int i = 0; i < array.GetLength(1); i++)
             {
-                dataTable.Columns.Add(i.ToString(), typeof(Ref<T>));
+                dataTable.Columns.Add(i.ToString(CultureInfo.InvariantCulture), typeof(Ref<T>));
             }
             for (int i = 0; i < array.GetLength(0); i++)
             {

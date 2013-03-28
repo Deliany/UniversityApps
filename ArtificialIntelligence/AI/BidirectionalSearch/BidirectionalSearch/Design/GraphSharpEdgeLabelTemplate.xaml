@@ -4,10 +4,10 @@
                     xmlns:converters="clr-namespace:GraphSharp.Converters;assembly=GraphSharp.Controls"
                     xmlns:my="clr-namespace:BidirectionalSearch.Helper">
 
-    <my:EdgeColorConverter x:Key="edgeToEdgeColorConverter"/>
-    <converters:EdgeRouteToPathConverter x:Key="routeToPathConverter" />
+    <my:EdgeColorConverter x:Key="EdgeToEdgeColorConverter"/>
+    <converters:EdgeRouteToPathConverter x:Key="RouteToPathConverter" />
     <Style TargetType="{x:Type graphsharp:EdgeControl}">
-        <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self},Path=Edge.EdgeColor,Converter={StaticResource edgeToEdgeColorConverter},Mode=TwoWay}"/>
+        <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self},Path=Edge.EdgeColor,Converter={StaticResource EdgeToEdgeColorConverter},Mode=TwoWay}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type graphsharp:EdgeControl}">
@@ -21,7 +21,7 @@
                             <Path.Data>
                                 <PathGeometry>
                                     <PathGeometry.Figures>
-                                        <MultiBinding Converter="{StaticResource routeToPathConverter}">
+                                        <MultiBinding Converter="{StaticResource RouteToPathConverter}">
                                             <Binding RelativeSource="{RelativeSource TemplatedParent}"
                                                  Path="Source.(graphsharp:GraphCanvas.X)" />
                                             <Binding RelativeSource="{RelativeSource TemplatedParent}"

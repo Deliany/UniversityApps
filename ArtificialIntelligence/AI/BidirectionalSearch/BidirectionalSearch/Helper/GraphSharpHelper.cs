@@ -108,7 +108,8 @@ namespace BidirectionalSearch.Helper
             // move it "edgLength" on the segment
             var angleBetweenPoints = GetAngleBetweenPoints(p1, p2);
             //p.Offset(edgeLength * Math.Cos(angleBetweenPoints), -edgeLength * Math.Sin(angleBetweenPoints));
-            float x = 12.5f, y = 12.5f;
+            const float x = 12.5f;
+            const float y = 12.5f;
             double sin = Math.Sin(angleBetweenPoints);
             double cos = Math.Cos(angleBetweenPoints);
             double sign = sin * cos / Math.Abs(sin * cos);

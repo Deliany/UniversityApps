@@ -9,8 +9,8 @@ namespace BidirectionalSearch.Model
 {
     public class Graph
     {
-        public List<Vertex> vertices = new List<Vertex>();
-        public  List<Edge> edges = new List<Edge>();
+        public List<Vertex> Vertices { get; private set; }
+        public List<Edge> Edges { get; private set; }
 
         /// <summary>
         /// Initializes instance of Graph from file
@@ -21,8 +21,22 @@ namespace BidirectionalSearch.Model
         ///         c 2 3 0
         /// </summary>
         /// <param name="filePath"></param>
-        public Graph(string filePath)
+        public Graph(string filePath) : this()
         {
+            this.LoadGraphFromFile(filePath);
+        }
+
+        public Graph()
+        {
+            this.Edges = new List<Edge>();
+            this.Vertices = new List<Vertex>();
+        }
+
+        public void LoadGraphFromFile(string filePath)
+        {
+            Vertices.Clear();
+            Edges.Clear();
+
             string[] lines = File.ReadAllLines(filePath);
 
             for (int i = 0; i < lines.Length; ++i)
@@ -36,14 +50,14 @@ namespace BidirectionalSearch.Model
                     string[] verticeNames = lines[i].Split(' ');
                     foreach (var vertName in verticeNames)
                     {
-                        Vertex v = new Vertex {Name = vertName};
-                        vertices.Add(v);
+                        Vertex v = new Vertex { Name = vertName };
+                        Vertices.Add(v);
                     }
                 }
                 else
                 {
                     string[] data = lines[i].Split(' ');
-                    Vertex vertFrom = new Vertex {Name = data[0]};
+                    Vertex vertFrom = new Vertex { Name = data[0] };
 
                     for (int j = 1; j < data.Length; j++)
                     {
@@ -56,29 +70,26 @@ namespace BidirectionalSearch.Model
 
                         if (weight != 0)
                         {
-                            Edge edge = new Edge(new Vertex(vertFrom), vertices[j - 1], weight);
-                            edges.Add(edge);
+                            Edge edge = new Edge(new Vertex(vertFrom), Vertices[j - 1], weight);
+                            Edges.Add(edge);
                         }
                     }
                 }
             }
-            
         }
-
-        private Graph() { }
 
         public Double[,] AsMatrix()
         {
-            int dimension = vertices.Count;
+            int dimension = Vertices.Count;
             Double[,] matrix = new Double[dimension,dimension];
             for (int i = 0; i < dimension; i++)
             {
                 for (int j = 0; j < dimension; j++)
                 {
-                    if (EdgeExists(vertices[i], vertices[j]))
+                    if (EdgeExists(Vertices[i], Vertices[j]))
                     {
                         matrix[i, j] =
-                            edges.Single(edge => edge.VerticeFrom == vertices[i] && edge.VerticeTo == vertices[j]).Weight;
+                            Edges.Single(edge => edge.VerticeFrom == Vertices[i] && edge.VerticeTo == Vertices[j]).Weight;
                     }
                     
                 }
@@ -89,22 +100,22 @@ namespace BidirectionalSearch.Model
 
         public Double GetEdgeWeight(Vertex vertFrom, Vertex vertTo)
         {
-            return edges.Single(edge => edge.VerticeFrom == vertFrom && edge.VerticeTo == vertTo).Weight;
+            return Edges.Single(edge => edge.VerticeFrom == vertFrom && edge.VerticeTo == vertTo).Weight;
         }
 
         public bool EdgeExists(Vertex vertFrom, Vertex vertTo)
         {
-            return edges.Any(edge => edge.VerticeFrom == vertFrom && edge.VerticeTo == vertTo);
+            return Edges.Any(edge => edge.VerticeFrom == vertFrom && edge.VerticeTo == vertTo);
         }
 
         public Edge GetEdge(Vertex vertFrom, Vertex vertTo)
         {
-            return !this.EdgeExists(vertFrom,vertTo) ? null : edges.Single(edge => edge.VerticeFrom == vertFrom && edge.VerticeTo == vertTo);
+            return !this.EdgeExists(vertFrom,vertTo) ? null : Edges.Single(edge => edge.VerticeFrom == vertFrom && edge.VerticeTo == vertTo);
         }
 
         public List<Edge> AdjacentEdges(Vertex v)
         {
-            return new List<Edge>(edges.Where(edge => edge.VerticeFrom == v));
+            return new List<Edge>(Edges.Where(edge => edge.VerticeFrom == v));
         } 
 
         public List<Vertex> AdjacentVertices(Vertex v)
