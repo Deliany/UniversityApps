@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="unix_task_java:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/unix_task_java_jar</output-path>
+    <root id="archive" name="unix_task_java.jar">
+      <element id="module-output" name="unix_task_java" />
+    </root>
+  </artifact>
+</component>
