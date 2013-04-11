@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BidirectionalSearch.Helper;
+using SearchAlgorithms.Helper;
 
-namespace BidirectionalSearch.Model
+namespace SearchAlgorithms.Model
 {
     public class TwoWayTraveledPathData
     {

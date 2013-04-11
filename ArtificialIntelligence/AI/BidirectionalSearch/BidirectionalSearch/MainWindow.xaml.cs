@@ -15,12 +15,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using BidirectionalSearch.Annotations;
-using BidirectionalSearch.Helper;
-using BidirectionalSearch.Model;
+using SearchAlgorithms.Annotations;
+using SearchAlgorithms.Helper;
+using SearchAlgorithms.Model;
 using QuickGraph;
 
-namespace BidirectionalSearch
+namespace SearchAlgorithms
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -31,15 +31,16 @@ namespace BidirectionalSearch
         public Graph Graph { get; set; }
         public BidirectionalGraph<object, IEdge<object>> VisioGraph { get; set; }
         public BidirectionalGraph<object, IEdge<object>> VisioTree { get; set; }
-        public Model.BidirectionalSearch br = new Model.BidirectionalSearch();
+
+        public SearchAlgorithm sa;
+
         public ObservableCollection<Vertex> Vertices { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
-            br.searchDidFinishedWithData = SearchDidFinishedWithData;
 
-            this.Graph = new Graph("graph_matrix.txt");
+            this.Graph = new Graph("graph_matrix.txt", "heuristic_data.txt");
             Logger.LogBox = this.logRTF;
 
             this.FillVisioGraphWithGraph(this.Graph);
@@ -58,7 +59,7 @@ namespace BidirectionalSearch
                 }));
         }
 
-        private void WriteLogWithTraveledData(TwoWayTraveledPathData data)
+        private void WriteLogWithTwoWayTraveledData(TwoWayTraveledPathData data)
         {
             Application.Current.Dispatcher.Invoke(new Action(() =>
             {
@@ -106,6 +107,49 @@ namespace BidirectionalSearch
                 msg.Clear();
 
                 Logger.WriteLogInfo("SHORTEST PATH:");
+                var shortestPath = data.GetShortestPath();
+                foreach (var edge in shortestPath)
+                {
+                    msg.Append(edge + "=>");
+                }
+                Logger.WriteLogInfo(msg.ToString());
+            }));
+        }
+
+        private void WriteLogWithTraveledData(TraveledPathData data)
+        {
+            Application.Current.Dispatcher.Invoke(new Action(() =>
+            {
+                SearchEventManager sem = data.EventManager;
+
+                Logger.ClearLog();
+
+                foreach (var searchEvent in sem.Events)
+                {
+                    Logger.WriteLogInfo(
+                        searchEvent.EventMessage);
+                }
+                StringBuilder msg = new StringBuilder();
+
+                Logger.WriteLogInfo(string.Format("Total edges EXPLORED in PATH: {0}", data.ExploredEdges.Count));
+                foreach (var edge in data.ExploredEdges)
+                {
+                    msg.Append(edge + "=>");
+                }
+                Logger.WriteLogInfo(msg.ToString());
+                msg.Clear();
+
+
+                Logger.WriteLogInfo(string.Format("Total edges TRAVELED in PATH: {0}", data.TraveledEdges.Count));
+                foreach (var vert in data.TraveledEdges)
+                {
+                    msg.Append(vert + "=>");
+                }
+                Logger.WriteLogInfo(msg.ToString());
+                msg.Clear();
+
+                Logger.WriteLogInfo("SHORTEST PATH:");
+
                 var shortestPath = data.GetShortestPath();
                 foreach (var edge in shortestPath)
                 {
@@ -173,12 +217,32 @@ namespace BidirectionalSearch
             c_dataGrid2D.ItemsSource = BindingHelper.GetBindable2DArray<Double>(this.Matrix);
         }
 
-        private void SearchDidFinishedWithData(TwoWayTraveledPathData data)
+        private void SearchDidFinishedWithData(object data)
         {
-            SearchEventManager sem = data.SEM;
+            SearchEventManager sem;
+            List<Edge> shortestPath;
+            if (data is TwoWayTraveledPathData)
+            {
+                TwoWayTraveledPathData twtpd = data as TwoWayTraveledPathData;
+                sem = twtpd.SEM;
+                shortestPath = twtpd.GetShortestPath();
+                this.WritePathCostToTextBox(twtpd.TotalCost);
+                this.WriteLogWithTwoWayTraveledData(twtpd);
+            }
+            else if (data is TraveledPathData)
+            {
+                TraveledPathData tpd = data as TraveledPathData;
+                sem = tpd.EventManager;
+                shortestPath = tpd.TraveledEdges;
+                this.WritePathCostToTextBox(tpd.TotalCost);
+                this.WriteLogWithTraveledData(tpd);
+            }
+            else
+            {
+                return;
+            }
 
-            this.WritePathCostToTextBox(data.TotalCost);
-            this.WriteLogWithTraveledData(data);
+
             Application.Current.Dispatcher.Invoke(new Action(this.SetupVisioTree));
             Application.Current.Dispatcher.Invoke(new Action(() => this.FillVisioGraphWithGraph(this.Graph)));
             
@@ -234,7 +298,6 @@ namespace BidirectionalSearch
                 }
             }
 
-            var shortestPath = data.GetShortestPath();
             foreach (var edge in shortestPath)
             {
                 var edgeFromGraph = this.VisioGraph.Edges.Single(
@@ -253,7 +316,9 @@ namespace BidirectionalSearch
         {
             try
             {
-                br.AsynchronousSearch(this.Graph, new Vertex(rootVertexChkbx.Text), new Vertex(goalVertexChkbx.Text));
+                sa = this.SearchAlgorithmComboBox.SelectedIndex == 0 ? (SearchAlgorithm) new BidirectionalSearch() : new GreedySearch();
+                sa.searchDidFinishedWithData = SearchDidFinishedWithData;
+                sa.AsynchronousSearch(this.Graph, new Vertex(rootVertexChkbx.Text), new Vertex(goalVertexChkbx.Text));
             }
             catch (Exception ex)
             {
@@ -263,7 +328,7 @@ namespace BidirectionalSearch
 
         private void StopButton_Click(object sender, RoutedEventArgs e)
         {
-            br.ActionThread.Abort();
+            sa.ActionThread.Abort();
             this.FillVisioGraphWithGraph(this.Graph);
             this.graphLayout.Relayout();
         }

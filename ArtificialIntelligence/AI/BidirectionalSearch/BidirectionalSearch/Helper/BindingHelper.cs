@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 
-namespace BidirectionalSearch.Helper
+namespace SearchAlgorithms.Helper
 {
     class BindingHelper
     {

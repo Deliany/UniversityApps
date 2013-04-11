@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BidirectionalSearch.Model
+namespace SearchAlgorithms.Model
 {
     public class ProblemSolvingAgent
     {
@@ -134,7 +134,6 @@ namespace BidirectionalSearch.Model
                         BidirectionalSearch bs = new BidirectionalSearch();
                         return bs.SynchronousSearch(problem.Graph, problem.Root, problem.Goal).GetShortestPath();
                     }
-                    break;
             }
             return null;
         }

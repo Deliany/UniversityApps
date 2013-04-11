@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
 
-namespace BidirectionalSearch.Helper
+namespace SearchAlgorithms.Helper
 {
     public static class Logger
     {

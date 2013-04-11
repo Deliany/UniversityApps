@@ -5,12 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace BidirectionalSearch.Model
+namespace SearchAlgorithms.Model
 {
-    public class Graph
+    public class Graph : HeuristicData
     {
-        public List<Vertex> Vertices { get; private set; }
-        public List<Edge> Edges { get; private set; }
+        public HeuristicData HeuristicData { get; protected set; }
 
         /// <summary>
         /// Initializes instance of Graph from file
@@ -21,109 +20,25 @@ namespace BidirectionalSearch.Model
         ///         c 2 3 0
         /// </summary>
         /// <param name="filePath"></param>
-        public Graph(string filePath) : this()
+        public Graph(string graphMatrixPath, string heuristicDataPath=null) : this()
         {
-            this.LoadGraphFromFile(filePath);
+            this.LoadGraphFromFile(graphMatrixPath);
+            if (heuristicDataPath != null)
+            {
+                this.HeuristicData.LoadHeuristicDataFromFile(heuristicDataPath, true);   
+            }
         }
 
         public Graph()
         {
             this.Edges = new List<Edge>();
             this.Vertices = new List<Vertex>();
+            this.HeuristicData = new HeuristicData();
         }
 
         public void LoadGraphFromFile(string filePath)
         {
-            Vertices.Clear();
-            Edges.Clear();
-
-            string[] lines = File.ReadAllLines(filePath);
-
-            for (int i = 0; i < lines.Length; ++i)
-            {
-                // replace all spaces, tabs and other whitespace to single space
-                lines[i] = Regex.Replace(lines[i], @"\s+", " ").Trim();
-
-                // first line in file must be vertices names separated by whitespace
-                if (i == 0)
-                {
-                    string[] verticeNames = lines[i].Split(' ');
-                    foreach (var vertName in verticeNames)
-                    {
-                        Vertex v = new Vertex { Name = vertName };
-                        Vertices.Add(v);
-                    }
-                }
-                else
-                {
-                    string[] data = lines[i].Split(' ');
-                    Vertex vertFrom = new Vertex { Name = data[0] };
-
-                    for (int j = 1; j < data.Length; j++)
-                    {
-                        Double weight;
-                        if (!Double.TryParse(data[j], out weight))
-                        {
-                            throw new Exception(
-                                string.Format("Number at [{0},{1}] position is in bad format, number expected", i, j));
-                        }
-
-                        if (weight != 0)
-                        {
-                            Edge edge = new Edge(new Vertex(vertFrom), Vertices[j - 1], weight);
-                            Edges.Add(edge);
-                        }
-                    }
-                }
-            }
+            this.LoadHeuristicDataFromFile(filePath);
         }
-
-        public Double[,] AsMatrix()
-        {
-            int dimension = Vertices.Count;
-            Double[,] matrix = new Double[dimension,dimension];
-            for (int i = 0; i < dimension; i++)
-            {
-                for (int j = 0; j < dimension; j++)
-                {
-                    if (EdgeExists(Vertices[i], Vertices[j]))
-                    {
-                        matrix[i, j] =
-                            Edges.Single(edge => edge.VerticeFrom == Vertices[i] && edge.VerticeTo == Vertices[j]).Weight;
-                    }
-                    
-                }
-            }
-
-            return matrix;
-        }
-
-        public Double GetEdgeWeight(Vertex vertFrom, Vertex vertTo)
-        {
-            return Edges.Single(edge => edge.VerticeFrom == vertFrom && edge.VerticeTo == vertTo).Weight;
-        }
-
-        public bool EdgeExists(Vertex vertFrom, Vertex vertTo)
-        {
-            return Edges.Any(edge => edge.VerticeFrom == vertFrom && edge.VerticeTo == vertTo);
-        }
-
-        public Edge GetEdge(Vertex vertFrom, Vertex vertTo)
-        {
-            return !this.EdgeExists(vertFrom,vertTo) ? null : Edges.Single(edge => edge.VerticeFrom == vertFrom && edge.VerticeTo == vertTo);
-        }
-
-        public List<Edge> AdjacentEdges(Vertex v)
-        {
-            return new List<Edge>(Edges.Where(edge => edge.VerticeFrom == v));
-        } 
-
-        public List<Vertex> AdjacentVertices(Vertex v)
-        {
-            List<Edge> adjacentEdges = this.AdjacentEdges(v);
-
-            return adjacentEdges.Select(edge => edge.VerticeTo).ToList();
-        } 
-
     }
 }
