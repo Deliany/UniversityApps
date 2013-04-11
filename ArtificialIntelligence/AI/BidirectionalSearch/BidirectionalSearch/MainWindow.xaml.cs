@@ -219,8 +219,12 @@ namespace SearchAlgorithms
 
         private void SearchDidFinishedWithData(object data)
         {
+            Application.Current.Dispatcher.Invoke(new Action(() => this.FillVisioGraphWithGraph(this.Graph)));
+            Application.Current.Dispatcher.Invoke(new Action(this.SetupVisioTree));
+
             SearchEventManager sem;
             List<Edge> shortestPath;
+
             if (data is TwoWayTraveledPathData)
             {
                 TwoWayTraveledPathData twtpd = data as TwoWayTraveledPathData;
@@ -236,15 +240,30 @@ namespace SearchAlgorithms
                 shortestPath = tpd.TraveledEdges;
                 this.WritePathCostToTextBox(tpd.TotalCost);
                 this.WriteLogWithTraveledData(tpd);
+
+
+
+                List<Vertex> visited = new List<Vertex>();
+                foreach (var vert in this.VisioGraph.Vertices)
+                {
+                    var edges = this.VisioGraph.Edges.Where(e => (Vertex)e.Source == (Vertex)vert && !visited.Contains((Vertex)e.Target));
+                    foreach (var edge in edges)
+                    {
+                        if (edge is MyEdge)
+                        {
+                            var ed = (edge as MyEdge);
+                            ed.Tag += "(" + this.Graph.HeuristicData.GetEdge((Vertex)edge.Target, sem.GoalVertex).Weight + ")";
+                        }
+                    }
+                    visited.Add((Vertex)vert);
+                }
             }
             else
             {
                 return;
             }
 
-
-            Application.Current.Dispatcher.Invoke(new Action(this.SetupVisioTree));
-            Application.Current.Dispatcher.Invoke(new Action(() => this.FillVisioGraphWithGraph(this.Graph)));
+            
             
             foreach (var searchEvent in sem.Events)
             {
