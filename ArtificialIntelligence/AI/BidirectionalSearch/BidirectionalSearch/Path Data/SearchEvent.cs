@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BidirectionalSearch.Model
+namespace SearchAlgorithms.Model
 {
     public enum SearchEventType
     {

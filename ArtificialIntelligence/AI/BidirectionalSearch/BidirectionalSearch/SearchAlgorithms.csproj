@@ -7,8 +7,8 @@
     <ProjectGuid>{62A99DC0-E992-46BE-944B-54B0151DA0EA}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BidirectionalSearch</RootNamespace>
-    <AssemblyName>BidirectionalSearch</AssemblyName>
+    <RootNamespace>SearchAlgorithms</RootNamespace>
+    <AssemblyName>SearchAlgorithms</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -77,8 +77,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Algorithms\GreedySearch.cs" />
+    <Compile Include="Model\Graph.cs" />
     <Compile Include="Model\ProblemSolvingAgent.cs" />
-    <Compile Include="Model\TwoWayTraveledPathData.cs" />
+    <Compile Include="Algorithms\SearchAlgorithm.cs" />
+    <Compile Include="Path Data\TwoWayTraveledPathData.cs" />
     <Compile Include="Tests\Tests.cs" />
     <Page Include="Design\GraphSharpEdgeLabelTemplate.xaml">
       <SubType>Designer</SubType>
@@ -115,12 +118,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\BidirectionalSearch.cs" />
+    <Compile Include="Algorithms\BidirectionalSearch.cs" />
     <Compile Include="Model\Edge.cs" />
-    <Compile Include="Model\Graph.cs" />
-    <Compile Include="Model\TraveledPathData.cs" />
-    <Compile Include="Model\SearchEvent.cs" />
-    <Compile Include="Model\SearchEventManager.cs" />
+    <Compile Include="Model\HeuristicData.cs" />
+    <Compile Include="Path Data\TraveledPathData.cs" />
+    <Compile Include="Path Data\SearchEvent.cs" />
+    <Compile Include="Path Data\SearchEventManager.cs" />
     <Compile Include="Model\Vertex.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -156,6 +159,7 @@
     <Content Include="Libs\QuickGraph.dll" />
     <Content Include="Libs\WPFExtensions.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

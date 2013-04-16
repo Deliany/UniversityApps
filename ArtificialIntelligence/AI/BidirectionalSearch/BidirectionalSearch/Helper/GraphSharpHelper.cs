@@ -7,12 +7,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
-using BidirectionalSearch.Annotations;
+using SearchAlgorithms.Annotations;
 using GraphSharp;
 using GraphSharp.Controls;
 using QuickGraph;
 
-namespace BidirectionalSearch.Helper
+namespace SearchAlgorithms.Helper
 {
     public class TaggedGraphLayout : GraphLayout<object, IEdge<object>, IBidirectionalGraph<object, IEdge<object>>>
     {

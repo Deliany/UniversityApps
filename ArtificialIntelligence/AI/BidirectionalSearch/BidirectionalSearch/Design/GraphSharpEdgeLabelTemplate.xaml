@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:graphsharp="clr-namespace:GraphSharp.Controls;assembly=GraphSharp.Controls"
                     xmlns:converters="clr-namespace:GraphSharp.Converters;assembly=GraphSharp.Controls"
-                    xmlns:my="clr-namespace:BidirectionalSearch.Helper">
+                    xmlns:my="clr-namespace:SearchAlgorithms.Helper">
 
     <my:EdgeColorConverter x:Key="EdgeToEdgeColorConverter"/>
     <converters:EdgeRouteToPathConverter x:Key="RouteToPathConverter" />

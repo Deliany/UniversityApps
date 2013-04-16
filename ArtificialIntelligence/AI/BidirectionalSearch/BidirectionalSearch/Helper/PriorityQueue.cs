@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BidirectionalSearch.Helper
+namespace SearchAlgorithms.Helper
 {
     public class PriorityQueue<TValue> : PriorityQueue<TValue, Double> { }
 

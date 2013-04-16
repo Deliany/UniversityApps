@@ -3,15 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BidirectionalSearch.Model
+namespace SearchAlgorithms.Model
 {
     public class TraveledPathData
     {
         public List<Edge> ExploredEdges { get; private set; }
         public List<Edge> TraveledEdges { get; private set; }
-        public Double PathCost { get; private set; }
 
         public SearchEventManager EventManager { get; set; }
+
+        public Double TotalCost
+        {
+            get
+            {
+                return this.GetShortestPath().Sum(e => e.Weight);
+            }
+        }
 
         public TraveledPathData(Vertex root, Vertex goal)
         {
@@ -67,11 +74,6 @@ namespace BidirectionalSearch.Model
             }
 
             return shortestPath;
-        }
-
-        public void UpdatePathCost(Double pathCost)
-        {
-            this.PathCost = pathCost;
         }
     }
 }

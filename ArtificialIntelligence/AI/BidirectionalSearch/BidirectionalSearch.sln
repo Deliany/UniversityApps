@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BidirectionalSearch", "BidirectionalSearch\BidirectionalSearch.csproj", "{62A99DC0-E992-46BE-944B-54B0151DA0EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchAlgorithms", "BidirectionalSearch\SearchAlgorithms.csproj", "{62A99DC0-E992-46BE-944B-54B0151DA0EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

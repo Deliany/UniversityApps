@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BidirectionalSearch.Model
+namespace SearchAlgorithms.Model
 {
     public class Edge
     {
@@ -17,6 +17,13 @@ namespace BidirectionalSearch.Model
             this.VerticeFrom = vertFrom;
             this.VerticeTo = vertTo;
             this.Weight = weight;
+        }
+
+        public Edge(Vertex vertFrom, Vertex vertTo)
+        {
+            this.VerticeFrom = vertFrom;
+            this.VerticeTo = vertTo;
+            this.Weight = 0.0;
         }
 
         public Edge(Edge edge, Double weight)

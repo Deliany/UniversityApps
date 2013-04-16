@@ -17,7 +17,7 @@
 using System;
 using System.ComponentModel;
 
-namespace BidirectionalSearch.Annotations
+namespace SearchAlgorithms.Annotations
 {
   /// <summary>
   /// Indicates that marked element should be localized or not.
